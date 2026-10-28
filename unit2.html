@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<title>Unit 2: Sensation, Perception & Cognition</title>
+<style>
+:root{--bg:#050f26;--p:#0b1f4a;--p2:#16408f;--ln:#1f4a9c;--ac:#4da3ff;--mu:#9fbdf0;--ok:#3ecf8e;--no:#ff6b81;--gold:#ffd27a;--mint:#7cffd8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:radial-gradient(circle at 15% 10%,rgba(77,163,255,.14),transparent 40%),radial-gradient(circle at 85% 90%,rgba(40,100,230,.16),transparent 40%) fixed,var(--bg);color:#e6eeff;min-height:100vh;line-height:1.5}
+a{color:var(--ac)}
+header{position:sticky;top:0;z-index:9;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(11,31,74,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.hl{display:flex;gap:12px;align-items:center}
+.logo{width:42px;height:42px;border-radius:12px;background:rgba(77,163,255,.18);border:1px solid var(--ac);display:grid;place-items:center;color:var(--ac);font-size:20px;box-shadow:0 0 16px rgba(77,163,255,.4);cursor:pointer;flex:0 0 auto}
+h1{font:800 20px 'Plus Jakarta Sans';margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.unit-select{background:rgba(5,15,38,.8);color:var(--ac);border:1px solid var(--ac);padding:4px 8px;border-radius:8px;font:700 13px 'Plus Jakarta Sans';cursor:pointer;outline:none;max-width:100%}
+.unit-select:focus{box-shadow:0 0 0 2px var(--ac)}
+.stats{display:flex;gap:16px;font:500 13px 'JetBrains Mono',monospace;background:rgba(5,15,38,.7);padding:8px 14px;border-radius:12px;border:1px solid var(--ln)}
+nav{display:flex;flex-wrap:wrap;gap:4px;padding:5px;background:rgba(5,15,38,.6);border:1px solid var(--ln);border-radius:12px}
+nav .tab{border:0;background:none;color:var(--mu);font:600 13px 'Plus Jakarta Sans';padding:8px 12px;border-radius:99px;cursor:pointer}
+nav .tab:hover{color:#fff;background:rgba(77,163,255,.12)}
+nav .tab.on{background:var(--ac);color:#04122a;box-shadow:0 0 14px rgba(77,163,255,.5)}
+#rt{max-width:1100px;margin:0 auto;padding:10px 16px}
+main{max-width:960px;margin:0 auto;padding-bottom:60px}
+.card{background:linear-gradient(160deg,rgba(22,64,143,.35),rgba(11,31,74,.9));border:1px solid var(--ln);border-radius:16px;padding:20px;margin:12px 0;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.fc{min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;text-align:center;font-size:19px;background:linear-gradient(145deg,#1553b8,#0b1f4a);box-shadow:0 0 30px rgba(77,163,255,.25);animation:pop .25s}
+@keyframes pop{from{transform:scale(.97);opacity:.6}}
+.fc .t{font-size:26px;font-weight:800}
+.mu{color:var(--mu);font-size:14px}
+button{background:var(--p);color:#fff;border:1px solid var(--ln);border-radius:8px;padding:8px 14px;cursor:pointer;font-family:inherit;font-size:14px}
+button:hover{background:var(--p2)}
+button.on{background:var(--ac);color:#04122a;font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bar button,.row button,.chips button{border-radius:99px;font:600 13px 'Plus Jakarta Sans'}
+.opt{display:block;width:100%;text-align:left;margin:7px 0;border-radius:12px;padding:12px 16px;transition:transform .1s;font-size:15px}
+.opt:hover:not(:disabled){transform:translateX(4px);border-color:var(--ac)}
+.ok{background:#12503a!important;border-color:var(--ok)!important}
+.bad{background:#5a1c2c!important;border-color:var(--no)!important}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}
+.tag{font:600 12px 'Plus Jakarta Sans';color:var(--ac);padding:2px 9px;border-radius:99px;background:rgba(77,163,255,.15);border:1px solid var(--ln);display:inline-block}
+.xtra{font:600 11px 'Plus Jakarta Sans';color:var(--gold);padding:1px 8px;border-radius:99px;border:1px solid #ffb454;background:rgba(255,180,84,.12);margin-left:6px;white-space:nowrap}
+#flt summary{cursor:pointer;font-weight:600}
+input[type=text],textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:#fff;margin:8px 0;font:inherit}
+textarea{min-height:70px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pg{height:6px;background:#0a2a66;border-radius:9px;margin:6px 0 2px;overflow:hidden}.pg i{display:block;height:100%;background:linear-gradient(90deg,#4da3ff,#7cffd8);transition:width .2s}
+/* notes */
+.sec{scroll-margin-top:120px}
+.sec h2{margin:0 0 4px;font-size:22px}.sec .code{font:500 12px 'JetBrains Mono';color:var(--ac);letter-spacing:.06em}
+.sec h3{margin:18px 0 6px;font-size:16px;color:var(--ac)}
+.sec ul{margin:4px 0 4px 20px;padding:0}.sec li{margin:4px 0}
+.sec b{color:#fff}
+.tip{margin:10px 0;padding:10px 14px;border-radius:10px;background:rgba(255,180,84,.1);border-left:4px solid #ffb454;font-size:14px}
+.tip::before{content:"Watch out: ";font-weight:800;color:var(--gold)}
+.ex{margin:10px 0;padding:10px 14px;border-radius:10px;background:rgba(62,207,142,.1);border-left:4px solid var(--ok);font-size:14px}
+.ex::before{content:"Example: ";font-weight:800;color:var(--mint)}
+.cxs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cx{display:inline-flex;gap:6px;align-items:center;font:600 12px 'Plus Jakarta Sans';text-decoration:none;color:#cfe3ff;padding:3px 10px;border-radius:99px;border:1px dashed var(--ac);background:rgba(77,163,255,.08)}
+.cx:hover{background:rgba(77,163,255,.22)}
+.tb{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+.tb th,.tb td{padding:8px 10px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}
+.tb th{color:var(--ac)}.tb td:first-child{font-weight:700;color:#fff}
+.tw{overflow-x:auto}
+.jump{position:sticky;top:0}
+/* glossary */
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.gt{background:var(--p);border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:10px;padding:10px 14px}
+.gt b{display:block;color:#fff}.gt span{color:var(--mu);font-size:14px}
+.gh{font:800 17px 'Plus Jakarta Sans';color:var(--ac);margin:24px 0 10px}
+/* compare */
+.cmp{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cb{border-radius:12px;padding:10px 14px;background:rgba(5,15,38,.55);border:1px solid var(--ln);border-top:4px solid var(--c,#4da3ff);font-size:14px}
+.cb b{display:block;font-size:15px;color:var(--c,#fff);margin-bottom:2px}
+.tell{margin-top:10px;font-size:14px;color:var(--mint)}.tell::before{content:"Quick tell: ";font-weight:800}
+/* connections */
+.cn{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.cc{background:rgba(5,15,38,.55);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;font-size:14px}
+.cc .pair{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px;font-weight:700}
+.cc .pair i{color:var(--ac)}
+/* sleep */
+.sv{width:100%;height:auto;display:block}
+.seg{cursor:pointer}.seg:hover{fill-opacity:.35}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-top:8px}
+.wv{background:rgba(5,15,38,.6);border:1px solid var(--ln);border-radius:12px;padding:10px 14px;margin-top:10px}
+/* pathways */
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.chain button{border-radius:10px;font-size:13px;padding:7px 11px}
+.chain .ar{color:var(--mu)}
+.chain button.tx{border-color:var(--gold)}
+.pdet{background:rgba(5,15,38,.6);border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:12px;padding:12px 14px;min-height:90px}
+.pdet .loc{font:500 12px 'JetBrains Mono';color:var(--ac)}
+/* labs */
+.ag{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+#aimg{width:min(320px,100%);aspect-ratio:3/2;border-radius:8px;border:1px solid var(--ln);position:relative;overflow:hidden}
+.dot{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:#000}
+input[type=range]{accent-color:#4da3ff;width:100%}
+.big{font:800 28px 'JetBrains Mono';color:var(--mint)}
+.ans{margin-top:8px;padding:10px 14px;border-radius:10px;background:rgba(62,207,142,.1);border-left:4px solid var(--ok);font-size:14px}
+.hide{display:none}
+.anat{margin-top:8px;background:rgba(5,15,38,.45);border:1px solid var(--ln);border-radius:12px}
+.ap{cursor:pointer;transition:filter .15s}.ap:hover{filter:brightness(1.4)}.ap.sel{filter:drop-shadow(0 0 6px #ffd27a) brightness(1.3)}
+.lbl{cursor:pointer}.lbl .bn{font:800 11px system-ui,sans-serif;fill:#04122a;text-anchor:middle;pointer-events:none}.lbl .lnm{font:700 12px system-ui,sans-serif;fill:#fff;paint-order:stroke;stroke:#050f26;stroke-width:4px;pointer-events:none}
+.pdet .loc{font:500 12px 'JetBrains Mono',monospace;color:var(--ac)}
+@media(max-width:640px){header{position:static}.grid{grid-template-columns:1fr}h1{font-size:18px}.card{padding:16px}.stats{gap:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hl">
+    <div class="logo" title="Home" onclick="switchUnit('index')"><i class="fa-solid fa-eye"></i></div>
+    <div>
+      <h1>NeuroMaster
+        <select id="unitSel" class="unit-select" onchange="switchUnit(this.value)" aria-label="Switch unit">
+          <option value="index">Home: All Units</option>
+          <option value="unit0">Unit 0: Foundations of Psych Science</option>
+          <option value="unit1">Unit 1: Biological Bases of Behavior</option>
+          <option value="unit2" selected>Unit 2: Cognition</option>
+          <option value="unit3" disabled>Unit 3: Development &amp; Learning (Locked)</option>
+          <option value="unit4" disabled>Unit 4: Social Psych &amp; Personality (Locked)</option>
+          <option value="unit5" disabled>Unit 5: Mental &amp; Physical Health (Locked)</option>
+        </select>
+      </h1>
+      <div class="mu">AP Psychology Study Suite · 1.5 Sleep · 1.6 Sensation · 2.1 Perception · 2.2 Thinking</div>
+    </div>
+  </div>
+  <div class="stats" id="cnt"></div>
+  <nav id="modes" aria-label="Study modes"></nav>
+</header>
+
+<div id="rt">
+  <details open class="card" id="flt">
+    <summary><i class="fa-solid fa-sliders"></i> Scope &amp; Filters</summary>
+    <div class="bar" id="scope"></div>
+    <div class="bar" id="cats"></div>
+  </details>
+  <main id="main"></main>
+</div>
+
+<script>
+function switchUnit(v){window.location.href=(v==="index"?"index":v)+".html"}
+
+const KEY="nm_unit2_missed";
+const C={
+  Z:"1.5 Sleep & Consciousness",
+  B:"1.6 Sensation Basics",
+  V:"1.6 Vision",
+  H:"1.6 Hearing",
+  O:"1.6 Smell & Taste",
+  T:"1.6 Touch, Pain & Body Position",
+  P:"2.1 Perception & Attention",
+  Q:"2.1 Visual Perception",
+  R:"2.2 Concepts & Thinking",
+  J:"2.2 Problem-Solving & Judgment"
+};
+
+/* [term, category, definition, 1 = beyond the slides] */
+const D=[
+["Consciousness","Z","Our awareness of ourselves and our environment. It shifts across the day and night, which affects focus and performance."],
+["Altered state of consciousness","Z","Any state that differs noticeably from normal waking awareness, such as sleep, dreaming, hypnosis, meditation, psychoactive drugs, daydreaming, or coma."],
+["Circadian rhythm","Z","The roughly 24-hour biological clock that regulates sleep, wakefulness, body temperature, and hormone release."],
+["Suprachiasmatic nucleus (SCN)","Z","A cluster of neurons in the hypothalamus that responds to light from the retina and resets the circadian rhythm. In the morning it signals the pineal gland to cut melatonin."],
+["Jet lag","Z","Fatigue, low mood, and poor alertness caused by a body clock that is out of sync with local time after crossing time zones."],
+["EEG patterns","Z","Brain-wave recordings from an electroencephalogram. Researchers use them to identify which stage of sleep a person is in."],
+["Beta waves","Z","Fast, low-amplitude brain waves of an alert, awake, thinking brain. REM sleep looks similar.",1],
+["Alpha waves","Z","Relatively slow brain waves of a relaxed, awake state, such as resting with your eyes closed just before falling asleep."],
+["Theta waves","Z","Irregular, slower brain waves typical of NREM-1, the light, transitional sleep.",1],
+["NREM sleep","Z","Non-rapid eye movement sleep. Stages 1 through 3 are progressively deeper. The slides use the older Stage 3/Stage 4 split, which is now combined into NREM-3."],
+["NREM-1","Z","Light, brief transitional sleep that is easy to wake from. Hypnagogic sensations, such as falling or hearing sounds, happen here."],
+["NREM-2","Z","Deeper relaxation marked by sleep spindles and K-complexes. Adults spend about half the night in this stage."],
+["Sleep spindles","Z","Bursts of rapid, rhythmic brain-wave activity that mark NREM-2 sleep."],
+["NREM-3 (deep sleep)","Z","Slow-wave sleep with large, slow delta waves. It is the hardest stage to wake from and is key for physical restoration and growth hormone release. Sleepwalking happens here."],
+["Delta waves","Z","Large, slow brain waves associated with deep NREM-3 sleep."],
+["REM sleep","Z","Rapid eye movement sleep, also called paradoxical sleep: the brain is highly active but the voluntary muscles are paralyzed. Vivid dreams happen here, and it supports memory consolidation."],
+["REM rebound","Z","The increase in REM sleep after a person has been deprived of it, for example after sleep loss, stress, or alcohol and drug use that suppress REM."],
+["Hypnagogic sensations","Z","Bizarre experiences while falling asleep (NREM-1), such as a falling sensation, a body jerk, or hearing your name. They are common, and more frequent with sleep disorders."],
+["Hallucinations","Z","False sensory experiences, such as seeing or hearing something with no external stimulus. Examples include hypnagogic hallucinations, hallucinations in narcolepsy, and drug-induced hallucinations."],
+["Dreams","Z","Sequences of images, emotions, and thoughts that pass through a sleeping mind. The most vivid ones occur in REM."],
+["Activation-synthesis theory","Z","Biological dream theory: random neural firing during REM (from the brainstem) is woven together by the cortex into a story. Dreams are the brain making sense of noise."],
+["Consolidation theory","Z","Biological dream theory: sleep and dreams help process, sort, and solidify the day's memories and experiences."],
+["Memory consolidation","Z","The neural storage of a long-term memory. Sleep, both REM and deep NREM, strengthens it, so pulling all-nighters hurts learning."],
+["Insomnia","Z","Recurring difficulty falling or staying asleep, leading to daytime fatigue and impaired functioning."],
+["Narcolepsy","Z","Sudden, uncontrollable sleep attacks, often directly into REM, sometimes with cataplexy (sudden loss of muscle tone). It is linked to a lack of hypocretin (orexin) from the hypothalamus."],
+["Sleep apnea","Z","Breathing repeatedly stops during sleep, causing brief awakenings and excessive daytime sleepiness. It is often accompanied by loud snoring."],
+["Somnambulism (sleepwalking)","Z","Walking or doing tasks while still asleep. It happens in deep NREM-3 sleep and is more common in children."],
+["Night terrors","Z","High arousal and an appearance of terror (screaming, racing heart) during NREM-3, seldom remembered. Mostly seen in children. Not the same as nightmares, which happen in REM.",1],
+["REM sleep behavior disorder","Z","The normal REM muscle paralysis is missing, so people physically act out their dreams. It is seen mostly in older men."],
+["Sleep deprivation","Z","Not getting enough sleep. It impairs attention, memory, mood, and immunity, raises accident risk, and shifts hunger hormones (more ghrelin, less leptin).",1],
+
+["Sensation","B","The process by which our sensory receptors and nervous system receive and represent stimulus energies from the environment."],
+["Transduction","B","Converting one form of energy into another. In sensation, stimulus energy such as light, sound waves, or chemicals is converted into neural impulses."],
+["Absolute threshold","B","The minimum intensity of a stimulus that a person can detect 50% of the time."],
+["Signal detection theory","B","Explains how we detect faint stimuli amid background noise. Detection depends on experience, expectations, motivation, and fatigue, not just stimulus strength (hits, misses, false alarms).",1],
+["Subliminal","B","Below a person's absolute threshold for conscious awareness.",1],
+["Difference threshold (JND)","B","The just-noticeable difference: the smallest change between two stimuli that a person can detect 50% of the time."],
+["Weber's law","B","The just-noticeable difference is a constant proportion of the original stimulus, not a constant amount. A teaspoon of sugar is noticeable in unsweet tea but not in very sweet tea."],
+["Sensory adaptation","B","Decreased sensitivity after constant exposure to an unchanging stimulus, such as no longer noticing a ticking clock or your clothes."],
+["Sensory interaction","B","One sense influences another. For example, smell strongly affects taste."],
+["Synesthesia","B","A rare condition in which stimulating one sense triggers an involuntary experience in another, such as seeing colors when hearing music."],
+["Priming","B","Exposure to one stimulus, often unconsciously, influences how you perceive or respond to a later stimulus. It appears in both 1.6 and 2.2."],
+["McGurk effect","B","Seeing lips say one syllable while hearing another makes you perceive a third. Vision and hearing interact.",1],
+["Thalamus (sensory relay)","B","The brain's sensory switchboard. It relays every sense except smell to the right cortical area."],
+
+["Hue","V","The color we experience, determined by the wavelength of light. Short wavelengths look blue-violet and long wavelengths look red.",1],
+["Intensity (light)","V","The amount of energy in a light wave, determined by its amplitude. We perceive it as brightness.",1],
+["Cornea","V","The clear, protective outer layer at the front of the eye that bends and helps focus incoming light."],
+["Pupil","V","The adjustable opening in the center of the eye through which light enters."],
+["Iris","V","The colored ring of muscle around the pupil. It dilates or constricts the pupil to control how much light enters."],
+["Lens","V","The clear, flexible structure behind the pupil that changes shape to focus images on the retina."],
+["Accommodation (lens)","V","The lens changing shape to focus near or far objects on the retina. Thicker for near, thinner for far. Not the same as schema accommodation in 2.2."],
+["Retina","V","The light-sensitive inner surface at the back of the eye. Its rods and cones transduce light into neural signals."],
+["Photoreceptors","V","Retinal cells (rods and cones) that react to light and convert it into electrical signals."],
+["Rods","V","Retinal receptors that detect black, white, and gray. They work in dim light, handle peripheral vision, and are more numerous than cones."],
+["Cones","V","Retinal receptors concentrated in the fovea. They detect color and fine detail and work in bright light. Cones = Color."],
+["Fovea","V","The central focal point of the retina, packed with cones. Vision is sharpest here."],
+["Bipolar cells","V","Retinal neurons that receive signals from rods and cones and pass them to ganglion cells.",1],
+["Ganglion cells","V","Retinal neurons whose axons bundle together to form the optic nerve. Some respond in opposing color pairs, which helps explain afterimages."],
+["Optic nerve","V","The nerve that carries neural impulses from the eye to the brain, via the thalamus to the occipital lobe."],
+["Blind spot","V","The point where the optic nerve leaves the eye. There are no receptor cells there, so it creates a small blind area that the brain fills in."],
+["Nearsightedness","V","Near objects are clear but distant objects are blurry, because the image focuses in front of the retina."],
+["Farsightedness","V","Distant objects are clear but near objects are blurry, because the image focuses behind the retina."],
+["Trichromatic theory","V","Young-Helmholtz theory: the retina has three types of cones, most sensitive to red, green, or blue. Their combined activity produces every color."],
+["Opponent-process theory","V","Neural cells, such as ganglion cells and cells in the thalamus, work in opposing pairs (red-green, blue-yellow, black-white). When one is stimulated, its partner is inhibited. This explains afterimages."],
+["Afterimages","V","An image that lingers after the stimulus is removed. After staring at green, a white wall looks red, because the fatigued green side of the pair rebounds."],
+["Dichromatism","V","Having only two types of functioning cones, so certain colors are hard to tell apart (most often red-green). The most common type of color vision deficiency."],
+["Monochromatism","V","Having only one type of cone or none, so the world is seen in shades of gray. Total color blindness, which is rare."],
+["Prosopagnosia","V","Face blindness: the inability to recognize familiar faces even though the eyes work fine. It usually results from damage to the fusiform face area in the temporal lobe."],
+["Blindsight","V","Responding to visual stimuli without consciously seeing them, after damage to the visual cortex. This shows that vision has a conscious track and an unconscious one."],
+["Feature detectors","V","Neurons in the visual cortex that respond to specific features such as edges, lines, angles, and movement (Hubel & Wiesel).",1],
+["Parallel processing","V","Processing many aspects of a stimulus, such as color, motion, form, and depth, at the same time.",1],
+["Sclera","V","The tough white outer coat of the eyeball (the 'white of the eye'). At the front it becomes the clear cornea.",1],
+["Choroid","V","The blood-vessel layer between the sclera and retina. It nourishes the retina, and its dark pigment absorbs stray light.",1],
+["Aqueous humor","V","The watery fluid between the cornea and lens that nourishes the front of the eye and maintains its pressure.",1],
+["Vitreous humor","V","The clear gel that fills the main chamber of the eyeball, keeping it round. Light passes through it to reach the retina.",1],
+["Ciliary muscles","V","Muscles attached to the lens that change its shape. They are what make lens accommodation possible.",1],
+["Optic chiasm","V","The X-shaped point where the optic nerves partially cross, so each visual field half goes to the opposite brain hemisphere.",1],
+["Visual cortex","V","The area of the occipital lobe that receives and processes visual information, where feature detectors are found.",1],
+
+["Frequency (sound)","H","The number of complete sound waves that pass a point per second, measured in hertz (Hz). We hear it as pitch."],
+["Amplitude (sound)","H","The height of a sound wave. We hear it as loudness, measured in decibels (dB). Prolonged sound above about 85 dB damages hearing."],
+["Wavelength (sound)","H","The distance from one wave peak to the next. Short wavelength means high frequency and high pitch."],
+["Pinna","H","The visible outer ear. It collects sound waves and funnels them into the ear canal."],
+["Ear canal","H","The tube that channels sound from the pinna to the eardrum."],
+["Eardrum (tympanic membrane)","H","A thin membrane that vibrates when sound waves hit it. It marks the boundary between the outer ear and the middle ear."],
+["Ossicles","H","Three tiny middle-ear bones, the hammer, anvil, and stirrup (malleus, incus, stapes), that amplify vibrations and pass them to the cochlea's oval window."],
+["Eustachian tube","H","A canal from the middle ear to the throat that equalizes pressure on both sides of the eardrum. It is why your ears pop on a plane."],
+["Cochlea","H","The snail-shaped, fluid-filled tube in the inner ear. Vibrations ripple its fluid and bend hair cells on the basilar membrane, and that is where transduction happens."],
+["Basilar membrane","H","The membrane inside the cochlea that is lined with hair cells. Where it vibrates the most tells the brain the pitch (place theory)."],
+["Hair cells","H","Auditory receptors on the basilar membrane that bend in response to fluid waves and trigger the auditory nerve. Damaged hair cells do not grow back."],
+["Auditory nerve","H","Carries neural signals from the cochlea's hair cells to the brain, via the thalamus to the auditory cortex in the temporal lobe."],
+["Place theory","H","Explains high-pitched sounds: different frequencies stimulate different places along the basilar membrane, like keys on a piano."],
+["Frequency theory","H","Explains low-pitched sounds: the whole basilar membrane vibrates, and the auditory nerve fires at the same rate as the sound wave. A 100 Hz tone produces 100 impulses per second."],
+["Volley theory","H","Explains mid-range pitches (about 1,000 to 4,000 Hz): neurons take turns firing in rapid succession so that, as a group, they match frequencies too fast for any single neuron."],
+["Sound localization","H","Determining where a sound comes from. The ear closer to the sound hears it slightly sooner and slightly louder."],
+["Conduction deafness","H","Hearing loss caused by damage to the mechanical system that conducts sound to the cochlea, such as the eardrum or ossicles. Hearing aids can help."],
+["Sensorineural deafness","H","Hearing loss caused by damage to the cochlea's hair cells or to the auditory nerve. It is the most common type and often comes from aging or loud noise."],
+["Cochlear implant","H","A device that converts sounds into electrical signals and stimulates the auditory nerve directly, bypassing damaged hair cells."],
+["Oval window","H","The membrane at the entrance to the cochlea. The stirrup pushes on it, sending pressure waves through the cochlear fluid.",1],
+["Round window","H","A membrane below the oval window that bulges outward to release the pressure wave, letting the cochlear fluid move.",1],
+["Auditory cortex","H","The area of the temporal lobe that receives and interprets sound information from the auditory nerve (via the thalamus).",1],
+
+["Olfaction","O","The sense of smell, a chemical sense. Airborne molecules dissolve in the mucus of the olfactory epithelium and bind to olfactory receptors."],
+["Olfactory bulb","O","The brain structure that receives signals from the olfactory receptors. Smell bypasses the thalamus and goes straight to the limbic system (amygdala and hippocampus), which is why smells trigger emotional memories."],
+["Pheromones","O","Chemical signals released by an animal that affect the behavior or physiology of others of the same species. Their role in humans is debated."],
+["Gustation","O","The sense of taste, a chemical sense. Taste receptors detect chemicals dissolved in saliva."],
+["Taste buds","O","Structures on the tongue (and mouth) that hold the taste receptor cells. They are replaced every week or two and decline with age."],
+["Taste receptors","O","Cells within taste buds that detect dissolved chemicals and send signals to the brain along the gustatory pathway."],
+["Umami","O","The savory, meaty taste, from glutamate. It signals protein."],
+["Oleogustus","O","A proposed sixth basic taste: the taste of fat."],
+["Supertasters","O","People with more taste buds than average who are extra sensitive to tastes, especially bitter ones."],
+["Medium tasters","O","The majority of people, who have an average number of taste buds and moderate sensitivity."],
+["Nontasters","O","People with fewer taste buds and reduced sensitivity to tastes, especially bitterness."],
+
+["Mechanoreceptors","T","Skin receptors that detect pressure, vibration, and texture."],
+["Thermoreceptors","T","Skin receptors that detect warmth and cold."],
+["Nociceptors","T","Sensory receptors that respond to potentially damaging stimuli (tissue damage, extreme heat, pressure, or chemicals) and signal pain."],
+["Somatosensory cortex","T","The strip at the front of the parietal lobe that processes touch and body sensations. Sensitive areas like the lips and hands get more cortical space."],
+["Gate-control theory","T","Melzack & Wall: a neurological gate in the spinal cord blocks or allows pain signals. Small fibers open it. Large-fiber activity (rubbing, massage) and brain activity (distraction, endorphins) close it."],
+["Phantom limb sensation","T","Feeling sensations, including pain, in an amputated limb, because the brain's body map still includes the missing limb. It shows that sensation and pain happen in the brain."],
+["Vestibular sense","T","The sense of balance and of head and body position and movement relative to gravity."],
+["Semicircular canals","T","Three fluid-filled, ring-shaped tubes in the inner ear, each in a different plane. When fluid moves, it bends hair cells that signal head rotation. Dizziness after spinning comes from fluid that keeps moving."],
+["Vestibular sacs","T","Inner-ear structures that detect head tilt and straight-line acceleration.",1],
+["Vertigo","T","A spinning sensation that occurs when the vestibular system sends signals that conflict with the other senses."],
+["Kinesthesis","T","The sense of the position and movement of your own body parts, from receptors in muscles, tendons, and joints. It is how you can touch your nose with your eyes closed."],
+
+["Perception","P","The process of organizing and interpreting sensory information so we can recognize meaningful objects and events."],
+["Bottom-up processing","P","Analysis that starts with raw sensory input and works up to the brain's integration of it, building a picture piece by piece, like a puzzle."],
+["Top-down processing","P","Interpretation guided by prior knowledge, expectations, and experiences, such as reading messy handwriting because you know the words."],
+["Perceptual set","P","A mental predisposition to perceive one thing and not another, shaped by expectations, emotions, motivation, and culture."],
+["Context effects","P","The surroundings change what we perceive. The same shadowy figure looks more threatening at night than in daylight."],
+["Culture and perception","P","Culture shapes what we notice. In the fish study, people from individualist cultures tended to see the lone fish as leading, while people from collectivist cultures tended to see it as being chased."],
+["Gestalt psychology","P","The study of how people naturally organize sensations into meaningful wholes. The whole can differ from the sum of its parts."],
+["Figure-ground","P","Organizing a scene into an object (the figure) that stands out from its surroundings (the ground), as in the vase/faces image."],
+["Grouping","P","The perceptual tendency to organize stimuli into coherent groups, through proximity, similarity, closure, and continuity."],
+["Proximity","P","A Gestalt grouping principle: we group objects that are close together."],
+["Similarity","P","A Gestalt grouping principle: we group objects that look alike in color, shape, or size."],
+["Closure","P","A Gestalt grouping principle: we fill in gaps to perceive a complete, whole object."],
+["Continuity","P","A Gestalt grouping principle: we perceive smooth, continuous patterns instead of broken ones.",1],
+["Attention","P","Mental focus on specific stimuli while other stimuli are ignored. Attention is limited."],
+["Selective attention","P","Focusing conscious awareness on one particular stimulus among many."],
+["Cocktail party effect","P","Tuning in to one voice in a noisy room, yet immediately noticing when someone across the room says your name."],
+["Inattentional blindness","P","Failing to see visible objects when attention is directed elsewhere, as in the 'invisible gorilla' study. A big driving risk when texting."],
+["Change blindness","P","Failing to notice changes in the environment. Magicians rely on it."],
+
+["Depth perception","Q","The ability to see objects in three dimensions even though the retinal image is two-dimensional. It lets us judge distance."],
+["Visual cliff","Q","Gibson & Walk's apparatus: a glass-covered drop-off. Crawling infants refuse to cross it, which suggests depth perception is present early and may be partly innate."],
+["Binocular cues","Q","Depth cues that depend on both eyes working together."],
+["Retinal disparity","Q","A binocular cue: the left and right eyes get slightly different images. The bigger the difference, the closer the object."],
+["Convergence","Q","A binocular cue: the eyes turn inward more for close objects, and the brain reads that muscle strain as nearness."],
+["Monocular cues","Q","Depth cues available to either eye alone. Artists use them to make flat paintings look 3D."],
+["Relative size","Q","A monocular cue: if two objects are assumed to be similar in size, the one that casts a smaller retinal image looks farther away."],
+["Interposition","Q","A monocular cue: an object that partially blocks another is seen as closer."],
+["Texture gradient","Q","A monocular cue: surfaces close to us have coarse, distinct texture, and texture becomes finer and denser with distance."],
+["Relative clarity","Q","A monocular cue: hazy, blurry objects look farther away than sharp, clear ones."],
+["Linear perspective","Q","A monocular cue: parallel lines, such as railroad tracks, appear to converge with distance."],
+["Relative height","Q","A monocular cue: objects higher in the visual field look farther away.",1],
+["Relative motion (motion parallax)","Q","A monocular cue: when you move, near objects seem to zoom past and far objects seem to move with you.",1],
+["Perceptual constancy","Q","Perceiving objects as unchanging (same color, shape, and size) even as lighting, distance, or angle change the retinal image."],
+["Color constancy","Q","Perceiving familiar objects as having a consistent color even when the lighting changes what reaches the eye."],
+["Shape constancy","Q","Perceiving an object as keeping its shape (a door is still a rectangle) even when viewing it from an angle changes the retinal image."],
+["Size constancy","Q","Perceiving an object as the same size even as it moves closer or farther and its retinal image changes."],
+["Apparent motion","Q","Perceiving movement where there is none."],
+["Stroboscopic movement","Q","Apparent motion from a rapid series of slightly different still images, as in flipbooks and movies."],
+["Phi phenomenon","Q","Apparent motion created when two or more adjacent lights blink on and off in quick succession, as on marquee signs and holiday light shows."],
+["Autokinetic effect","Q","A stationary point of light in a dark room appears to move, because of tiny eye movements and the lack of reference points."],
+["Perceptual adaptation","Q","The ability to adjust to changed sensory input, such as eventually functioning normally while wearing goggles that flip vision upside down."],
+
+["Cognition","R","All the mental activities involved in acquiring, processing, storing, and using information, including thinking, knowing, remembering, and communicating."],
+["Metacognition","R","Thinking about your own thinking, such as checking whether you really understand something or self-checking during a test."],
+["Concept","R","A mental grouping of similar objects, events, ideas, or people, such as 'fruit.'"],
+["Prototype","R","The most typical example or mental image of a concept. A robin is a prototype bird, while an ostrich takes longer to classify."],
+["Schema","R","A mental framework that organizes and interprets information, such as the restaurant script: enter, order, eat, pay. Schemas shape perception (2.1) and thinking (2.2)."],
+["Assimilation","R","Interpreting new information in terms of an existing schema, such as calling a zebra a 'striped horse.'"],
+["Accommodation (schema)","R","Changing an existing schema, or creating a new one, to fit new information, such as learning that a zebra is its own animal."],
+["Executive functions","R","Higher-level cognitive skills (planning, prioritizing, impulse control, working memory, flexible thinking) handled mainly by the prefrontal cortex. Think of them as the brain's CEO."],
+["Creativity","R","The ability to produce new and valuable ideas."],
+["Divergent thinking","R","Expanding the number of possible solutions, such as brainstorming many uses for a paper clip. Creative thinking that branches out."],
+["Convergent thinking","R","Narrowing many options down to the single best solution, such as solving a riddle or a multiple-choice question."],
+
+["Algorithm","J","A methodical, step-by-step procedure that guarantees a solution but can be slow, like following a recipe exactly or trying every combination."],
+["Heuristic","J","A simple thinking shortcut that lets us judge and solve problems quickly. It is efficient but more error-prone than an algorithm."],
+["Representativeness heuristic","J","Judging how likely something is by how well it matches a prototype, often while ignoring base rates. For example, assuming a quiet person with glasses is a librarian."],
+["Availability heuristic","J","Judging how likely an event is by how easily examples come to mind, such as fearing plane crashes after seeing one on the news."],
+["Framing","J","How an issue is worded changes decisions. A '90% survival rate' sounds better than a '10% death rate,' even though they mean the same thing."],
+["Gambler's fallacy","J","Believing that past random events change the odds of future ones, such as thinking heads is 'due' after several tails."],
+["Sunk-cost fallacy","J","Continuing a failing course of action because of what you have already invested (time, money, effort), such as sitting through a bad movie because you paid for it."],
+["Mental set","J","A tendency to approach a problem in one particular way, usually one that worked before, even when a new approach would be better."],
+["Functional fixedness","J","The tendency to think of objects only in terms of their usual functions, so you don't see a book as a doorstop or a coin as a screwdriver."],
+["Insight","J","A sudden 'aha!' realization of a problem's solution, in contrast to strategy-based solutions.",1],
+["Confirmation bias","J","Searching for information that supports your existing beliefs and ignoring evidence that contradicts them.",1],
+["Overconfidence","J","Being more confident than correct, which means overestimating the accuracy of your beliefs and judgments.",1],
+["Belief perseverance","J","Clinging to your initial beliefs even after the basis for them has been discredited.",1]
+];
+
+/* ---------- utilities ---------- */
+const $=id=>document.getElementById(id);
+const sh=a=>{a=[...a];for(let i=a.length;i>1;){let j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const X=d=>d[3]?'<span class="xtra" title="Not on the class slides, but useful for the AP exam">★ beyond slides</span>':"";
+function loadMiss(){try{return new Set(JSON.parse(localStorage.getItem(KEY)||"[]"))}catch(e){return new Set()}}
+function saveMiss(){try{localStorage.setItem(KEY,JSON.stringify([...miss]))}catch(e){}}
+const cx=(label,href)=>`<a class="cx" href="${href}"><i class="fa-solid fa-link"></i>${label}</a>`;
+
+let mode="notes",scope="all",cats=new Set(Object.keys(C)),miss=loadMiss(),missOnly=false;
+const MODES={notes:"Notes",gloss:"Glossary",cmp:"Compare",conn:"Connections",sleep:"Sleep Cycle",path:"Pathways",anat:"Eye & Ear",lab:"Labs",flash:"Flashcards",quiz:"Quiz",match:"Matching",type:"Type-In",app:"Scenarios",aaq:"AAQ Practice"};
+const IC={notes:"book",gloss:"book-open",cmp:"code-compare",conn:"diagram-project",sleep:"moon",path:"route",anat:"eye",lab:"flask",flash:"clone",quiz:"list-check",match:"puzzle-piece",type:"keyboard",app:"lightbulb",aaq:"file-pen"};
+const TERM_MODES=["gloss","flash","quiz","match","type"];
+
+function pool(n){let p=sh(D.map((d,k)=>k).filter(k=>cats.has(D[k][1])&&(!missOnly||miss.has(D[k][0]))));return scope=="rand"?p.slice(0,n):p}
+
+function bar(){
+  $("modes").innerHTML=Object.keys(MODES).map(k=>`<button class="tab ${k==mode?"on":""}" onclick="setMode('${k}')"><i class="fa-solid fa-${IC[k]}"></i> ${MODES[k]}</button>`).join("");
+  $("flt").style.display=TERM_MODES.includes(mode)?"":"none";
+  $("scope").innerHTML=[["rand","Random 10"],["all","All Terms"]].map(([k,v])=>`<button class="${k==scope?"on":""}" onclick="scope='${k}';go()">${v}</button>`).join("")+`<button class="${missOnly?"on":""}" onclick="missOnly=!missOnly;go()">Missed (${miss.size})</button>`+(miss.size?`<button onclick="miss.clear();saveMiss();missOnly=false;go()">Clear missed</button>`:"");
+  $("cats").innerHTML=`<button onclick="cats=new Set(Object.keys(C));go()">All Categories</button>`+Object.entries(C).map(([k,v])=>`<button class="${cats.has(k)?"on":""}" onclick="tog('${k}')">${v}</button>`).join("");
+  $("cnt").innerHTML=`<span><i class="fa-solid fa-circle-check" style="color:#3ecf8e"></i> Terms: ${D.filter(d=>cats.has(d[1])).length}</span><span><i class="fa-solid fa-triangle-exclamation" style="color:#ffb454"></i> Missed: ${miss.size}</span>`;
+}
+function setMode(k){mode=k;go();window.scrollTo({top:0})}
+function tog(k){cats.has(k)?cats.delete(k):cats.add(k);if(!cats.size)cats.add(k);go()}
+function addMiss(k){miss.add(D[k][0]);saveMiss()}
+function delMiss(k){miss.delete(D[k][0]);saveMiss()}
+
+let Q=[],i=0,sc=0,flip=false,rv=false;
+function go(){
+  bar();
+  Q=pool(mode=="match"?6:10);i=0;sc=0;flip=false;
+  if(TERM_MODES.includes(mode)&&mode!=="gloss"&&!Q.length){$("main").innerHTML='<div class="card">No terms match your filters. Turn on more categories or switch off "Missed" to continue.</div>';return}
+  ({notes,gloss,cmp,conn,sleep,path,anat,lab,flash,quiz,match,type:typ,app,aaq})[mode]();
+}
+function prog(){return `<div class="pg"><i style="width:${Q.length?i/Q.length*100:0}%"></i></div>`}
+function done(){
+  $("main").innerHTML=`<div class="card"><h2>Session complete</h2><p>Score: <b>${sc}</b> / ${Q.length}</p><p class="mu">${miss.size?`${miss.size} term(s) are saved in your Missed list. Tap "Missed" in the filters to drill only those.`:"No missed terms. Nice work."}</p><div class="row"><button class="on" onclick="go()">Restart</button><button onclick="missOnly=true;go()">Drill missed</button></div></div>`;
+  bar();
+}
+
+/* ---------- NOTES ---------- */
+const NOTES=[
+{id:"n15",code:"1.5 · UNIT 1 BRIDGE",t:"Sleep & Consciousness",h:`
+<p><b>Consciousness</b> is awareness of yourself and your environment. <b>Altered states</b> differ from normal waking awareness, such as sleep and dreams, hypnosis, meditation, psychoactive drugs, daydreaming, and coma.</p>
+<h3>The body clock</h3>
+<ul><li><b>Circadian rhythm</b>: a roughly 24-hour cycle of sleep and wake, body temperature, and hormones. Alertness dips mid-afternoon and rises in the evening.</li>
+<li><b>SCN</b> (in the <b>hypothalamus</b>): light hits the retina, the retina signals the SCN, and the SCN tells the <b>pineal gland</b> to cut <b>melatonin</b>. In darkness, melatonin rises and you get sleepy.</li>
+<li>Disruptions such as <b>jet lag</b>, shift work, and late-night screens (bright light delays melatonin) hurt mood, alertness, and thinking.</li>
+<li>Teens' rhythms naturally shift later ("night owls"), and older adults shift earlier.</li></ul>
+<h3>Stages of sleep (one cycle ≈ 90 minutes, 4 to 6 cycles per night)</h3>
+<div class="tw"><table class="tb"><tr><th>Stage</th><th>EEG</th><th>What's happening</th></tr>
+<tr><td>Awake, alert</td><td>Beta</td><td>Fast, low-amplitude waves</td></tr>
+<tr><td>Awake, relaxed</td><td>Alpha</td><td>Drowsy, eyes closed, right before sleep</td></tr>
+<tr><td>NREM-1</td><td>Theta</td><td>Light, transitional sleep with <b>hypnagogic sensations</b> (falling, a body jerk, hearing your name)</td></tr>
+<tr><td>NREM-2</td><td>Sleep spindles, K-complexes</td><td>Deeper relaxation, about half the night</td></tr>
+<tr><td>NREM-3</td><td>Delta (large and slow)</td><td>Deep sleep, hardest to wake. Physical restoration and growth hormone. <b>Sleepwalking</b> and night terrors happen here.</td></tr>
+<tr><td>REM</td><td>Beta-like (active)</td><td><b>Paradoxical sleep</b>: an active brain in a paralyzed body. Vivid dreams and memory consolidation.</td></tr></table></div>
+<ul><li>The typical path is 1 → 2 → 3 → 2 → REM. <b>Deep NREM-3 dominates early</b> in the night, and <b>REM periods get longer toward morning.</b></li>
+<li><b>REM rebound</b>: after REM deprivation (sleep loss, stress, alcohol, sleeping pills), the body makes up for it with extra REM.</li>
+<li>Other animals have REM too, which suggests REM serves a biological need.</li></ul>
+<div class="tip">The slides say "Stage 1 = alpha waves" and "Stages 3 &amp; 4." The current model (and the 2024 CED) uses <b>NREM-1, 2, 3</b>. Alpha waves come from the relaxed state <i>right before</i> sleep, and NREM-1 itself shows theta. If you see "Stage 4" on old practice tests, read it as deep NREM-3.</div>
+<h3>Why do we dream?</h3>
+<ul><li><b>Activation-synthesis theory</b>: random neural firing during REM (from the brainstem) is stitched into a story by the cortex. Dreams are the brain making sense of noise.</li>
+<li><b>Consolidation theory</b>: sleep and dreams process and lock in the day's memories. Study, then sleep.</li>
+<li>Other theories you might see: Freud's wish-fulfillment theory (manifest vs. latent content, which has little scientific support), the neural development theory (REM builds pathways, which fits infants getting so much REM), and the cognitive development theory (dreams reflect what we know). <span class="xtra">★ beyond slides</span></li></ul>
+<h3>Why sleep matters</h3>
+<p>Sleep protects (we were safer still at night), restores (tissue repair, clearing waste), consolidates memories, boosts creativity, and supports growth. <b>Sleep deprivation</b> lowers attention, memory, mood, and immunity, raises accident risk, and increases ghrelin (hunger) while decreasing leptin (fullness).</p>
+<h3>Sleep disorders</h3>
+<div class="tw"><table class="tb"><tr><th>Disorder</th><th>Key feature</th><th>Stage tie</th></tr>
+<tr><td>Insomnia</td><td>Persistent trouble falling or staying asleep</td><td>n/a</td></tr>
+<tr><td>Narcolepsy</td><td>Sudden sleep attacks, sometimes cataplexy (sudden loss of muscle tone)</td><td>Falls straight into REM</td></tr>
+<tr><td>Sleep apnea</td><td>Breathing stops repeatedly, loud snoring, daytime sleepiness</td><td>Fragmented sleep</td></tr>
+<tr><td>Somnambulism</td><td>Sleepwalking</td><td>NREM-3</td></tr>
+<tr><td>Night terrors <span class="xtra">★</span></td><td>Terrified arousal, not remembered</td><td>NREM-3</td></tr>
+<tr><td>REM sleep behavior disorder</td><td>Acting out dreams, because REM paralysis is missing</td><td>REM</td></tr></table></div>
+<div class="tip">Sleepwalking (NREM-3) and REM sleep behavior disorder (REM) can look alike. If the person is <b>acting out a dream</b>, it's REM behavior disorder. Nightmares are REM; night terrors are NREM-3.</div>
+<div class="cxs">${cx("Unit 1 · Hypothalamus (SCN)","unit1.html")}${cx("Unit 1 · Melatonin","unit1.html")}${cx("Unit 1 · EEG","unit1.html")}${cx("Unit 1 · Depressants suppress REM","unit1.html")}${cx("Unit 1 · Ghrelin & leptin","unit1.html")}</div>`},
+
+{id:"n16a",code:"1.6A · UNIT 1 BRIDGE",t:"Sensation Basics",h:`
+<p><b>Sensation</b> is your receptors and nervous system receiving and representing stimulus energy. <b>Perception</b> (2.1) is the brain organizing and interpreting that input. The bridge between them is <b>transduction</b>, which converts stimulus energy into neural impulses.</p>
+<h3>Detecting a stimulus</h3>
+<ul><li><b>Absolute threshold</b>: the minimum intensity detected <b>50% of the time</b>, such as a candle flame 30 miles away on a clear, dark night.</li>
+<li><b>Signal detection theory</b> <span class="xtra">★</span>: detection also depends on psychological factors (expectations, motivation, fatigue). A parent hears a baby's whimper but sleeps through traffic.</li>
+<li><b>Subliminal</b> <span class="xtra">★</span> stimuli are below the absolute threshold. They can briefly prime responses, but they don't produce lasting persuasion.</li></ul>
+<h3>Detecting change</h3>
+<ul><li><b>Difference threshold (JND)</b>: the smallest change detected 50% of the time.</li>
+<li><b>Weber's law</b>: the JND is a constant <b>proportion</b>, not a constant amount. Adding 1 lb to a 10 lb bag is noticeable, but adding 1 lb to a 100 lb bag isn't. You'd need about 10 lb.</li>
+<li><b>Sensory adaptation</b>: constant, unchanging stimulation leads to reduced sensitivity, like not noticing a ticking clock, your clothes, or your own house's smell. It frees attention for <i>change</i>, which is what matters for survival.</li></ul>
+<div class="ex">Sugar in tea (from the slides): one teaspoon is obvious in barely sweet tea but unnoticeable in very sweet tea. That's Weber's law.</div>
+<h3>Senses working together</h3>
+<ul><li><b>Sensory interaction</b>: one sense influences another. Food tastes bland with a stuffy nose, and in the McGurk effect <span class="xtra">★</span> vision changes what you hear.</li>
+<li><b>Synesthesia</b>: one sense involuntarily triggers another, such as seeing colors when hearing music.</li>
+<li><b>Priming</b>: an earlier stimulus influences how you perceive a later one. It shows up again in 2.2 decision-making.</li></ul>
+<div class="tip">Sensory <b>adaptation</b> happens at the receptor level (sensitivity drops). Habituation (Unit 3, learning) is a decrease in <i>response</i> to a repeated stimulus. Also, the difference between sensory interaction and synesthesia: in interaction, senses influence each other normally; in synesthesia, one sense actually creates an experience in another.</div>
+<div class="cxs">${cx("Unit 1 · Sensory (afferent) neurons","unit1.html")}${cx("Unit 1 · Thalamus","unit1.html")}${cx("Unit 1 · Threshold / all-or-none","unit1.html")}${cx("Unit 0 · Operational definition (the 50% rule)","unit0.html")}</div>`},
+
+{id:"n16b",code:"1.6B · UNIT 1 BRIDGE",t:"Vision",h:`
+<p>Light's <b>wavelength</b> determines <b>hue</b> (color), and its <b>amplitude</b> determines <b>intensity</b> (brightness).</p>
+<h3>Path of light</h3>
+<p><b>Cornea</b> → <b>pupil</b> (size set by the <b>iris</b>) → <b>lens</b> (focuses by <b>accommodation</b>) → <b>retina</b>: <b>rods and cones</b> transduce light → bipolar cells → <b>ganglion cells</b> → <b>optic nerve</b> (leaving at the <b>blind spot</b>) → optic chiasm → <b>thalamus</b> → <b>visual cortex, occipital lobe</b>. See the Pathways tab.</p>
+<div class="tw"><table class="tb"><tr><th></th><th>Rods</th><th>Cones</th></tr>
+<tr><td>Detect</td><td>Black, white, gray</td><td>Color and fine detail</td></tr>
+<tr><td>Best in</td><td>Dim light, peripheral vision</td><td>Bright light, center vision</td></tr>
+<tr><td>Location</td><td>Periphery of the retina</td><td>Packed in the <b>fovea</b></td></tr>
+<tr><td>Number</td><td>About 120 million</td><td>About 6 million</td></tr></table></div>
+<h3>Focus problems</h3>
+<ul><li><b>Nearsighted</b>: near objects are clear, far ones blurry. The image focuses <b>in front of</b> the retina.</li>
+<li><b>Farsighted</b>: far objects are clear, near ones blurry. The image focuses <b>behind</b> the retina.</li></ul>
+<h3>Color vision: two theories, both correct at different stages</h3>
+<ul><li><b>Trichromatic (Young-Helmholtz)</b>: three cone types (red, green, blue) in the <b>retina</b>. It explains color mixing and color deficiencies.</li>
+<li><b>Opponent-process</b>: opposing pairs (red-green, blue-yellow, black-white) in <b>ganglion cells and the thalamus</b>. It explains <b>afterimages</b>: stare at green, look at white, and you see red. Try it in the Labs tab.</li>
+<li><b>Dichromatism</b>: two working cone types (red-green deficiency is most common). <b>Monochromatism</b>: one cone type or none, so vision is in grays.</li></ul>
+<h3>When the brain, not the eye, is damaged</h3>
+<ul><li><b>Prosopagnosia</b>: can't recognize faces (fusiform face area, temporal lobe).</li>
+<li><b>Blindsight</b>: visual cortex damage, but the person still responds to things they say they can't see. Evidence for an unconscious visual track.</li>
+<li><b>Feature detectors</b> <span class="xtra">★</span> (Hubel &amp; Wiesel) respond to edges, lines, and motion. <b>Parallel processing</b> <span class="xtra">★</span> handles color, motion, form, and depth at once.</li></ul>
+<p><b>Supporting structures</b> <span class="xtra">★</span>: the <b>sclera</b> (white outer coat), <b>choroid</b> (blood-vessel layer), <b>aqueous humor</b> (fluid behind the cornea), <b>vitreous humor</b> (gel filling the eyeball), and <b>ciliary muscles</b> (reshape the lens). The <b>Eye &amp; Ear</b> tab has a clickable diagram of every part plus a retina close-up.</p>
+<div class="tip">"Accommodation" means two different things in this unit. <b>Lens accommodation</b> (1.6) is the lens changing shape to focus. <b>Schema accommodation</b> (2.2) is changing a mental framework. Read the context.</div>
+<div class="cxs">${cx("Unit 1 · Occipital lobes","unit1.html")}${cx("Unit 1 · Temporal lobes (faces)","unit1.html")}${cx("Unit 1 · Thalamus","unit1.html")}${cx("1.5 · Retina → SCN (light resets the clock)","#n15")}</div>`},
+
+{id:"n16c",code:"1.6C · UNIT 1 BRIDGE",t:"Hearing",h:`
+<p>Sound waves are compressions and expansions of air. <b>Amplitude</b> determines <b>loudness</b> (decibels), and <b>frequency</b> (hertz) determines <b>pitch</b>. Short wavelength = high frequency = high pitch.</p>
+<h3>Path of sound</h3>
+<p><b>Outer ear:</b> pinna → ear canal → <b>eardrum</b>. <b>Middle ear:</b> <b>ossicles</b> (hammer, anvil, stirrup) amplify the vibration, and the Eustachian tube equalizes pressure. <b>Inner ear:</b> oval window → fluid in the <b>cochlea</b> ripples the <b>basilar membrane</b>, bending <b>hair cells</b> (this is transduction) → <b>auditory nerve</b> → thalamus → <b>auditory cortex, temporal lobe</b>.</p>
+<p>The <b>oval window</b> <span class="xtra">★</span> takes the stirrup's push into the cochlea, and the <b>round window</b> <span class="xtra">★</span> bulges to release the pressure. The <b>Eye &amp; Ear</b> tab has a clickable ear and an uncoiled cochlea with a frequency slider.</p>
+<h3>Pitch theories</h3>
+<div class="tw"><table class="tb"><tr><th>Theory</th><th>Pitch range</th><th>Idea</th></tr>
+<tr><td>Place</td><td><b>High</b></td><td>Different frequencies vibrate different <b>places</b> on the basilar membrane, like piano keys</td></tr>
+<tr><td>Frequency</td><td><b>Low</b></td><td>The whole membrane vibrates, and nerve firing rate matches the sound's frequency (100 Hz → 100 impulses per second)</td></tr>
+<tr><td>Volley</td><td><b>Middle</b> (about 1,000–4,000 Hz)</td><td>Neurons take turns firing ("volleys") to match frequencies too fast for one neuron</td></tr></table></div>
+<div class="ex">Memory hook: <b>P</b>lace for <b>P</b>iccolo (high), <b>F</b>requency for <b>F</b>oghorn (low), and a <b>V</b>olley of neurons fills the middle.</div>
+<h3>Sound localization</h3>
+<p>The ear closer to the sound hears it <b>slightly sooner and louder</b>. Sounds directly in front of or behind you are hard to place because both ears get the same input.</p>
+<h3>Hearing loss</h3>
+<ul><li><b>Conduction deafness</b>: a mechanical problem (eardrum, ossicles), so sound can't reach the cochlea. Hearing aids help.</li>
+<li><b>Sensorineural deafness</b>: damage to the hair cells or auditory nerve, often from aging or loud noise. Hair cells don't regrow.</li>
+<li><b>Cochlear implant</b>: bypasses damaged hair cells and stimulates the auditory nerve directly. It works for sensorineural loss when the nerve is intact.</li></ul>
+<div class="cxs">${cx("Unit 1 · Temporal lobes","unit1.html")}${cx("Unit 1 · Action potential firing rate","unit1.html")}${cx("1.6E · Inner ear also holds the vestibular system","#n16e")}</div>`},
+
+{id:"n16d",code:"1.6D · UNIT 1 BRIDGE",t:"Smell, Taste, Touch & Pain",h:`
+<h3>Chemical senses</h3>
+<ul><li><b>Olfaction</b>: molecules dissolve in the mucus of the olfactory epithelium → olfactory receptors → <b>olfactory bulb</b> → straight to the limbic system (amygdala, hippocampus) and olfactory cortex. <b>Smell is the only sense that bypasses the thalamus</b>, which is why smells trigger vivid emotional memories.</li>
+<li><b>Pheromones</b>: chemical signals that affect members of the same species. Clear in animals, debated in humans.</li>
+<li><b>Gustation</b>: taste buds hold <b>taste receptors</b> that detect chemicals dissolved in saliva. Basic tastes: <b>sweet</b> (energy), <b>salty</b> (sodium), <b>sour</b> (possible spoilage), <b>bitter</b> (possible toxins), <b>umami</b> (savory, protein), and <b>oleogustus</b> (fat, a proposed sixth).</li>
+<li>Taster types: <b>supertasters</b> (more taste buds, very sensitive to bitter), <b>medium tasters</b> (most people), <b>nontasters</b> (fewer taste buds).</li>
+<li>Smell and taste interact (<b>sensory interaction</b>): much of "flavor" is actually smell.</li></ul>
+<h3>Touch</h3>
+<ul><li>Skin receptors: <b>mechanoreceptors</b> (pressure, texture), <b>thermoreceptors</b> (temperature), <b>nociceptors</b> (pain).</li>
+<li>Signals go through the spinal cord → <b>thalamus</b> → <b>somatosensory cortex</b> (parietal lobe). Lips and hands get the most cortical space.</li></ul>
+<h3>Pain</h3>
+<ul><li>Pain signals possible harm. <b>Nociceptors</b> → spinal cord → thalamus → somatosensory cortex (where it is and how strong) <i>and</i> the limbic system (how bad it feels).</li>
+<li><b>Gate-control theory</b> (Melzack &amp; Wall): a "gate" in the spinal cord. Small fibers open it (pain gets through). Large fibers close it (rubbing a bumped elbow, massage), and so can the brain (distraction, <b>endorphins</b>).</li>
+<li><b>Phantom limb sensation</b>: feeling a missing limb, because the brain's body map is still active. Pain is made in the brain.</li>
+<li>Pain is <b>biopsychosocial</b> <span class="xtra">★</span>: biology (nociceptors), psychology (attention, expectations, placebo), and social-cultural factors (others' presence, norms).</li></ul>
+<div class="cxs">${cx("Unit 1 · Endorphins","unit1.html")}${cx("Unit 1 · Substance P","unit1.html")}${cx("Unit 1 · Somatosensory cortex","unit1.html")}${cx("Unit 1 · Amygdala & hippocampus","unit1.html")}${cx("Unit 1 · Biopsychosocial approach","unit1.html")}${cx("Unit 0 · Placebo effect","unit0.html")}</div>`},
+
+{id:"n16e",code:"1.6E · UNIT 1 BRIDGE",t:"Vestibular & Kinesthetic Senses",h:`
+<ul><li><b>Vestibular sense</b>: balance and head position relative to gravity. It lives in the inner ear.
+<ul><li><b>Semicircular canals</b>: three fluid-filled rings in different planes. Fluid movement bends hair cells, which signal head rotation.</li>
+<li><b>Vestibular sacs</b> <span class="xtra">★</span>: detect tilt and straight-line acceleration.</li></ul></li>
+<li>Dizziness after spinning: the canal fluid keeps moving after you stop. <b>Vertigo</b> and motion sickness come from conflict between vestibular and visual signals.</li>
+<li><b>Kinesthesis</b>: the position and movement of your own body parts, from receptors in muscles, tendons, and joints. It's how you touch your nose with your eyes closed.</li></ul>
+<div class="tip">Vestibular = <b>balance and head position</b> (inner ear). Kinesthetic = <b>where your limbs are and how they move</b> (muscles and joints). A gymnast on a beam uses both.</div>
+<div class="cxs">${cx("Unit 1 · Cerebellum (balance & coordination)","unit1.html")}${cx("1.6C · Same hair-cell idea as the cochlea","#n16c")}</div>`},
+
+{id:"n21a",code:"2.1A",t:"Perception: Processing, Influences, Gestalt & Attention",h:`
+<p><b>Perception</b> is organizing and interpreting sensory information into meaningful objects and events. Sensation is the input; perception is the brain making sense of it.</p>
+<h3>Two directions of processing</h3>
+<ul><li><b>Bottom-up</b>: starts with raw sensory data and builds up piece by piece (data-driven). Example: examining an unfamiliar object feature by feature.</li>
+<li><b>Top-down</b>: uses knowledge, expectations, and experience to interpret input (concept-driven). Example: reading "c_t" as "cat," or hearing song lyrics once you've seen them.</li>
+<li>We use both at the same time.</li></ul>
+<h3>Internal influences</h3>
+<ul><li><b>Schemas</b>: mental frameworks. Our face schema is so strong that we see faces in clouds and outlets.</li>
+<li><b>Perceptual set</b>: a readiness to perceive something a certain way. If you expect a scary movie, a normal creak sounds terrifying. In the blind french fry test, your "favorite" fries may lose the blind taste test.</li></ul>
+<h3>External influences</h3>
+<ul><li><b>Context</b>: the same object looks different in different surroundings, like a coat stand at night or a heron on a trail cam.</li>
+<li><b>Culture</b>: in the fish study, individualist cultures tended to see the lone fish as <i>leading</i>, while collectivist cultures tended to see it as <i>being chased</i>.</li></ul>
+<h3>Gestalt organization (the whole is more than its parts)</h3>
+<ul><li><b>Figure-ground</b>: separating the object from its background (vase vs. two faces).</li>
+<li><b>Grouping</b>: <b>proximity</b> (near things belong together), <b>similarity</b> (alike things belong together), <b>closure</b> (we fill gaps to see a whole), and <b>continuity</b> <span class="xtra">★</span> (we prefer smooth paths). See the Labs tab.</li></ul>
+<h3>Attention</h3>
+<ul><li><b>Selective attention</b>: focusing on one thing among many. Your conscious mind handles only a small part of what you sense.</li>
+<li><b>Cocktail party effect</b>: you follow one conversation, yet your name cuts through the noise.</li>
+<li><b>Inattentional blindness</b>: missing visible objects while focused elsewhere (the "invisible gorilla"). A big reason texting while driving is dangerous.</li>
+<li><b>Change blindness</b>: missing changes in a scene, such as a conversation partner being swapped. Magicians rely on it.</li></ul>
+<div class="tip">Inattentional blindness = never noticing <b>something present</b>. Change blindness = not noticing that <b>something changed</b>.</div>
+<div class="cxs">${cx("1.6 · Sensation is bottom-up input","#n16a")}${cx("2.2 · Schemas, assimilation & accommodation","#n22")}${cx("Unit 0 · Replication (the gorilla study replicates)","unit0.html")}</div>`},
+
+{id:"n21b",code:"2.1B",t:"Visual Perception: Depth, Constancy & Motion",h:`
+<p><b>Depth perception</b> turns a 2D retinal image into a 3D world. In the <b>visual cliff</b> (Gibson &amp; Walk), crawling infants won't cross a glass-covered drop, which suggests depth perception is present early and partly innate. Newborn animals show it too.</p>
+<div class="tw"><table class="tb"><tr><th>Cue</th><th>Type</th><th>Closer object looks...</th></tr>
+<tr><td>Retinal disparity</td><td>Binocular</td><td>More different between the two eyes</td></tr>
+<tr><td>Convergence</td><td>Binocular</td><td>Eyes turn inward more (more muscle strain)</td></tr>
+<tr><td>Relative size</td><td>Monocular</td><td>Larger (when objects are assumed to be the same size)</td></tr>
+<tr><td>Interposition</td><td>Monocular</td><td>In front, blocking the other</td></tr>
+<tr><td>Texture gradient</td><td>Monocular</td><td>Coarser, more distinct texture</td></tr>
+<tr><td>Relative clarity</td><td>Monocular</td><td>Sharper (hazy = far)</td></tr>
+<tr><td>Linear perspective</td><td>Monocular</td><td>Farther from where parallel lines converge</td></tr>
+<tr><td>Relative height <span class="xtra">★</span></td><td>Monocular</td><td>Lower in the visual field</td></tr>
+<tr><td>Relative motion <span class="xtra">★</span></td><td>Monocular</td><td>Zooms past faster when you move</td></tr></table></div>
+<div class="tip">The slide says "objects with finer details are seen as closer." Here's the precise version: nearby surfaces show <b>coarse, distinct</b> texture, which gets <b>finer and denser</b> with distance. Seeing <i>clear detail</i> means near, and texture packed tightly together means far.</div>
+<div class="ex">Is it monocular or binocular? Cover one eye. If the cue still works (a painting, a photo, a movie), it's monocular. Retinal disparity and convergence are the only two binocular cues you need for AP.</div>
+<h3>Perceptual constancies</h3>
+<ul><li><b>Color constancy</b>: a red apple still looks red in dim or yellow light.</li>
+<li><b>Shape constancy</b>: an opening door still looks rectangular, even though its retinal image is a trapezoid.</li>
+<li><b>Size constancy</b>: far-away people don't look tiny, because the brain factors in distance. Misjudged distance drives illusions like the Ponzo and moon illusions <span class="xtra">★</span>.</li></ul>
+<h3>Apparent motion</h3>
+<ul><li><b>Stroboscopic movement</b>: rapid still frames look like motion (movies, flipbooks).</li>
+<li><b>Phi phenomenon</b>: lights blinking in sequence look like one moving light (marquees, light shows).</li>
+<li><b>Autokinetic effect</b>: a still dot of light in a dark room seems to drift (tiny eye movements). Sherif used it to study conformity in Unit 4.</li></ul>
+<p><b>Perceptual adaptation</b>: after a while with upside-down goggles, people adjust and function normally. The brain is flexible.</p>
+<div class="cxs">${cx("Unit 1 · Brain plasticity (adaptation)","unit1.html")}${cx("Unit 0 · Visual cliff as an experiment","unit0.html")}${cx("Unit 1 · Nature-nurture issue","unit1.html")}</div>`},
+
+{id:"n22",code:"2.2",t:"Thinking, Problem-Solving, Judgment & Decision-Making",h:`
+<p><b>Cognition</b> covers all the mental activity of acquiring, processing, storing, and using information. <b>Metacognition</b> is thinking about your thinking, such as noticing you don't actually understand a practice question.</p>
+<h3>Organizing knowledge</h3>
+<ul><li><b>Concept</b>: a mental category ("fruit"). <b>Prototype</b>: the best example (an apple, not an olive). The farther an item is from the prototype, the slower we categorize it.</li>
+<li><b>Schema</b>: a framework or script (a sit-down restaurant vs. a buffet vs. fast food).
+<ul><li><b>Assimilation</b>: fitting new information into an existing schema (zebra = "striped horse").</li>
+<li><b>Accommodation</b>: changing the schema to fit new information (a zebra is its own animal). These are Piaget's terms, coming back in Unit 3.</li></ul></li></ul>
+<h3>Solving problems</h3>
+<ul><li><b>Algorithm</b>: step-by-step, guarantees an answer, but can be slow (a recipe, trying every locker combination, the quadratic formula).</li>
+<li><b>Heuristic</b>: a fast shortcut that is usually good but error-prone.
+<ul><li><b>Representativeness</b>: judging by resemblance to a prototype, ignoring base rates ("glasses means librarian").</li>
+<li><b>Availability</b>: judging by how easily examples come to mind ("plane crashes are common" right after news coverage).</li></ul></li>
+<li><b>Insight</b> <span class="xtra">★</span>: the sudden "aha!"</li></ul>
+<h3>How presentation shapes decisions</h3>
+<ul><li><b>Priming</b>: "Say <i>folk</i> five times. What's the white of an egg?" Many people say "yolk." The answer is albumen, the egg white.</li>
+<li><b>Framing</b>: a "90% success rate" surgery wins over a "10% failure rate" surgery, even though they're identical.</li></ul>
+<h3>Decision fallacies</h3>
+<ul><li><b>Gambler's fallacy</b>: "Tails five times, so heads is due." Each flip is independent. (Unit 0: we see patterns in random events.)</li>
+<li><b>Sunk-cost fallacy</b>: staying in a bad movie because you paid. Past costs shouldn't drive future choices.</li>
+<li>Also useful <span class="xtra">★</span>: <b>confirmation bias</b>, <b>overconfidence</b>, and <b>belief perseverance</b>.</li></ul>
+<h3>Getting stuck</h3>
+<ul><li><b>Mental set</b>: reusing an old strategy. ("6 eggs, broke 2, cooked 2, ate 2. How many left?" Answer: <b>4</b>. The eggs you broke are the ones you cooked and ate.)</li>
+<li><b>Functional fixedness</b>: seeing objects only in their usual role (a book can't be a doorstop).</li></ul>
+<h3>Creativity &amp; executive function</h3>
+<ul><li><b>Creativity</b>: new and valuable ideas. <b>Divergent thinking</b> generates many options (uses for a paperclip). <b>Convergent thinking</b> narrows to one best answer (a riddle, a multiple-choice item). Creativity needs you to break free of mental set and functional fixedness.</li>
+<li><b>Executive functions</b> (planning, prioritizing, impulse control, working memory) are run by the <b>prefrontal cortex</b> in the frontal lobe. Studying instead of gaming is executive function at work. The prefrontal cortex keeps maturing into your mid-20s.</li></ul>
+<div class="tip">Representativeness asks "does it <b>look like</b> the type?" Availability asks "can I <b>think of examples</b> easily?" And don't confuse <b>mental set</b> (stuck on a <i>strategy</i>) with <b>functional fixedness</b> (stuck on an <i>object's use</i>).</div>
+<div class="cxs">${cx("Unit 1 · Frontal lobes / Phineas Gage","unit1.html")}${cx("Unit 0 · Hindsight bias","unit0.html")}${cx("Unit 0 · Critical thinking","unit0.html")}${cx("2.1 · Schemas & perceptual set","#n21a")}${cx("1.6 · Priming","#n16a")}</div>`}
+];
+function notes(){
+  $("main").innerHTML=`<div class="card"><div class="mu" style="margin-bottom:8px">Jump to a section. Terms marked <span class="xtra">★ beyond slides</span> aren't on your class slides but often show up on AP questions. Dashed chips link to Unit 0 and Unit 1.</div><div class="chips row">${NOTES.map(n=>`<button onclick="document.getElementById('${n.id}').scrollIntoView({behavior:'smooth'})">${n.code.split(" ")[0]} ${n.t.split(":")[0]}</button>`).join("")}</div></div>`+
+  NOTES.map(n=>`<section class="card sec" id="${n.id}"><div class="code">${n.code}</div><h2>${n.t}</h2>${n.h}</section>`).join("");
+}
+
+/* ---------- GLOSSARY ---------- */
+function gloss(){
+  $("main").innerHTML='<input type="text" id="q" placeholder="Search Unit 2 terms or definitions..." oninput="gl()" aria-label="Search terms"><div id="gl"></div>';gl();
+}
+function gl(){
+  const s=($("q").value||"").toLowerCase();
+  $("gl").innerHTML=Object.keys(C).filter(c=>cats.has(c)).map(c=>{
+    const ts=D.filter(d=>d[1]==c&&(d[0]+" "+d[2]).toLowerCase().includes(s));
+    return ts.length?`<div class="gh">${C[c]}</div><div class="gg">${ts.map(d=>`<div class="gt"><b>${d[0]}${X(d)}</b><span>${d[2]}</span></div>`).join("")}</div>`:"";
+  }).join("")||'<div class="card">No matches.</div>';
+}
+
+/* ---------- COMPARE ---------- */
+const CMP=[
+["Sensation vs. perception",[["Sensation","Receptors detect and transduce stimulus energy. Input."],["Perception","The brain organizes and interprets that input. Meaning."]],"If it's about <i>detecting</i>, it's sensation. If it's about <i>interpreting</i> or recognizing, it's perception."],
+["Bottom-up vs. top-down",[["Bottom-up","Builds from raw sensory features. Data-driven."],["Top-down","Driven by expectations, schemas, and experience. Concept-driven."]],"Does prior knowledge or expectation change what's perceived? Then it's top-down."],
+["Absolute vs. difference threshold",[["Absolute threshold","Can you detect it at all? (50% of the time)"],["Difference threshold (JND)","Can you tell a change between two stimuli? Follows Weber's law."]],"Detecting something from nothing is absolute. Detecting a change is JND."],
+["Sensory adaptation vs. selective attention",[["Sensory adaptation","Receptors become less sensitive to an unchanging stimulus. Automatic."],["Selective attention","Your focus picks one stimulus. The others still register, just not consciously."]],"Stopped noticing because it's constant? That's adaptation. Tuned out because you're focused elsewhere? That's attention."],
+["Sensory interaction vs. synesthesia",[["Sensory interaction","Normal: one sense influences another (smell shapes taste)."],["Synesthesia","Rare: one sense creates an experience in another (hearing colors)."]],"Synesthesia adds a whole extra sensory experience."],
+["Rods vs. cones",[["Rods","Dim light, black and white, periphery, about 120 million"],["Cones","Color, detail, bright light, fovea, about 6 million"]],"Cones = Color. Seeing at night is rods."],
+["Trichromatic vs. opponent-process",[["Trichromatic","Three cone types (R, G, B) in the retina"],["Opponent-process","Opposing pairs in ganglion cells and the thalamus. Explains afterimages."]],"Any question about <b>afterimages</b> is opponent-process. Color mixing or color deficiency points to trichromatic."],
+["Nearsighted vs. farsighted",[["Nearsighted","Sees near clearly. The image focuses in front of the retina."],["Farsighted","Sees far clearly. The image focuses behind the retina."]],"The name tells you what you <i>can</i> see clearly."],
+["Prosopagnosia vs. blindsight",[["Prosopagnosia","Sees faces but can't recognize them (fusiform area)"],["Blindsight","Can't consciously see, yet responds accurately (visual cortex damage)"]],"In blindsight, behavior shows the person saw something they deny seeing."],
+["Pitch theories",[["Place","High pitch: location on the basilar membrane"],["Frequency","Low pitch: nerve firing rate matches the wave"],["Volley","Middle pitch: neurons take turns firing"]],"High → place, low → frequency, middle → volley."],
+["Conduction vs. sensorineural deafness",[["Conduction","Mechanical: eardrum or ossicles. Hearing aids help."],["Sensorineural","Hair cells or auditory nerve. Cochlear implant."]],"Loud concerts damage hair cells, which is sensorineural."],
+["Vestibular vs. kinesthesis",[["Vestibular","Balance and head position: semicircular canals in the inner ear"],["Kinesthesis","Limb position and movement: receptors in muscles and joints"]],"Spinning and dizziness is vestibular. Touching your nose with your eyes closed is kinesthesis."],
+["Inattentional vs. change blindness",[["Inattentional blindness","Missing something present because attention is elsewhere (the gorilla)"],["Change blindness","Missing that something changed (the swapped person)"]],"Did the question mention a change? Then it's change blindness."],
+["Retinal disparity vs. convergence",[["Retinal disparity","The two eyes' images differ more for close objects"],["Convergence","The eyes turn inward and the brain reads that muscle strain"]],"Image difference is disparity. Eye-muscle movement is convergence."],
+["Schema vs. perceptual set",[["Schema","A general mental framework or concept"],["Perceptual set","A readiness to perceive one thing in a given moment, produced by schemas, expectations, and emotions"]],"Perceptual set is the in-the-moment expectation. A schema is the stored knowledge behind it."],
+["Assimilation vs. accommodation (schema)",[["Assimilation","New information is fit into an old schema"],["Accommodation","The schema changes to fit the new information"]],"Did the <i>schema</i> change? Then it's accommodation."],
+["Algorithm vs. heuristic",[["Algorithm","Step-by-step and guaranteed, but slow"],["Heuristic","A fast shortcut that can be wrong"]],"Guaranteed answer means algorithm."],
+["Representativeness vs. availability",[["Representativeness","Matches a stereotype or prototype"],["Availability","Examples come easily to mind (vivid, recent, in the news)"]],"Stereotypes point to representativeness. News and memorable events point to availability."],
+["Priming vs. framing",[["Priming","An earlier stimulus activates associations"],["Framing","The wording of the same information changes the choice"]],"Same facts worded differently is framing. Something seen <i>before</i> the question is priming."],
+["Gambler's vs. sunk-cost fallacy",[["Gambler's fallacy","Thinks past random outcomes change future odds"],["Sunk-cost fallacy","Sticks with something because of past investment"]],"Odds and chance point to the gambler's fallacy. Money or time already spent points to sunk cost."],
+["Mental set vs. functional fixedness",[["Mental set","Stuck on an old strategy"],["Functional fixedness","Stuck on an object's usual use"]],"Is the question about an <i>object</i>? Then it's functional fixedness."],
+["Divergent vs. convergent thinking",[["Divergent","Many possible answers. Brainstorming."],["Convergent","One best answer. Narrowing down."]],"Diverge = spread out. Converge = come together."],
+["Sleepwalking vs. REM behavior disorder",[["Somnambulism","NREM-3, often children, not dream enactment"],["REM sleep behavior disorder","REM, often older men, acting out dreams because paralysis is missing"]],"Acting out a dream means REM behavior disorder."],
+["Activation-synthesis vs. consolidation",[["Activation-synthesis","Dreams = the brain making sense of random REM firing"],["Consolidation","Dreams and sleep = processing and storing memories"]],"\"Random\" means activation-synthesis. \"Memories\" means consolidation."],
+["Insomnia vs. narcolepsy vs. apnea",[["Insomnia","Can't fall or stay asleep"],["Narcolepsy","Can't stay awake: sleep attacks straight into REM"],["Sleep apnea","Can't breathe: repeated awakenings, snoring"]],"Look for the key word: sleepless, sleep attack, or breathing."]
+];
+function cmp(){
+  $("main").innerHTML=`<div class="card"><div class="mu">The pairs that most often get swapped on multiple-choice questions. Read the quick tell, then test yourself in Scenarios.</div></div>`+CMP.map(([t,items,tell])=>`<div class="card"><h3 style="margin:0 0 10px">${t}</h3><div class="cmp">${items.map((x,k)=>`<div class="cb" style="--c:${["#4da3ff","#ffd27a","#7cffd8"][k]}"><b>${x[0]}</b>${x[1]}</div>`).join("")}</div><div class="tell">${tell}</div></div>`).join("");
+}
+
+/* ---------- CONNECTIONS ---------- */
+const CON=[
+["Back to Unit 1: Biological Bases",[
+["SCN","Hypothalamus","unit1.html","The SCN, the master clock for circadian rhythm, sits in the hypothalamus, which you studied in Unit 1."],
+["Circadian rhythm","Melatonin (pineal)","unit1.html","Darkness raises melatonin and light suppresses it. This is how the endocrine system controls sleepiness."],
+["Sleep stages","EEG","unit1.html","Sleep stages are defined by EEG wave patterns. An EEG is the Unit 1 brain method behind all of 1.5."],
+["REM rebound","Depressants","unit1.html","Alcohol and sedatives suppress REM, so quitting them triggers REM rebound."],
+["Sleep deprivation","Ghrelin & leptin","unit1.html","Sleep loss raises ghrelin (hunger) and lowers leptin (fullness), which links sleep to weight gain."],
+["Transduction","Sensory (afferent) neurons","unit1.html","Receptors convert stimulus energy into action potentials, which sensory neurons carry to the CNS."],
+["Every sense but smell","Thalamus","unit1.html","The thalamus relays sight, sound, taste, and touch. Smell skips it and goes straight to the limbic system."],
+["Smell & memory","Amygdala & hippocampus","unit1.html","The olfactory bulb connects directly to emotion and memory centers, which is why smells feel nostalgic."],
+["Vision","Occipital lobes","unit1.html","Visual cortex damage causes blindsight. Face recognition depends on the temporal lobe (prosopagnosia)."],
+["Hearing","Temporal lobes","unit1.html","The auditory cortex is in the temporal lobe, next to Wernicke's area (language comprehension)."],
+["Touch","Somatosensory cortex (parietal)","unit1.html","The body map explains phantom limbs: the cortex keeps a map of a limb that is gone."],
+["Gate-control theory","Endorphins & substance P","unit1.html","Substance P carries pain signals. Endorphins (natural opioids) help close the pain gate."],
+["Vestibular & kinesthesis","Cerebellum","unit1.html","The cerebellum uses balance and body-position input to coordinate smooth movement."],
+["Executive functions","Frontal lobes / prefrontal cortex","unit1.html","Phineas Gage's frontal damage wrecked his planning and impulse control. Those are executive functions."],
+["Perceptual adaptation","Brain plasticity","unit1.html","Adjusting to flipped goggles is neuroplasticity at work."],
+["Volley & frequency theories","Action potentials & refractory period","unit1.html","A single neuron can't fire faster than about 1,000 times a second because of its refractory period. That's why volleying is needed."]
+]],
+["Back to Unit 0: Research Methods",[
+["Absolute threshold (50%)","Operational definition","unit0.html","\"Detected 50% of the time\" is an operational definition of a threshold."],
+["Gambler's fallacy","Perceiving order in randomness","unit0.html","Your slides tie this straight back to Unit 0: humans see patterns in random events."],
+["Availability heuristic","Critical thinking & overconfidence","unit0.html","Vivid anecdotes are easy to recall, which is why psychology relies on data instead of intuition."],
+["Hindsight bias","Confirmation bias & belief perseverance","unit0.html","All of these are thinking errors that the scientific attitude guards against."],
+["Visual cliff","Experiment & ethics","unit0.html","Infants are protected by the glass, so there's minimal risk. Watch for the IV/DV and ethics questions on AAQs."],
+["Gate control / pain","Placebo effect","unit0.html","Expectations alone can reduce pain. This is why drug studies use double-blind designs."],
+["Invisible gorilla","Replication","unit0.html","Inattentional blindness has replicated in many settings, which builds confidence in the finding."],
+["Fish study (culture)","Sampling & generalizability","unit0.html","Cross-cultural samples show that findings from one culture may not generalize."]
+]],
+["Within this unit",[
+["Sensation (1.6)","Perception (2.1)","#n21a","Sensation is bottom-up input. Perception adds top-down interpretation."],
+["Priming (1.6)","Priming & framing (2.2)","#n22","The same term appears in both sections: earlier exposure shapes later perception and decisions."],
+["Schemas (2.1)","Assimilation & accommodation (2.2)","#n22","Schemas create perceptual set, and they grow through assimilation and accommodation."],
+["Retina (1.6B)","SCN (1.5)","#n15","Light-sensitive retinal cells signal the SCN, so light, not just willpower, resets the clock."],
+["Inner ear (1.6C)","Vestibular sense (1.6E)","#n16e","The cochlea and the semicircular canals both use hair cells. Fluid movement bends them."],
+["Lens accommodation (1.6B)","Schema accommodation (2.2)","#n22","Same word, different meaning. A classic multiple-choice trap."],
+["REM & consolidation (1.5)","Memory (2.3–2.6)","#n15","Sleep's role in consolidating memories sets up the upcoming memory topics."]
+]],
+["Looking ahead",[
+["Assimilation & accommodation","Unit 3 · Piaget","#n22","Piaget uses these terms to explain how children's thinking develops."],
+["Sensory adaptation","Unit 3 · Habituation","#n16a","Similar but distinct: receptors adapting vs. a learned drop in response."],
+["Autokinetic effect","Unit 4 · Sherif's conformity study","#n21b","Group members' estimates of the 'moving' dot converged, an early norm-formation study."],
+["Culture & perception","Unit 4 · Individualism vs. collectivism","#n21a","The fish study is an early preview of cultural differences in attribution."],
+["Insomnia, narcolepsy, apnea","Unit 5 · Sleep-wake disorders","#n15","The DSM groups these as sleep-wake disorders."]
+]]
+];
+function conn(){
+  $("main").innerHTML=`<div class="card"><div class="mu">How this unit ties into the rest of your NeuroMaster suite. Tap a chip to open that unit's page. AP free-response questions reward these cross-unit links.</div></div>`+CON.map(([g,list])=>`<div class="card"><h3 style="margin:0 0 10px">${g}</h3><div class="cn">${list.map(([a,b,href,t])=>`<div class="cc"><div class="pair">${a} <i class="fa-solid fa-arrow-right-arrow-left"></i> <a href="${href}">${b}</a></div>${t}</div>`).join("")}</div></div>`).join("");
+}
+
+/* ---------- SLEEP CYCLE ---------- */
+const NIGHT=[["W",10],["N1",5],["N2",20],["N3",40],["N2",10],["R",10],["N2",25],["N3",30],["N2",10],["R",20],["N2",35],["N3",15],["N2",10],["R",25],["N2",50],["N1",5],["R",30],["N2",50],["R",45],["N2",25],["W",10]];
+const SL={W:{n:"Awake",y:30,c:"#9fbdf0",w:"Beta (alert) / Alpha (relaxed)",d:"Beta waves when alert. As you relax with your eyes closed, alpha waves appear. Brief awakenings during the night are normal and usually forgotten.",f:[18,6]},
+R:{n:"REM",y:70,c:"#ff6b81",w:"Fast, irregular, beta-like",d:"Paradoxical sleep: an active brain, rapid eye movements, and paralyzed voluntary muscles. Vivid dreams and memory consolidation. REM periods get longer toward morning (from about 10 to 45+ minutes). REM rebound follows REM deprivation. Narcolepsy enters REM directly, and REM behavior disorder lacks the paralysis.",f:[16,8]},
+N1:{n:"NREM-1",y:110,c:"#7cc4ff",w:"Theta (irregular)",d:"Light, transitional sleep lasting only a few minutes. Hypnagogic sensations such as falling, a body jerk, or hearing your name. Easy to wake from.",f:[8,10]},
+N2:{n:"NREM-2",y:150,c:"#ffd27a",w:"Sleep spindles & K-complexes",d:"Clearly asleep and relaxing more deeply. Bursts of rapid activity (sleep spindles). Takes up about half of total sleep. Sleep talking can happen here.",f:[7,10,1]},
+N3:{n:"NREM-3",y:190,c:"#7cffd8",w:"Delta (large and slow)",d:"Deep, slow-wave sleep. The hardest stage to wake from. Physical restoration and growth hormone release. Sleepwalking and night terrors happen here. It dominates the first half of the night and fades later.",f:[2.2,20]}};
+function wavePath(f,a,spindle){let p="";for(let x=0;x<=300;x+=2){let A=a,F=f;if(spindle&&x>120&&x<190){A=a*1.8;F=f*2.4}const y=28-A*Math.sin(2*Math.PI*F*x/300)-(A*.35)*Math.sin(2*Math.PI*F*2.7*x/300+1.3);p+=(x?"L":"M")+x+" "+y.toFixed(1)}return p}
+function sleep(){
+  let t=0,segs="",line="";const sx=m=>60+m*680/480;
+  NIGHT.forEach(([s,m],k)=>{const x0=sx(t),x1=sx(t+m),y=SL[s].y;line+=(k?`L${x0} ${y}`:`M${x0} ${y}`)+`L${x1} ${y}`;segs+=`<rect class="seg" x="${x0}" y="${y-14}" width="${x1-x0}" height="28" fill="${SL[s].c}" fill-opacity=".18" onclick="slInfo('${s}',${t},${m})"><title>${SL[s].n} · ${m} min</title></rect>`;t+=m});
+  const ylab=Object.keys(SL).map(s=>`<text x="52" y="${SL[s].y+4}" fill="${SL[s].c}" font-size="12" font-weight="700" text-anchor="end">${SL[s].n}</text>`).join("");
+  const xlab=[0,1,2,3,4,5,6,7,8].map(h=>`<text x="${sx(h*60)}" y="232" fill="#9fbdf0" font-size="11" text-anchor="middle">${h}h</text><line x1="${sx(h*60)}" x2="${sx(h*60)}" y1="20" y2="210" stroke="#1f4a9c" stroke-dasharray="2 4"/>`).join("");
+  $("main").innerHTML=`<div class="card"><h3 style="margin:0">A typical night of sleep</h3><div class="mu">Tap any stretch of the line. Notice two patterns: deep NREM-3 shrinks across the night, and REM periods grow. Each cycle is about 90 minutes.</div>
+  <svg class="sv" viewBox="0 0 760 245" role="img" aria-label="Hypnogram of an 8 hour night">${xlab}${ylab}${segs}<path d="${line}" fill="none" stroke="#e6eeff" stroke-width="2.5" stroke-linejoin="round" pointer-events="none"/></svg>
+  <div id="slI" class="wv"></div></div>
+  <div class="card"><h3 style="margin:0 0 6px">Brain waves at a glance</h3><div class="mu">Fast and small means alert or REM. Slow and big means deep sleep.</div>${["W","N1","N2","N3","R"].map(s=>`<div class="wv"><b style="color:${SL[s].c}">${SL[s].n}</b> <span class="mu">· ${SL[s].w}</span><svg viewBox="0 0 300 56" preserveAspectRatio="none" style="width:100%;height:56px;display:block"><path d="${wavePath(SL[s].f[0],SL[s].f[1],SL[s].f[2])}" fill="none" stroke="${SL[s].c}" stroke-width="1.6"/></svg></div>`).join("")}</div>`;
+  slInfo("N3",35,40);
+}
+function slInfo(s,t,m){const S=SL[s],h=x=>`${Math.floor(x/60)}h ${String(x%60).padStart(2,"0")}m`;$("slI").innerHTML=`<b style="color:${S.c};font-size:17px">${S.n}</b> <span class="mu">· ${h(t)} to ${h(t+m)} into the night (${m} min) · EEG: ${S.w}</span><div style="margin-top:6px">${S.d}</div>`}
+
+/* ---------- PATHWAYS ---------- */
+const PW={
+vision:["Vision","eye",[["Light","Light waves: wavelength gives hue, amplitude gives brightness.","Environment"],["Cornea","Clear outer layer that bends incoming light.","Eye · front"],["Pupil & iris","The iris muscle widens or narrows the pupil to control light.","Eye · front"],["Lens","Changes shape (accommodation) to focus the image on the retina. The image lands upside down.","Eye · behind pupil"],["Rods & cones","TRANSDUCTION: photoreceptors convert light into neural signals. Cones in the fovea handle color and detail. Rods in the periphery handle dim light.","Retina",1],["Bipolar → ganglion cells","Signals pass forward. Ganglion cells begin opponent-process coding.","Retina"],["Optic nerve","Ganglion axons leave the eye at the blind spot.","Eye → brain"],["Optic chiasm","The optic nerves partly cross here, so each half of your visual field goes to the opposite hemisphere.","Base of the brain"],["Thalamus","Relay station that sends the signal to the visual cortex.","Forebrain"],["Visual cortex","Feature detectors and parallel processing build the image you see.","Occipital lobe"]]],
+hearing:["Hearing","ear-listen",[["Sound waves","Air pressure waves: amplitude gives loudness (dB), frequency gives pitch (Hz).","Environment"],["Pinna & ear canal","Collect and funnel sound inward.","Outer ear"],["Eardrum","Vibrates with the sound waves.","Outer/middle boundary"],["Ossicles","Hammer, anvil, and stirrup amplify the vibrations.","Middle ear"],["Oval window","The stirrup pushes on it, sending waves into the cochlear fluid.","Inner ear"],["Cochlea hair cells","TRANSDUCTION: fluid waves ripple the basilar membrane and bend hair cells. Pitch comes from place, frequency, or volley coding.","Inner ear",1],["Auditory nerve","Carries the impulses to the brain. Damage here causes sensorineural loss.","Inner ear → brain"],["Thalamus","Relay station.","Forebrain"],["Auditory cortex","Interprets the sound and localizes it using timing and loudness differences between the ears.","Temporal lobe"]]],
+smell:["Smell","wind",[["Odor molecules","Airborne chemicals.","Environment"],["Olfactory epithelium","Molecules dissolve in mucus at the top of the nasal cavity.","Nose"],["Olfactory receptors","TRANSDUCTION: receptor neurons fire in combinations that code each odor.","Nose",1],["Olfactory bulb","Receives the signals. No thalamus stop!","Brain · above nose"],["Amygdala, hippocampus & olfactory cortex","Direct links to emotion and memory explain why smells trigger strong memories.","Limbic system / temporal lobe"]]],
+taste:["Taste","utensils",[["Food chemicals","Dissolve in saliva.","Mouth"],["Taste buds","Hold the receptor cells and are replaced every week or two.","Tongue"],["Taste receptors","TRANSDUCTION: sweet, salty, sour, bitter, umami, and maybe fat (oleogustus).","Tongue",1],["Gustatory nerves","Carry the signal toward the brain.","Mouth → brainstem"],["Thalamus","Relay station.","Forebrain"],["Gustatory cortex","Combines with smell (sensory interaction) to create flavor.","Frontal/temporal region"]]],
+touch:["Touch & Pain","hand",[["Stimulus","Pressure, temperature, or tissue damage.","Skin"],["Skin receptors","TRANSDUCTION: mechanoreceptors (pressure), thermoreceptors (temperature), nociceptors (pain).","Skin",1],["Spinal cord gate","Gate-control theory: small fibers open the gate, while large fibers and brain signals (distraction, endorphins) close it.","Spinal cord"],["Thalamus","Relay station.","Forebrain"],["Somatosensory cortex","Locates the sensation and judges its intensity. The body map explains phantom limbs.","Parietal lobe"],["Limbic system","Adds the emotional unpleasantness of pain.","Limbic system"]]],
+balance:["Balance","person-falling",[["Head moves","Rotation, tilt, or acceleration.","Body"],["Semicircular canals & vestibular sacs","TRANSDUCTION: moving fluid bends hair cells.","Inner ear",1],["Vestibular nerve","Carries the signal to the brainstem.","Inner ear → brain"],["Cerebellum & brainstem","Adjust posture and eye movements. A conflict with what the eyes see leads to vertigo or motion sickness.","Hindbrain"]]]
+};
+let pk="vision",ps=0;
+function path(){
+  const [t,ic,st]=PW[pk];
+  $("main").innerHTML=`<div class="card"><div class="mu">Pick a sense, then step through it. The gold-outlined step is where <b>transduction</b> happens. AP likes to ask about that step.</div><div class="row">${Object.entries(PW).map(([k,v])=>`<button class="${k==pk?"on":""}" onclick="pk='${k}';ps=0;path()"><i class="fa-solid fa-${v[1]}"></i> ${v[0]}</button>`).join("")}</div>
+  <div class="chain">${st.map((s,k)=>`${k?'<span class="ar"><i class="fa-solid fa-chevron-right"></i></span>':""}<button class="${k==ps?"on":""} ${s[3]?"tx":""}" onclick="ps=${k};path()">${k+1}. ${s[0]}</button>`).join("")}</div>
+  <div class="pdet"><div class="loc">STEP ${ps+1} OF ${st.length} · ${st[ps][2].toUpperCase()}</div><b style="font-size:18px">${st[ps][0]}</b>${st[ps][3]?' <span class="xtra">⚡ transduction</span>':""}<div style="margin-top:6px">${st[ps][1]}</div></div>
+  <div class="row"><button onclick="ps=Math.max(0,ps-1);path()">Back</button><button class="on" onclick="ps=(ps+1)%${st.length};path()">${ps==st.length-1?"Restart":"Next step"}</button></div></div>`;
+}
+
+/* ---------- EYE & EAR ANATOMY ---------- */
+function PT(a,r,cx,cy){a=a*Math.PI/180;return [+(cx+r*Math.cos(a)).toFixed(1),+(cy+r*Math.sin(a)).toFixed(1)]}
+function ARC(cx,cy,r,a0,a1){const [x0,y0]=PT(a0,r,cx,cy),[x1,y1]=PT(a1,r,cx,cy);return `M${x0} ${y0}A${r} ${r} 0 1 0 ${x1} ${y1}`}
+function SPIRAL(cx,cy){let p="";for(let s=0;s<=160;s++){const t=s/160,a=Math.PI+t*2.6*2*Math.PI,r=58-52*t;p+=(s?"L":"M")+(cx+r*Math.cos(a)).toFixed(1)+" "+(cy+r*Math.sin(a)).toFixed(1)}return p}
+const ap=(k,extra)=>`class="ap" data-p="${k}" onclick="aPick('${k}')" ${extra||""}`;
+/* part: [key, name, function (no name), extra detail, anchorX, anchorY, labelX, labelY, side, glossary term] */
+const ANAT={
+eye:{t:"The Eye",ic:"eye",vb:"0 0 620 360",note:"Side view, light entering from the left. The image lands upside down on the retina, and the brain flips it.",
+svg:()=>{const cx=330,cy=180,on=[PT(12,127,cx,cy),PT(28,127,cx,cy)];return `
+<text x="18" y="112" fill="#9fbdf0" font-size="12" font-weight="700">Light →</text>
+<path d="M18 122 L250 168 L443 180 M18 240 L250 192 L443 180" stroke="#fff" stroke-opacity=".35" stroke-dasharray="5 5" fill="none" pointer-events="none"/>
+<path ${ap("nerve")} d="M${on[0][0]} ${on[0][1]} L615 210 L615 252 L${on[1][0]} ${on[1][1]} Z" fill="#ffd27a" fill-opacity=".85"/>
+<circle ${ap("vitreous")} cx="${cx}" cy="${cy}" r="109" fill="#123a7a"/>
+<path ${ap("retina")} d="${ARC(cx,cy,113,140,220)}" stroke="#ff9e7a" stroke-width="7" fill="none"/>
+<path ${ap("choroid")} d="${ARC(cx,cy,120,145,215)}" stroke="#9c3f63" stroke-width="6" fill="none"/>
+<path ${ap("sclera")} d="${ARC(cx,cy,127,150,210)}" stroke="#dfe7f5" stroke-width="9" fill="none"/>
+<path ${ap("aqueous")} d="M219 116 Q150 180 219 244 Z" fill="#7cc4ff" fill-opacity=".22"/>
+<path ${ap("cornea")} d="M219 116 Q150 180 219 244" stroke="#9fe0ff" stroke-width="6" fill="none"/>
+<g ${ap("ciliary")}><ellipse cx="238" cy="126" rx="7" ry="13" fill="#c0789a"/><ellipse cx="238" cy="234" rx="7" ry="13" fill="#c0789a"/><path d="M240 138 L250 148 M240 222 L250 212" stroke="#c0789a" stroke-width="2"/></g>
+<g ${ap("iris")}><rect x="222" y="116" width="8" height="44" rx="3" fill="#3f88e8"/><rect x="222" y="200" width="8" height="44" rx="3" fill="#3f88e8"/></g>
+<rect ${ap("pupil")} x="219" y="160" width="14" height="40" fill="#01040c" stroke="#3f88e8" stroke-width="1"/>
+<ellipse ${ap("lens")} cx="252" cy="180" rx="16" ry="38" fill="#d6ecff" fill-opacity=".85"/>
+<circle ${ap("fovea")} cx="441" cy="180" r="7" fill="#ffd27a" stroke="#04122a" stroke-width="2"/>
+<circle ${ap("blind")} cx="435" cy="218" r="7" fill="#000" stroke="#fff" stroke-width="2"/>`},
+parts:[
+["cornea","Cornea","Clear, curved front layer that first bends incoming light","Light's first stop. It does most of the eye's focusing, and the lens fine-tunes. LASIK surgery reshapes the cornea.",184,150,120,52,"b","Cornea"],
+["aqueous","Aqueous humor","Watery fluid behind the cornea that nourishes the front of the eye and keeps its shape","It is constantly drained and replaced. Poor drainage raises eye pressure (glaucoma).",198,198,70,296,"b","Aqueous humor"],
+["iris","Iris","Colored ring of muscle that widens or narrows the pupil","Dilates the pupil in dim light and during sympathetic arousal (Unit 1). Constricts it in bright light.",226,130,226,30,"b","Iris"],
+["pupil","Pupil","Adjustable opening that lets light into the eye","It's a hole, not tissue. It looks black because light goes in and doesn't come back out.",222,180,62,178,"b","Pupil"],
+["lens","Lens","Changes shape to focus the image onto the retina (accommodation)","Thicker for near objects, flatter for far ones. It stiffens with age, which is why older adults need reading glasses.",256,206,262,322,"b","Lens"],
+["ciliary","Ciliary muscles","Muscles that pull on the lens to change its shape","They power lens accommodation.",238,238,168,322,"b","Ciliary muscles"],
+["vitreous","Vitreous humor","Clear gel that fills the main eyeball and keeps it round","Light passes through it to reach the retina. 'Floaters' are bits of debris in this gel.",330,150,340,30,"b","Vitreous humor"],
+["sclera","Sclera","Tough white outer coat that protects the eye","The 'white of the eye.' At the front it becomes the clear cornea.",PT(-62,127,330,180)[0],PT(-62,127,330,180)[1],440,30,"b","Sclera"],
+["choroid","Choroid","Blood-vessel layer between the sclera and retina that nourishes the retina","Its dark pigment absorbs stray light so it doesn't scatter.",PT(-38,120,330,180)[0],PT(-38,120,330,180)[1],548,64,"b","Choroid"],
+["retina","Retina","Light-sensitive back layer where rods and cones transduce light","TRANSDUCTION happens here. Light passes through ganglion and bipolar cells to reach the rods and cones at the very back. See Retina close-up.",PT(-18,113,330,180)[0],PT(-18,113,330,180)[1],575,122,"b","Retina"],
+["fovea","Fovea","Central pit of the retina packed with cones, giving the sharpest vision","Whatever you look at directly lands here. There are no rods, so a faint star can vanish when you stare straight at it.",441,180,575,168,"b","Fovea"],
+["blind","Blind spot (optic disc)","Where the optic nerve leaves the eye, with no rods or cones","It leaves a small gap in each eye's view. The brain fills it in, and the other eye covers it.",435,218,470,322,"b","Blind spot"],
+["nerve","Optic nerve","Carries neural impulses from the eye to the brain","It is made of ganglion-cell axons. From here signals go to the optic chiasm, then the thalamus, then the visual cortex in the occipital lobe.",545,233,575,290,"b","Optic nerve"]]},
+
+retina:{t:"Retina Close-up",ic:"magnifying-glass",vb:"0 0 620 340",note:"Light passes through the ganglion and bipolar layers to reach the rods and cones at the back. Neural signals then travel forward, from the back of the retina toward the front.",
+svg:()=>{const G=[80,160,240],B=[60,115,170,225,280],R=[50,110,200,260],K=[80,140,230];let s=`
+<text x="8" y="44" fill="#9fbdf0" font-size="12" font-weight="700">Light →</text><path d="M8 52 L70 52" stroke="#fff" stroke-opacity=".6" stroke-width="2" marker-end="url(#ah)"/>
+<defs><marker id="ah" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#cfe3ff"/></marker></defs>
+<rect ${ap("pigment")} x="470" y="35" width="70" height="255" rx="6" fill="#6b2f45"/>
+<g ${ap("fibers")}><path d="M110 290 L110 40" stroke="#ffd27a" stroke-width="5"/>${G.map(y=>`<path d="M154 ${y} L110 ${y}" stroke="#ffd27a" stroke-width="3"/>`).join("")}<path d="M110 40 L110 26" stroke="#ffd27a" stroke-width="5" marker-end="url(#ah)"/></g>`;
+s+=B.map(y=>G.map(g=>Math.abs(g-y)<70?`<path d="M186 ${g} L272 ${y}" stroke="#cfe3ff" stroke-opacity=".35"/>`:"").join("")).join("");
+s+=R.concat(K).map(y=>B.map(b=>Math.abs(b-y)<45?`<path d="M308 ${b} L388 ${y}" stroke="#cfe3ff" stroke-opacity=".35"/>`:"").join("")).join("");
+s+=`<g ${ap("ganglion")}>${G.map(y=>`<circle cx="170" cy="${y}" r="16" fill="#7cffd8"/>`).join("")}</g>
+<g ${ap("bipolar")}>${B.map(y=>`<ellipse cx="290" cy="${y}" rx="18" ry="10" fill="#ffd27a"/>`).join("")}</g>
+<g ${ap("rods")}>${R.map(y=>`<rect x="390" y="${y-8}" width="62" height="16" rx="8" fill="#9fbdf0"/>`).join("")}</g>
+<g ${ap("cones")}>${K.map(y=>`<path d="M390 ${y} L452 ${y-13} L452 ${y+13} Z" fill="#ff9e7a"/>`).join("")}</g>
+<path d="M440 302 L130 302" stroke="#7cffd8" stroke-width="2" marker-end="url(#ah)"/><text x="285" y="296" fill="#7cffd8" font-size="11" text-anchor="middle">neural signal travels forward</text>`;return s},
+parts:[
+["fibers","Optic nerve fibers","Ganglion-cell axons that run along the front surface and bundle into the optic nerve","They all exit at the optic disc, which creates the blind spot.",110,200,30,322,"r","Optic nerve"],
+["ganglion","Ganglion cells","Collect signals from bipolar cells; their axons form the optic nerve","Some ganglion cells work in opponent pairs (red-green, blue-yellow), which helps explain afterimages.",170,160,148,14,"r","Ganglion cells"],
+["bipolar","Bipolar cells","Middle-layer neurons that relay signals from photoreceptors to ganglion cells","Many rods share one bipolar cell (high sensitivity). A fovea cone often gets its own (high detail).",290,115,280,14,"r","Bipolar cells"],
+["cones","Cones","Detect color and fine detail in bright light","About 6 million, concentrated in the fovea. Three types underlie trichromatic theory.",440,140,420,14,"r","Cones"],
+["rods","Rods","Detect dim light in black, white, and gray, and handle peripheral vision","About 120 million, mostly in the periphery. Rods adapt slowly to the dark, which is why your eyes need time to adjust.",420,200,330,322,"r","Rods"],
+["pigment","Pigment layer","Dark back layer that nourishes the photoreceptors and absorbs stray light","Part of the choroid. Rods and cones face this layer, so light must cross the whole retina to reach them.",505,250,480,322,"r","Choroid"]]},
+
+ear:{t:"The Ear",ic:"ear-listen",vb:"0 0 620 366",note:"Outer ear (collects sound) → middle ear (amplifies with tiny bones) → inner ear (fluid and hair cells transduce). The inner ear also holds the balance organs.",
+svg:()=>`
+<text x="120" y="360" fill="#9fbdf0" font-size="11" text-anchor="middle">OUTER EAR</text><text x="290" y="360" fill="#9fbdf0" font-size="11" text-anchor="middle">MIDDLE EAR</text><text x="470" y="360" fill="#9fbdf0" font-size="11" text-anchor="middle">INNER EAR</text>
+<rect x="243" y="112" width="94" height="130" rx="18" fill="#4da3ff" fill-opacity=".08" stroke="#1f4a9c" stroke-dasharray="4 4"/>
+<path ${ap("eust")} d="M300 242 C308 285 335 312 372 338" stroke="#9fbdf0" stroke-opacity=".6" stroke-width="14" fill="none" stroke-linecap="round"/>
+<path ${ap("pinna")} d="M104 70 C30 64 18 168 44 230 C60 272 92 302 112 280 C126 262 104 246 104 226 L104 198" stroke="#d9a38b" stroke-width="18" fill="none" stroke-linecap="round"/>
+<rect ${ap("canal")} x="100" y="166" width="134" height="30" rx="8" fill="#3a5f9f"/>
+<ellipse ${ap("drum")} cx="238" cy="181" rx="5" ry="30" fill="#ffd27a"/>
+<g ${ap("hammer")}><path d="M243 182 L262 142" stroke="#f2f2f2" stroke-width="7" stroke-linecap="round"/><circle cx="265" cy="136" r="8" fill="#f2f2f2"/></g>
+<g ${ap("anvil")}><path d="M273 134 L294 142 L298 162" stroke="#e0c9a6" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g ${ap("stirrup")}><path d="M300 166 L328 172 L328 192 Z" stroke="#c8b6ff" stroke-width="5" fill="none" stroke-linejoin="round"/></g>
+<ellipse ${ap("oval")} cx="334" cy="182" rx="4" ry="12" fill="#ff9e7a"/>
+<ellipse ${ap("round")} cx="340" cy="222" rx="4" ry="9" fill="#ff9ec4"/>
+<g ${ap("canals")} fill="none" stroke="#ff9ec4" stroke-width="6"><ellipse cx="378" cy="96" rx="24" ry="36" transform="rotate(-20 378 96)"/><ellipse cx="414" cy="104" rx="34" ry="20"/><ellipse cx="398" cy="128" rx="20" ry="28" transform="rotate(35 398 128)"/></g>
+<ellipse ${ap("sacs")} cx="370" cy="166" rx="17" ry="12" fill="#ffb0d0"/>
+<path ${ap("anerve")} d="M440 216 C485 204 525 194 615 190" stroke="#ffd27a" stroke-width="12" fill="none" stroke-linecap="round"/>
+<path ${ap("cochlea")} d="${SPIRAL(430,220)}" stroke="#7cffd8" stroke-width="11" fill="none" stroke-linecap="round"/>`,
+parts:[
+["pinna","Pinna","Visible outer ear that collects sound and funnels it inward","Its folds help you tell whether a sound is above or below you.",44,200,40,40,"b","Pinna"],
+["canal","Ear canal","Tube that channels sound to the eardrum","It slightly amplifies some frequencies.",160,181,160,300,"b","Ear canal"],
+["drum","Eardrum (tympanic membrane)","Thin membrane that vibrates when sound waves hit it","It marks the boundary between the outer and middle ear. A ruptured eardrum causes conduction deafness.",238,162,175,78,"b","Eardrum (tympanic membrane)"],
+["hammer","Hammer (malleus)","First of the three tiny bones, attached to the eardrum","Ossicle order: hammer → anvil → stirrup (H-A-S). Together they amplify vibrations.",262,142,215,22,"b","Ossicles"],
+["anvil","Anvil (incus)","Middle bone that links the other two ossicles","Damage to the ossicles causes conduction deafness.",294,146,335,22,"b","Ossicles"],
+["stirrup","Stirrup (stapes)","Last of the three bones; it pushes on the oval window","The smallest bone in the human body.",314,180,250,290,"b","Ossicles"],
+["oval","Oval window","Membrane where vibrations pass into the cochlea's fluid","The doorway between the middle and inner ear.",334,182,318,258,"b","Oval window"],
+["round","Round window","Membrane that bulges out to release fluid pressure from the cochlea","Without it, the fluid couldn't move, because fluid doesn't compress.",340,222,392,288,"b","Round window"],
+["eust","Eustachian tube","Connects the middle ear to the throat to equalize air pressure","This is why your ears pop on a plane. It isn't part of the hearing pathway.",330,300,420,336,"r","Eustachian tube"],
+["canals","Semicircular canals","Three fluid-filled loops that detect head rotation","Part of the vestibular sense (balance), not hearing, even though they share the inner ear.",414,84,470,30,"b","Semicircular canals"],
+["sacs","Vestibular sacs","Detect head tilt and straight-line acceleration","Also part of the vestibular sense.",370,166,560,96,"b","Vestibular sacs"],
+["cochlea","Cochlea","Snail-shaped, fluid-filled tube where hair cells transduce vibrations","TRANSDUCTION happens here. See Cochlea uncoiled for place theory.",478,232,565,292,"b","Cochlea"],
+["anerve","Auditory nerve","Carries impulses from the hair cells to the brain","From here signals go to the thalamus, then the auditory cortex in the temporal lobe. Damage here causes sensorineural deafness.",570,192,575,150,"b","Auditory nerve"]]},
+
+cochlea:{t:"Cochlea Uncoiled",ic:"wave-square",vb:"0 0 620 320",note:"Imagine unrolling the snail shell. Slide the frequency to see where the basilar membrane vibrates most. That's place theory.",
+svg:()=>{let ticks="";for(let x=110;x<=548;x+=16){const yt=148-(x-95)/465*8;ticks+=`<path d="M${x} ${yt} L${x} ${yt-9}" stroke="#ffd27a" stroke-width="3" stroke-linecap="round"/>`}return `
+<defs><linearGradient id="bmg" x1="0" x2="1"><stop offset="0" stop-color="#ff6b81"/><stop offset=".5" stop-color="#b39dff"/><stop offset="1" stop-color="#4da3ff"/></linearGradient></defs>
+<path d="M30 104 L80 108" stroke="#c8b6ff" stroke-width="6" stroke-linecap="round"/><text x="22" y="96" fill="#c8b6ff" font-size="11">stirrup</text>
+<path ${ap("fluid")} d="M95 75 L540 96 Q588 150 540 204 L95 225 Z" fill="#7cffd8" fill-opacity=".12" stroke="#7cffd8" stroke-opacity=".6"/>
+<path d="M140 118 L470 122 M470 180 L140 184" stroke="#7cffd8" stroke-opacity=".5" stroke-dasharray="6 6" marker-end="url(#ah2)"/>
+<defs><marker id="ah2" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#7cffd8"/></marker></defs>
+<path ${ap("nerve2")} d="M300 156 C300 232 360 262 615 270 M180 154 C185 236 300 266 420 266 M470 160 C470 230 520 252 615 262" stroke="#ffd27a" stroke-width="6" fill="none" stroke-opacity=".8"/>
+<path ${ap("basilar")} d="M95 148 L560 140 L560 162 L95 153 Z" fill="url(#bmg)"/>
+<rect ${ap("base")} x="95" y="134" width="90" height="26" fill="#ff6b81" fill-opacity=".18" stroke="#ff6b81" stroke-dasharray="3 3"/>
+<rect ${ap("apex")} x="470" y="128" width="90" height="38" fill="#4da3ff" fill-opacity=".18" stroke="#4da3ff" stroke-dasharray="3 3"/>
+<g ${ap("hair")}>${ticks}</g>
+<path id="cwave" d="" stroke="#fff" stroke-width="2.5" fill="none" pointer-events="none"/>
+<ellipse id="cglow" cx="300" cy="150" rx="30" ry="26" fill="#fff" fill-opacity=".18" pointer-events="none"/>
+<ellipse ${ap("oval2")} cx="95" cy="108" rx="6" ry="16" fill="#ff9e7a"/>
+<ellipse ${ap("round2")} cx="95" cy="192" rx="6" ry="13" fill="#ff9ec4"/>
+<text x="140" y="214" fill="#ff9e7a" font-size="11" font-weight="700">BASE · high pitch</text><text x="535" y="214" fill="#7cc4ff" font-size="11" font-weight="700" text-anchor="end">APEX · low pitch</text>`},
+parts:[
+["oval2","Oval window","Where the stirrup pushes, starting a pressure wave in the fluid","The wave travels along the upper duct, around the far end, and back along the lower duct.",95,108,40,40,"r","Oval window"],
+["fluid","Cochlear fluid","Fluid that carries the pressure wave through the cochlea","Fluid waves are what bend the hair cells.",320,90,300,30,"b","Cochlea"],
+["hair","Hair cells","Receptors on the basilar membrane that bend and fire, transducing sound","Loud noise destroys them, and they don't grow back (sensorineural deafness).",255,138,200,56,"b","Hair cells"],
+["basilar","Basilar membrane","Membrane running the length of the cochlea and lined with hair cells","Its stiffness changes along its length, so each pitch vibrates it most at a different place.",330,148,400,56,"b","Basilar membrane"],
+["base","Base (near oval window)","Narrow, stiff end that vibrates most to HIGH pitches","High pitches are explained by place theory. This end wears out first with age and noise, so high pitches go first.",140,147,150,300,"r","Place theory"],
+["apex","Apex (far end)","Wide, floppy end that vibrates most to LOW pitches","For very low pitches, the whole membrane vibrates and the nerve's firing rate matches the frequency (frequency theory).",515,147,560,40,"b","Frequency theory"],
+["round2","Round window","Bulges outward to let the pressure wave escape","It sits just below the oval window.",95,192,30,262,"r","Round window"],
+["nerve2","Auditory nerve fibers","Carry signals from the hair cells to the brain","Low pitches: firing rate matches the sound. Mid pitches: fibers fire in volleys. High pitches: which fibers fire codes the pitch.",560,266,430,300,"r","Auditory nerve"]]}
+};
+let av="eye",aSel=null,aLab=true,aQz=null,cf=1000;
+function aLabels(V){return V.parts.map((p,k)=>{const [key,n,,,ax,ay,lx,ly,side]=p,sel=aSel==key,bad=aQz&&aQz.bad==key;
+  const tx=side=="r"?`x="${lx+16}" y="${ly+4}" text-anchor="start"`:`x="${lx}" y="${ly+27}" text-anchor="middle"`;
+  return `<g class="lbl" onclick="aPick('${key}')"><line x1="${lx}" y1="${ly}" x2="${ax}" y2="${ay}" stroke="${sel?"#ffd27a":"#cfe3ff"}" stroke-width="${sel?2:1.2}" stroke-opacity=".8"/><circle cx="${ax}" cy="${ay}" r="3" fill="#fff"/><circle cx="${lx}" cy="${ly}" r="11" fill="${bad?"#ff6b81":sel?"#ffd27a":"#4da3ff"}" stroke="#04122a" stroke-width="2"/><text class="bn" x="${lx}" y="${ly+4}">${k+1}</text>${aLab&&!aQz?`<text class="lnm" ${tx}>${n}</text>`:""}</g>`}).join("")}
+function anat(){
+  const V=ANAT[av],P=V.parts.find(p=>p[0]==aSel);
+  let info;
+  if(aQz){const q=aQz,p=V.parts.find(x=>x[0]==q.order[q.i]);
+    info=q.i>=q.order.length?`<b style="font-size:17px">Done! ${q.sc} / ${q.order.length}</b><div class="row"><button class="on" onclick="aQuiz('${q.type}')">Again</button><button onclick="aQz=null;aSel=null;anat()">Back to explore</button></div>`
+    :`<div class="loc">QUESTION ${q.i+1} OF ${q.order.length} · SCORE ${q.sc}</div><div style="font-size:17px;margin-top:4px">${q.type=="name"?`Click the <b style="color:var(--gold)">${p[1]}</b>.`:`Which structure: <b style="color:var(--gold)">${p[2]}</b>?`}</div>${q.fb||""}`;}
+  else info=P?`<div class="loc">${V.t.toUpperCase()} · #${V.parts.indexOf(P)+1}</div><b style="font-size:18px">${P[1]}</b>${D.some(d=>d[0]==P[1])?"":""}<div style="margin-top:4px"><b style="color:var(--mint)">Job:</b> ${P[2]}.</div><div style="margin-top:4px">${P[3]}</div><div class="mu" style="margin-top:6px">Glossary term: ${P[9]}</div>`:`<div class="mu">Tap any structure or numbered label to learn its job.</div>`;
+  $("main").innerHTML=`<div class="card"><div class="row" style="margin-top:0">${Object.entries(ANAT).map(([k,v])=>`<button class="${k==av?"on":""}" onclick="av='${k}';aSel=null;aQz=null;anat()"><i class="fa-solid fa-${v.ic}"></i> ${v.t}</button>`).join("")}</div>
+  <div class="mu" style="margin-top:8px">${V.note}</div>
+  <svg class="sv anat" viewBox="${V.vb}" role="img" aria-label="${V.t} diagram">${V.svg()}${aLabels(V)}</svg>
+  ${av=="cochlea"?`<label class="mu" for="cfr">Sound frequency: <b id="cfv"></b></label><input type="range" id="cfr" min="0" max="1000" value="${Math.round(Math.log10(cf/20)/3*1000)}" oninput="cFreq(this.value)"><div id="cft" class="mu"></div>`:""}
+  <div class="pdet" style="margin-top:10px">${info}</div>
+  <div class="row">${aQz?`<button onclick="aQz=null;aSel=null;anat()">Exit quiz</button>`:`<button class="${aLab?"on":""}" onclick="aLab=!aLab;anat()"><i class="fa-solid fa-tags"></i> Labels ${aLab?"on":"off"}</button><button onclick="aQuiz('name')"><i class="fa-solid fa-crosshairs"></i> Label quiz</button><button onclick="aQuiz('fn')"><i class="fa-solid fa-gears"></i> Function quiz</button>`}</div>
+  ${aQz?"":`<div class="chips row">${V.parts.map((p,k)=>`<button class="${aSel==p[0]?"on":""}" onclick="aPick('${p[0]}')">${k+1}. ${p[1]}</button>`).join("")}</div>`}</div>`;
+  document.querySelectorAll(".anat .ap").forEach(e=>e.classList.toggle("sel",e.dataset.p==aSel));
+  if(av=="cochlea")cFreq(Math.round(Math.log10(cf/20)/3*1000));
+}
+function aQuiz(t){aQz={type:t,order:sh(ANAT[av].parts.map(p=>p[0])),i:0,sc:0,fb:"",lock:false};aSel=null;anat()}
+function aPick(k){
+  if(!aQz){aSel=k;return anat()}
+  const q=aQz;if(q.i>=q.order.length||q.lock)return;
+  const V=ANAT[av],want=q.order[q.i],p=V.parts.find(x=>x[0]==want);
+  q.lock=true;aSel=want;
+  if(k==want){q.sc++;q.bad=null;q.fb=`<div class="ans">Correct: <b>${p[1]}</b>. ${p[3]}</div>`}
+  else{q.bad=k;const ki=D.findIndex(d=>d[0]==p[9]);if(ki>=0){addMiss(ki);bar()}q.fb=`<div class="ans" style="background:rgba(255,107,129,.12);border-left-color:var(--no)">Not quite. The gold label is <b>${p[1]}</b>: ${p[2]}.</div>`}
+  q.fb+=`<div class="row"><button class="on" onclick="aQz.i++;aQz.lock=false;aQz.bad=null;aQz.fb='';aSel=null;anat()">Next</button></div>`;
+  anat();
+}
+function cFreq(v){
+  cf=Math.round(20*Math.pow(10,v/1000*3));const x=95+(Math.log10(20000)-Math.log10(cf))/3*465;
+  let d="";for(let xx=95;xx<=560;xx+=3){const env=Math.exp(-Math.pow((xx-x)/45,2)),y=150-18*env*Math.sin((xx-95)/7);d+=(xx==95?"M":"L")+xx+" "+y.toFixed(1)}
+  const w=$("cwave"),g=$("cglow");if(!w)return;w.setAttribute("d",d);g.setAttribute("cx",x.toFixed(0));
+  $("cfv").textContent=cf>=1000?(cf/1000).toFixed(1)+" kHz":cf+" Hz";
+  const ex=cf<150?"a deep bass note or thunder":cf<600?"a man's or woman's speaking voice":cf<1500?"a piano's upper middle range":cf<5000?"a baby's cry or a whistle (the ear is most sensitive here)":cf<12000?"cymbals or birdsong":"a mosquito buzz or the 'teen-only' ringtone that adults often can't hear";
+  const th=cf<1000?"<b>Frequency theory</b> dominates: the auditory nerve fires at the same rate as the sound, and the peak vibration sits toward the apex.":cf<=4000?"<b>Volley theory</b> plus place: groups of neurons take turns firing to keep up, while the peak moves toward the base.":"<b>Place theory</b>: neurons can't fire this fast, so the brain codes pitch by <i>where</i> on the basilar membrane, near the base, the hair cells fire.";
+  $("cft").innerHTML=`Sounds like ${ex}. ${th} Human hearing range: about 20 Hz to 20 kHz.`;
+}
+
+/* ---------- LABS ---------- */
+let aT=null;
+function lab(){
+  $("main").innerHTML=`<div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-scale-balanced"></i> Weber's law calculator</h3><div class="mu">The JND is a fixed <i>percentage</i> of the starting stimulus. The percentages are approximate textbook values.</div>
+  <div class="row"><select id="wk" onchange="web()" style="background:var(--bg);color:#fff;border:1px solid var(--ln);border-radius:8px;padding:8px"><option value="0.02|lb|Weight">Weight (≈2%)</option><option value="0.08|units|Light brightness">Light brightness (≈8%)</option><option value="0.003|Hz|Tone pitch">Tone pitch (≈0.3%)</option></select></div>
+  <label class="mu" for="wb">Starting stimulus: <b id="wbv"></b></label><input type="range" id="wb" min="1" max="200" value="50" oninput="web()">
+  <div>Smallest change you'd notice: <span class="big" id="wj"></span></div><div class="mu" id="wn"></div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-palette"></i> Afterimage (opponent-process theory)</h3><div class="mu">Stare at the small center dot without moving your eyes until the timer ends. Then the image turns white. What colors do you see?</div>
+  <div class="ag" style="margin-top:10px"><div id="aimg"></div><div><div class="big" id="atm">20</div><div class="row"><button class="on" onclick="aStart()">Start</button><button onclick="aReset()">Reset</button></div></div></div><div id="aans" class="ans hide">Green looked <b>red/magenta</b>, yellow looked <b>blue</b>, and black looked <b>white</b>. Staring tired out one side of each opponent pair (green, yellow, black). On white, the partner side rebounds. Trichromatic theory can't explain this, but opponent-process theory can.</div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-shapes"></i> Gestalt grouping</h3><div class="mu">Name the principle for each, then reveal.</div>
+  <div class="grid" style="margin-top:10px">
+  ${gest("A",`${[0,1,2,3,4,5].map(c=>[0,1,2,3,4].map(r=>`<circle cx="${20+c*22+(c>2?30:0)}" cy="${20+r*22}" r="7" fill="#4da3ff"/>`).join("")).join("")}`,"Proximity: you see two groups of columns because of spacing alone.")}
+  ${gest("B",`${[0,1,2,3,4,5,6,7].map(c=>[0,1,2,3,4].map(r=>`<circle cx="${20+c*22}" cy="${20+r*22}" r="7" fill="${r%2?"#ffd27a":"#4da3ff"}"/>`).join("")).join("")}`,"Similarity: you see rows, because same-colored dots group together even though the spacing is even.")}
+  ${gest("C",`<path d="M95 20 A45 45 0 0 1 140 65" stroke="#7cffd8" stroke-width="6" fill="none"/><path d="M140 80 A45 45 0 0 1 95 125" stroke="#7cffd8" stroke-width="6" fill="none"/><path d="M80 125 A45 45 0 0 1 50 72" stroke="#7cffd8" stroke-width="6" fill="none"/><path d="M50 58 A45 45 0 0 1 80 20" stroke="#7cffd8" stroke-width="6" fill="none"/>`,"Closure: you see a circle even though it's broken into arcs. The brain fills the gaps.")}
+  ${gest("D",`<rect x="0" y="0" width="190" height="145" fill="#e6eeff"/><path d="M60 0 C60 30 85 35 85 55 C85 75 62 80 62 100 C62 120 75 135 75 145 L115 145 C115 135 128 120 128 100 C128 80 105 75 105 55 C105 35 130 30 130 0 Z" fill="#0b1f4a"/>`,"Figure-ground: a dark vase, or two light faces in profile? The image flips depending on which part you treat as the figure.")}
+  </div></div>`;
+  web();aReset();
+}
+function gest(k,svg,ans){return `<div class="wv" style="margin:0"><b>${k}</b><svg viewBox="0 0 190 145" style="width:100%;max-height:150px;display:block">${svg}</svg><button onclick="this.nextElementSibling.classList.toggle('hide')">Reveal</button><div class="ans hide">${ans}</div></div>`}
+function web(){const [k,u,n]=$("wk").value.split("|"),b=+$("wb").value,j=b*+k;$("wbv").textContent=`${b} ${u}`;$("wj").textContent=`${j<1?j.toFixed(2):j.toFixed(1)} ${u}`;$("wn").textContent=`${n}: at ${b} ${u}, a change smaller than ${j.toFixed(2)} ${u} goes unnoticed. Double the starting stimulus and the JND doubles too.`}
+function flagHTML(white){return white?'<div style="position:absolute;inset:0;background:#fff"></div><div class="dot"></div>':'<div style="position:absolute;inset:0;display:flex"><div style="flex:1;background:#00a651"></div><div style="flex:1;background:#ffe600"></div><div style="flex:1;background:#000"></div></div><div class="dot" style="background:#fff"></div>'}
+function aReset(){clearInterval(aT);$("aimg").innerHTML=flagHTML(false);$("atm").textContent="20";$("aans").classList.add("hide")}
+function aStart(){aReset();let s=20;aT=setInterval(()=>{s--;$("atm").textContent=s;if(s<=0){clearInterval(aT);$("aimg").innerHTML=flagHTML(true);$("atm").textContent="Look!";setTimeout(()=>$("aans").classList.remove("hide"),2500)}},1000)}
+
+/* ---------- FLASHCARDS ---------- */
+function flash(){
+  if(i>=Q.length)return done();
+  const k=Q[i],d=D[k];
+  $("main").innerHTML=`<div class="mu">Card ${i+1} of ${Q.length}. Tap the card (or press Space) to flip.</div>${prog()}
+  <div class="card fc" onclick="flip=!flip;flash()" tabindex="0" role="button" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();flip=!flip;flash()}">${flip!=rv?`<div>${d[2]}</div><div class="mu" style="margin-top:10px">${d[0]}</div>`:`<div class="t">${d[0]}</div><div style="margin-top:8px"><span class="tag">${C[d[1]]}</span>${X(d)}</div>`}</div>
+  <div class="row"><button onclick="i=Math.max(0,i-1);flip=false;flash()">Back</button>
+  <button onclick="addMiss(${k});bar();i++;flip=false;flash()"><i class="fa-solid fa-rotate"></i> Still learning</button>
+  <button class="on" onclick="delMiss(${k});bar();sc++;i++;flip=false;flash()"><i class="fa-solid fa-check"></i> Mastered</button>
+  <button onclick="rv=!rv;flip=false;flash()">Front: ${rv?"definition":"term"}</button></div>`;
+}
+
+/* ---------- QUIZ ---------- */
+function quiz(){
+  if(i>=Q.length)return done();
+  const k=Q[i],d=D[k];
+  const same=sh(D.map((x,j)=>j).filter(j=>j!=k&&D[j][1]==d[1])),other=sh(D.map((x,j)=>j).filter(j=>j!=k&&D[j][1]!=d[1]));
+  const o=sh([k,...[...same,...other].slice(0,3)]);
+  $("main").innerHTML=`<div class="mu">Question ${i+1} of ${Q.length} · Score ${sc}</div>${prog()}
+  <div class="card"><span class="tag">${C[d[1]]}</span><div style="margin-top:8px;font-size:17px">${d[2]}</div></div>
+  <div id="o">${o.map(j=>`<button class="opt" data-k="${j}" onclick="pick(this,${j==k})">${D[j][0]}</button>`).join("")}</div><div id="f"></div>`;
+}
+function pick(b,ok){
+  const k=Q[i];document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.k==k)x.classList.add("ok")});
+  if(ok)sc++;else{b.classList.add("bad");addMiss(k);bar()}
+  $("f").innerHTML=`<div class="card"><b>${D[k][0]}:</b> ${D[k][2]}</div><button class="on" onclick="i++;quiz()">Next question</button>`;
+}
+
+/* ---------- MATCHING ---------- */
+let M={t:[],d:[],s:null,left:0,bad:null};
+function match(){const r=Q.slice(i,i+6);if(!r.length)return done();M={t:sh(r),d:sh(r),s:null,left:r.length,bad:null};drawM()}
+function drawM(){
+  $("main").innerHTML=`<div class="mu">Tap a term, then its definition. ${M.left} left · Score ${sc}</div>${prog()}<div class="grid"><div>${M.t.map(k=>`<button class="opt ${M.s&&M.s[0]=="t"&&M.s[1]==k?"on":""} ${M.bad&&M.bad.includes("t"+k)?"bad":""}" onclick="selM('t',${k})">${D[k][0]}</button>`).join("")}</div><div>${M.d.map(k=>`<button class="opt ${M.s&&M.s[0]=="d"&&M.s[1]==k?"on":""} ${M.bad&&M.bad.includes("d"+k)?"bad":""}" style="font-size:14px" onclick="selM('d',${k})">${D[k][2]}</button>`).join("")}</div></div>`;
+}
+function selM(t,k){
+  M.bad=null;
+  if(!M.s||M.s[0]==t){M.s=[t,k];return drawM()}
+  const a=M.s[1];
+  if(a==k){sc++;M.t=M.t.filter(x=>x!=k);M.d=M.d.filter(x=>x!=k);M.left--;M.s=null;if(!M.left){i+=6;return i>=Q.length?done():match()}}
+  else{const tk=t=="t"?k:a;addMiss(tk);bar();M.bad=[M.s[0]+a,t+k];M.s=null;setTimeout(()=>{M.bad=null;drawM()},700)}
+  drawM();
+}
+
+/* ---------- TYPE-IN ---------- */
+const norm=s=>s.toLowerCase().replace(/['’]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+function variants(t){const v=[t,t.replace(/\(.*?\)/g,"")];const m=t.match(/\((.*?)\)/);if(m)v.push(m[1]);return v.map(norm).filter(Boolean)}
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function typ(){
+  if(i>=Q.length)return done();
+  const d=D[Q[i]];
+  $("main").innerHTML=`<div class="mu">Term ${i+1} of ${Q.length} · Score ${sc}</div>${prog()}<div class="card"><span class="tag">${C[d[1]]}</span><div style="margin-top:8px;font-size:17px">${d[2]}</div><div class="mu" style="margin-top:6px">Hint: ${d[0].length} characters, starts with “${d[0][0]}”</div></div>
+  <input type="text" id="ans" placeholder="Type the term, then press Enter" onkeydown="if(event.key==='Enter')chkT()" autocomplete="off"><div class="row"><button class="on" onclick="chkT()">Submit</button><button onclick="$('ans').value='';chkT(true)">Show answer</button></div><div id="f"></div>`;
+  setTimeout(()=>$("ans")&&$("ans").focus(),30);
+}
+function chkT(skip){
+  const k=Q[i],d=D[k],inp=norm($("ans").value);if(!skip&&!inp)return;
+  const vs=variants(d[0]),exact=vs.includes(inp),close=!exact&&inp.length>5&&vs.some(v=>lev(inp,v)<=Math.max(1,Math.floor(v.length/8)));
+  $("ans").disabled=true;document.querySelectorAll("#main .row button").forEach(b=>b.disabled=true);
+  if(exact||close){sc++;$("f").innerHTML=`<div class="card ok">${close?"Close enough (check the spelling): ":"Correct! "}<b>${d[0]}</b></div><button class="on" onclick="i++;typ()">Next</button>`}
+  else{addMiss(k);bar();$("f").innerHTML=`<div class="card bad">The term is <b>${d[0]}</b>.</div><button class="on" onclick="i++;typ()">Next</button>`}
+}
+
+/* ---------- SCENARIOS ---------- */
+const APP=[
+["Maya stops noticing the hum of the air conditioner about ten minutes after walking into the library.","Sensory adaptation",["Selective attention","Absolute threshold","Weber's law"],"Constant, unchanging stimulation lowered her receptors' sensitivity."],
+["You can easily tell when a friend adds one candle to a cake with two candles, but not when one is added to a cake with forty.","Weber's law",["Absolute threshold","Sensory interaction","Signal detection theory"],"The change you can notice is a proportion of the original amount."],
+["During a hearing test, Jordan reports hearing the faintest tone on about half of the trials.","Absolute threshold",["Difference threshold (JND)","Weber's law","Sound localization"],"The minimum intensity detected 50% of the time is the absolute threshold."],
+["With a bad cold, Leo says his favorite curry “tastes like nothing.”","Sensory interaction",["Synesthesia","Sensory adaptation","Nontaster"],"Smell normally contributes much of what we experience as flavor."],
+["After staring at a green, yellow, and black flag, Ana looks at a white wall and sees a red, blue, and white flag.","Opponent-process theory",["Trichromatic theory","Feature detectors","Color constancy"],"The fatigued half of each opponent pair rebounds, producing the afterimage."],
+["A patient with visual cortex damage says he sees nothing on his left side, yet he correctly points to where a light flashed there.","Blindsight",["Prosopagnosia","Monochromatism","Inattentional blindness"],"He responds to visual information without conscious awareness of it."],
+["A woman can describe a person's nose, eyes, and hair, but she can't recognize her own brother's face.","Prosopagnosia",["Blindsight","Dichromatism","Change blindness"],"Face recognition fails after damage to the fusiform area in the temporal lobe."],
+["A guitarist plays a very low bass note, and the auditory nerve fires at the same rate as the sound wave.","Frequency theory",["Place theory","Volley theory","Sound localization"],"For low pitches, nerve firing rate matches the wave's frequency."],
+["After years of loud concerts, a drummer has permanent damage to the hair cells in his cochlea.","Sensorineural deafness",["Conduction deafness","Phantom limb sensation","Sensory adaptation"],"Hair-cell damage is sensorineural, and hair cells don't regrow."],
+["After bumping her elbow, Priya rubs it hard and the pain fades.","Gate-control theory",["Phantom limb sensation","Sensory interaction","Kinesthesis"],"Large-fiber touch signals close the spinal 'gate' to pain signals."],
+["Eyes closed, a gymnast knows exactly where her arms and legs are mid-routine.","Kinesthesis",["Vestibular sense","Sensory adaptation","Selective attention"],"Receptors in muscles and joints signal limb position and movement."],
+["After spinning on a tire swing, Sam stumbles because the room still seems to be turning.","Semicircular canals",["Cochlea","Kinesthesis","Somatosensory cortex"],"Fluid in the canals keeps moving after the spinning stops."],
+["A smell of sunscreen instantly brings back a vivid, emotional memory of a childhood beach trip.","Olfactory bulb",["Thalamus (sensory relay)","Taste buds","Gate-control theory"],"Smell skips the thalamus and connects directly to the limbic system's memory and emotion areas."],
+["While waiting for a friend wearing a red jacket, Ben mistakes three strangers in red for her.","Perceptual set",["Bottom-up processing","Sensory adaptation","Change blindness"],"His expectations primed him to perceive red jackets as his friend."],
+["Even though the professor's handwriting is messy, students read it easily because they know the material.","Top-down processing",["Bottom-up processing","Absolute threshold","Feature detectors"],"Prior knowledge guides the interpretation."],
+["Counting basketball passes in a video, half the viewers never notice a person in a gorilla suit walking through.","Inattentional blindness",["Change blindness","Cocktail party effect","Sensory adaptation"],"Focused attention elsewhere made a visible object go unseen."],
+["In a movie, an actor's drink switches from full to empty between shots, and most viewers never notice.","Change blindness",["Inattentional blindness","Perceptual adaptation","Phi phenomenon"],"They failed to detect a change in the scene."],
+["At a loud party, Kai is deep in a conversation but immediately turns when someone across the room says his name.","Cocktail party effect",["Inattentional blindness","Sensory interaction","Change blindness"],"Personally meaningful stimuli break through selective attention."],
+["A painter makes distant mountains look hazy and blue so they appear far away.","Relative clarity",["Interposition","Retinal disparity","Linear perspective"],"Hazy objects are perceived as farther away."],
+["As a ball flies toward your face, your eyes turn inward and you sense it's getting close.","Convergence",["Retinal disparity","Relative size","Accommodation (lens)"],"The brain reads the inward muscle strain as nearness."],
+["Your classroom door looks like a trapezoid as it swings open, but you still perceive it as a rectangle.","Shape constancy",["Size constancy","Linear perspective","Closure"],"You perceive the shape as unchanging despite the changing retinal image."],
+["Holiday lights blink on and off in sequence, so they look like a single light racing around the house.","Phi phenomenon",["Stroboscopic movement","Autokinetic effect","Relative motion (motion parallax)"],"Adjacent lights blinking in sequence create apparent motion."],
+["A child sees a cow for the first time and calls it a “big dog.”","Assimilation",["Accommodation (schema)","Prototype","Functional fixedness"],"She fit the new animal into her existing dog schema."],
+["Later, the child learns cows moo, give milk, and aren't dogs, so she creates a new category.","Accommodation (schema)",["Assimilation","Mental set","Metacognition"],"Her schema changed to fit the new information."],
+["After watching several shark-attack news stories, Lia believes sharks are a bigger danger than car accidents.","Availability heuristic",["Representativeness heuristic","Framing","Gambler's fallacy"],"Vivid, easily recalled examples inflate her estimate of the risk."],
+["Told that Tom is shy and loves poetry, most people guess he's a librarian rather than a salesperson, even though there are far more salespeople.","Representativeness heuristic",["Availability heuristic","Confirmation bias","Overconfidence"],"They matched him to a prototype and ignored base rates."],
+["A roulette wheel lands on black six times in a row, so Dev bets big on red because it's “due.”","Gambler's fallacy",["Sunk-cost fallacy","Availability heuristic","Framing"],"Each spin is independent, and past outcomes don't change the odds."],
+["Alex keeps fixing his broken-down car because he has already spent $3,000 on repairs.","Sunk-cost fallacy",["Gambler's fallacy","Mental set","Framing"],"Past investment, not future value, is driving his choice."],
+["Shoppers prefer ground beef labeled “80% lean” over beef labeled “20% fat.”","Framing",["Priming","Availability heuristic","Representativeness heuristic"],"The same information, worded differently, changes the choice."],
+["Needing to tighten a screw, Rosa doesn't think to use a coin because she sees coins only as money.","Functional fixedness",["Mental set","Convergent thinking","Algorithm"],"She sees the object only in terms of its usual function."],
+["Jamal keeps using a long-division method that worked in earlier units, even though a quicker shortcut fits the new problems.","Mental set",["Functional fixedness","Insight","Algorithm"],"He's stuck on a previously successful strategy."],
+["To open a 3-digit lock, Nia tries every combination from 000 to 999 in order.","Algorithm",["Heuristic","Insight","Divergent thinking"],"A step-by-step method that guarantees a solution, though slowly."],
+["In two minutes, students list as many uses for a brick as they can.","Divergent thinking",["Convergent thinking","Metacognition","Functional fixedness"],"Generating many possible solutions is divergent thinking."],
+["Mid-test, Chloe pauses to ask herself whether she actually understands the question or is just pattern-matching.","Metacognition",["Executive functions","Convergent thinking","Selective attention"],"She is thinking about her own thinking."],
+["A man with frontal lobe damage struggles to plan his day and can't resist impulsive purchases.","Executive functions",["Metacognition","Kinesthesis","Mental set"],"Planning and impulse control are prefrontal executive functions."],
+["After a flight from Seattle to Shanghai, Jay is wide awake at 3 a.m. and exhausted at noon.","Jet lag",["Narcolepsy","Insomnia","REM rebound"],"His circadian rhythm is out of sync with local time."],
+["A participant woken every time REM begins spends much more time in REM on the following night.","REM rebound",["Activation-synthesis theory","Narcolepsy","Sleep apnea"],"After REM deprivation, the body compensates with extra REM."],
+["A man in his 70s punches and kicks in his sleep while dreaming he's fighting off an attacker.","REM sleep behavior disorder",["Somnambulism (sleepwalking)","Night terrors","Narcolepsy"],"Normal REM paralysis is missing, so he acts out the dream."],
+["During a laugh, a woman suddenly collapses into REM sleep in the middle of the day.","Narcolepsy",["Sleep apnea","Insomnia","Hypnagogic sensations"],"Sleep attacks that go straight into REM, here with cataplexy, define narcolepsy."],
+["A loud snorer wakes up dozens of times an hour gasping for air and is exhausted all day.","Sleep apnea",["Insomnia","Narcolepsy","Night terrors"],"Repeated pauses in breathing fragment his sleep."],
+["After a blow to the head, a boxer has trouble hearing because the three tiny bones behind his eardrum were damaged.","Conduction deafness",["Sensorineural deafness","Sensory adaptation","Place theory"],"The ossicles conduct sound to the cochlea, so this is mechanical (conduction) hearing loss."],
+["A glaucoma patient's eye pressure rises because fluid behind the cornea isn't draining properly.","Aqueous humor",["Vitreous humor","Choroid","Fovea"],"The aqueous humor is the watery fluid in the front of the eye. Poor drainage raises pressure."],
+["Looking directly at a faint star makes it disappear, but it reappears when you look slightly to the side.","Fovea",["Blind spot","Optic chiasm","Ciliary muscles"],"The fovea has only cones, which need bright light. Looking off-center uses the rods."],
+["As an older adult reads a menu, her lens can no longer thicken enough to focus up close.","Accommodation (lens)",["Accommodation (schema)","Convergence","Retinal disparity"],"The lens's ability to change shape (accommodation) declines with age."],
+["Drifting off in class, Marcus suddenly feels like he's falling and jerks awake.","Hypnagogic sensations",["REM rebound","Night terrors","Hallucinations"],"Falling sensations and body jerks happen in NREM-1 as you fall asleep."],
+["A sleep researcher argues that dreams are just the cortex trying to weave random brainstem signals into a story.","Activation-synthesis theory",["Consolidation theory","Memory consolidation","REM rebound"],"Dreams are explained as interpretations of random neural activity."]
+];
+let AQ=[],ai=0,as=0;
+function app(){AQ=sh(APP).slice(0,12);ai=0;as=0;appQ()}
+function appQ(){
+  if(ai>=AQ.length){$("main").innerHTML=`<div class="card"><h2>Scenarios complete</h2><p>Score: <b>${as}</b> / ${AQ.length}</p><button class="on" onclick="app()">New set of 12</button></div>`;return}
+  const [s,a,ds,w]=AQ[ai],o=sh([a,...ds]);
+  $("main").innerHTML=`<div class="mu">Scenario ${ai+1} of ${AQ.length} · Score ${as}</div><div class="pg"><i style="width:${ai/AQ.length*100}%"></i></div><div class="card" style="font-size:17px">${s}</div><div>${o.map(x=>`<button class="opt" onclick="appP(this,${x==a})">${x}</button>`).join("")}</div><div id="f"></div>`;
+}
+function appP(b,ok){
+  const [s,a,ds,w]=AQ[ai];document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent==a)x.classList.add("ok")});
+  if(ok)as++;else{b.classList.add("bad");const k=D.findIndex(d=>d[0]==a);if(k>=0){addMiss(k);bar()}}
+  $("f").innerHTML=`<div class="card"><b>${a}.</b> ${w}</div><button class="on" onclick="ai++;appQ()">Next</button>`;
+}
+
+/* ---------- AAQ ---------- */
+const AAQS=[
+{t:"Study 1: Sleep and Memory",s:"Researchers wanted to know whether sleep after learning improves memory. Eighty high school students (ages 15–18) from two Washington schools volunteered and gave written assent, with parental consent. All memorized 40 word pairs at 9 p.m. Students were randomly assigned either to sleep normally (8 hours) or to stay awake all night in the lab. After a recovery night, all were tested on the pairs. The sleep group recalled a mean of 31.2 pairs (SD = 4.1); the awake group recalled a mean of 22.5 pairs (SD = 5.3). The difference was statistically significant (p < .01).",
+p:[["Identify the research method used in the study.","An <b>experiment</b>. The researchers manipulated sleep vs. no sleep and used random assignment."],
+["State the operational definition of memory in the study.","The <b>number of the 40 word pairs correctly recalled</b> on the test after the recovery night."],
+["Describe what the difference in standard deviations means.","The awake group's scores were <b>more spread out</b> around their mean (SD 5.3 vs. 4.1), so their recall was less consistent."],
+["Identify at least one ethical guideline applied by the researchers.","<b>Informed consent/assent</b>: written assent from students plus parental consent for minors. (Other answers could include no lasting harm, thanks to the recovery night.)"],
+["Explain the extent to which the findings may or may not be generalizable.","Limited: it used <b>volunteers aged 15–18 from two Washington schools</b>, so it may not generalize to adults or other regions. Random assignment supports a causal claim within this sample, but the sample isn't random."],
+["Explain how at least one finding supports or refutes the hypothesis that sleep improves memory.","It <b>supports</b> it: the sleep group recalled significantly more pairs (31.2 vs. 22.5, p &lt; .01), which fits <b>consolidation theory</b> (1.5)."]]},
+{t:"Study 2: Framing and Medical Choices",s:"A psychologist recruited 200 adults online. Participants were randomly assigned to read about a surgery described either as having a “90% survival rate” or a “10% mortality rate.” They then rated how likely they were to choose the surgery from 1 (definitely not) to 7 (definitely yes). Participants were told the study was about medical decisions and were debriefed afterward. The survival group's median rating was 6; the mortality group's median rating was 3. The effect size was large (d = 0.9).",
+p:[["Identify the independent variable.","The <b>wording (frame)</b> of the surgery outcome: 90% survival vs. 10% mortality."],
+["Identify the dependent variable and its operational definition.","Willingness to choose the surgery, measured as a <b>1–7 rating</b>."],
+["Describe what the effect size means.","A large d (0.9) means the framing had a <b>strong, practically meaningful</b> effect on ratings, not just a statistically detectable one."],
+["Identify the ethical guideline shown by the researchers.","<b>Debriefing</b>: participants were told the study's true purpose afterward (and gave informed consent)."],
+["Explain how the findings support or refute the hypothesis that framing changes decisions.","They <b>support</b> it: identical information got a median of 6 when framed positively vs. 3 when framed negatively. That's the <b>framing</b> effect (2.2)."],
+["Explain one limitation on generalizability.","An <b>online sample of volunteers</b> may not represent patients facing real surgery, so real stakes might change the results."]]}
+];
+let aq=0;
+function aaq(){
+  const A=AAQS[aq];
+  $("main").innerHTML=`<div class="card"><div class="mu">The 2024 AP exam's <b>Article Analysis Question (AAQ)</b> pulls in Unit 0 methods. Write your answer to each part first, then reveal the model answer. Keep answers short and specific: name it, then tie it to the study.</div><div class="row">${AAQS.map((x,k)=>`<button class="${k==aq?"on":""}" onclick="aq=${k};aaq()">${x.t}</button>`).join("")}</div></div>
+  <div class="card"><h3 style="margin:0 0 6px">${A.t}</h3><div>${A.s}</div></div>
+  ${A.p.map(([q,a],k)=>`<div class="card"><b>${String.fromCharCode(65+k)}.</b> ${q}<textarea placeholder="Your answer..." aria-label="Your answer for part ${String.fromCharCode(65+k)}"></textarea><button onclick="this.nextElementSibling.classList.toggle('hide')">Reveal model answer</button><div class="ans hide">${a}</div></div>`).join("")}
+  <div class="card mu">${cx("Review Unit 0 · Research methods & statistics","unit0.html")}</div>`;
+}
+
+window.onload=go;
+</script>
+</body>
+</html>
