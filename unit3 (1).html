@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<title>Unit 3: Memory &amp; Intelligence</title>
+<style>
+:root{--bg:#050f26;--p:#0b1f4a;--p2:#16408f;--ln:#1f4a9c;--ac:#4da3ff;--mu:#9fbdf0;--ok:#3ecf8e;--no:#ff6b81;--gold:#ffd27a;--mint:#7cffd8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:radial-gradient(circle at 15% 10%,rgba(77,163,255,.14),transparent 40%),radial-gradient(circle at 85% 90%,rgba(40,100,230,.16),transparent 40%) fixed,var(--bg);color:#e6eeff;min-height:100vh;line-height:1.5}
+a{color:var(--ac)}
+header{position:sticky;top:0;z-index:9;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(11,31,74,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.hl{display:flex;gap:12px;align-items:center}
+.logo{width:42px;height:42px;border-radius:12px;background:rgba(77,163,255,.18);border:1px solid var(--ac);display:grid;place-items:center;color:var(--ac);font-size:20px;box-shadow:0 0 16px rgba(77,163,255,.4);cursor:pointer;flex:0 0 auto}
+h1{font:800 20px 'Plus Jakarta Sans';margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.unit-select{background:rgba(5,15,38,.8);color:var(--ac);border:1px solid var(--ac);padding:4px 8px;border-radius:8px;font:700 13px 'Plus Jakarta Sans';cursor:pointer;outline:none;max-width:100%}
+.unit-select:focus{box-shadow:0 0 0 2px var(--ac)}
+.stats{display:flex;gap:16px;font:500 13px 'JetBrains Mono',monospace;background:rgba(5,15,38,.7);padding:8px 14px;border-radius:12px;border:1px solid var(--ln)}
+nav{display:flex;flex-wrap:wrap;gap:4px;padding:5px;background:rgba(5,15,38,.6);border:1px solid var(--ln);border-radius:12px}
+nav .tab{border:0;background:none;color:var(--mu);font:600 13px 'Plus Jakarta Sans';padding:8px 12px;border-radius:99px;cursor:pointer}
+nav .tab:hover{color:#fff;background:rgba(77,163,255,.12)}
+nav .tab.on{background:var(--ac);color:#04122a;box-shadow:0 0 14px rgba(77,163,255,.5)}
+#rt{max-width:1100px;margin:0 auto;padding:10px 16px}
+main{max-width:960px;margin:0 auto;padding-bottom:60px}
+.card{background:linear-gradient(160deg,rgba(22,64,143,.35),rgba(11,31,74,.9));border:1px solid var(--ln);border-radius:16px;padding:20px;margin:12px 0;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.fc{min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;text-align:center;font-size:19px;background:linear-gradient(145deg,#1553b8,#0b1f4a);box-shadow:0 0 30px rgba(77,163,255,.25);animation:pop .25s}
+@keyframes pop{from{transform:scale(.97);opacity:.6}}
+.fc .t{font-size:26px;font-weight:800}
+.mu{color:var(--mu);font-size:14px}
+button{background:var(--p);color:#fff;border:1px solid var(--ln);border-radius:8px;padding:8px 14px;cursor:pointer;font-family:inherit;font-size:14px}
+button:hover{background:var(--p2)}
+button.on{background:var(--ac);color:#04122a;font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bar button,.row button,.chips button{border-radius:99px;font:600 13px 'Plus Jakarta Sans'}
+.opt{display:block;width:100%;text-align:left;margin:7px 0;border-radius:12px;padding:12px 16px;transition:transform .1s;font-size:15px}
+.opt:hover:not(:disabled){transform:translateX(4px);border-color:var(--ac)}
+.ok{background:#12503a!important;border-color:var(--ok)!important}
+.bad{background:#5a1c2c!important;border-color:var(--no)!important}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}
+.tag{font:600 12px 'Plus Jakarta Sans';color:var(--ac);padding:2px 9px;border-radius:99px;background:rgba(77,163,255,.15);border:1px solid var(--ln);display:inline-block}
+.xtra{font:600 11px 'Plus Jakarta Sans';color:var(--gold);padding:1px 8px;border-radius:99px;border:1px solid #ffb454;background:rgba(255,180,84,.12);margin-left:6px;white-space:nowrap}
+#flt summary{cursor:pointer;font-weight:600}
+input[type=text],textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:#fff;margin:8px 0;font:inherit}
+textarea{min-height:70px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pg{height:6px;background:#0a2a66;border-radius:9px;margin:6px 0 2px;overflow:hidden}.pg i{display:block;height:100%;background:linear-gradient(90deg,#4da3ff,#7cffd8);transition:width .2s}
+/* notes */
+.sec{scroll-margin-top:120px}
+.sec h2{margin:0 0 4px;font-size:22px}.sec .code{font:500 12px 'JetBrains Mono';color:var(--ac);letter-spacing:.06em}
+.sec h3{margin:18px 0 6px;font-size:16px;color:var(--ac)}
+.sec ul{margin:4px 0 4px 20px;padding:0}.sec li{margin:4px 0}
+.sec b{color:#fff}
+.tip{margin:10px 0;padding:10px 14px;border-radius:10px;background:rgba(255,180,84,.1);border-left:4px solid #ffb454;font-size:14px}
+.tip::before{content:"Watch out: ";font-weight:800;color:var(--gold)}
+.ex{margin:10px 0;padding:10px 14px;border-radius:10px;background:rgba(62,207,142,.1);border-left:4px solid var(--ok);font-size:14px}
+.ex::before{content:"Example: ";font-weight:800;color:var(--mint)}
+.cxs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cx{display:inline-flex;gap:6px;align-items:center;font:600 12px 'Plus Jakarta Sans';text-decoration:none;color:#cfe3ff;padding:3px 10px;border-radius:99px;border:1px dashed var(--ac);background:rgba(77,163,255,.08)}
+.cx:hover{background:rgba(77,163,255,.22)}
+.tb{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+.tb th,.tb td{padding:8px 10px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}
+.tb th{color:var(--ac)}.tb td:first-child{font-weight:700;color:#fff}
+.tw{overflow-x:auto}
+.jump{position:sticky;top:0}
+/* glossary */
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.gt{background:var(--p);border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:10px;padding:10px 14px}
+.gt b{display:block;color:#fff}.gt span{color:var(--mu);font-size:14px}
+.gh{font:800 17px 'Plus Jakarta Sans';color:var(--ac);margin:24px 0 10px}
+/* compare */
+.cmp{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cb{border-radius:12px;padding:10px 14px;background:rgba(5,15,38,.55);border:1px solid var(--ln);border-top:4px solid var(--c,#4da3ff);font-size:14px}
+.cb b{display:block;font-size:15px;color:var(--c,#fff);margin-bottom:2px}
+.tell{margin-top:10px;font-size:14px;color:var(--mint)}.tell::before{content:"Quick tell: ";font-weight:800}
+/* connections */
+.cn{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.cc{background:rgba(5,15,38,.55);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;font-size:14px}
+.cc .pair{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px;font-weight:700}
+.cc .pair i{color:var(--ac)}
+/* sleep */
+.sv{width:100%;height:auto;display:block}
+.seg{cursor:pointer}.seg:hover{fill-opacity:.35}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-top:8px}
+.wv{background:rgba(5,15,38,.6);border:1px solid var(--ln);border-radius:12px;padding:10px 14px;margin-top:10px}
+/* pathways */
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.chain button{border-radius:10px;font-size:13px;padding:7px 11px}
+.chain .ar{color:var(--mu)}
+.chain button.tx{border-color:var(--gold)}
+.pdet{background:rgba(5,15,38,.6);border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:12px;padding:12px 14px;min-height:90px}
+.pdet .loc{font:500 12px 'JetBrains Mono';color:var(--ac)}
+/* labs */
+.ag{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+#aimg{width:min(320px,100%);aspect-ratio:3/2;border-radius:8px;border:1px solid var(--ln);position:relative;overflow:hidden}
+.dot{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:#000}
+input[type=range]{accent-color:#4da3ff;width:100%}
+.big{font:800 28px 'JetBrains Mono';color:var(--mint)}
+.ans{margin-top:8px;padding:10px 14px;border-radius:10px;background:rgba(62,207,142,.1);border-left:4px solid var(--ok);font-size:14px}
+.hide{display:none}
+.anat{margin-top:8px;background:rgba(5,15,38,.45);border:1px solid var(--ln);border-radius:12px}
+.ap{cursor:pointer;transition:filter .15s}.ap:hover{filter:brightness(1.4)}.ap.sel{filter:drop-shadow(0 0 6px #ffd27a) brightness(1.3)}
+.lbl{cursor:pointer}.lbl .bn{font:800 11px system-ui,sans-serif;fill:#04122a;text-anchor:middle;pointer-events:none}.lbl .lnm{font:700 12px system-ui,sans-serif;fill:#fff;paint-order:stroke;stroke:#050f26;stroke-width:4px;pointer-events:none}
+.pdet .loc{font:500 12px 'JetBrains Mono',monospace;color:var(--ac)}
+@media(max-width:640px){header{position:static}.grid{grid-template-columns:1fr}h1{font-size:18px}.card{padding:16px}.stats{gap:10px}}
+/* unit 3 additions */
+.sg{font:600 11px 'Plus Jakarta Sans';color:#b9f5df;padding:1px 8px;border-radius:99px;border:1px solid var(--ok);background:rgba(62,207,142,.12);margin-left:6px;white-space:nowrap}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:10px 0}
+.stg{cursor:pointer;text-align:left;border-radius:14px;padding:12px 14px;background:rgba(5,15,38,.6);border:1px solid var(--ln);border-top:4px solid var(--c,#4da3ff);color:#e6eeff;font-size:13px}
+.stg b{display:block;font-size:15px;color:var(--c,#fff)}
+.stg.on{background:rgba(77,163,255,.18);box-shadow:0 0 16px rgba(77,163,255,.35);color:#e6eeff;font-weight:400}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;margin-top:8px}.kv span:nth-child(odd){color:var(--ac);font-weight:700}
+.tree{display:flex;flex-direction:column;align-items:center;gap:10px}
+.tl{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.tn{border-radius:12px;padding:8px 14px;font-weight:700;font-size:14px;border:1px solid var(--c,#4da3ff);background:rgba(5,15,38,.7);color:var(--c,#fff)}
+.tn.on{background:var(--c,#4da3ff);color:#04122a}
+.lvl{display:flex;align-items:center;gap:10px;margin-top:8px}.lvl .pg{flex:1;height:12px}
+.wordflash{font:800 44px 'JetBrains Mono',monospace;color:var(--mint);text-align:center;min-height:70px;letter-spacing:.04em}
+.bars{display:flex;align-items:flex-end;gap:4px;height:140px;margin-top:10px;border-bottom:1px solid var(--ln);position:relative}
+.bars div{flex:1;background:linear-gradient(0deg,#16408f,#4da3ff);border-radius:4px 4px 0 0;position:relative;min-height:2px}
+.bars div.hit{background:linear-gradient(0deg,#12503a,#3ecf8e)}
+.bars div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font:500 10px 'JetBrains Mono';color:var(--mu)}
+.dart{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.fix{margin:10px 0;padding:10px 14px;border-radius:10px;background:rgba(255,107,129,.1);border-left:4px solid var(--no);font-size:14px}
+.fix::before{content:"Key check: ";font-weight:800;color:var(--no)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hl">
+    <div class="logo" title="Home" onclick="switchUnit('index')"><i class="fa-solid fa-memory"></i></div>
+    <div>
+      <h1>NeuroMaster
+        <select id="unitSel" class="unit-select" onchange="switchUnit(this.value)" aria-label="Switch unit">
+          <option value="index">Home: All Units</option>
+          <option value="unit0">Unit 0: Foundations of Psych Science</option>
+          <option value="unit1">Unit 1: Biological Bases of Behavior</option>
+          <option value="unit2">Unit 2: Cognition</option>
+          <option value="unit3" selected>Unit 3: Memory &amp; Intelligence</option>
+          <option value="unit4" disabled>Unit 4: Social Psych &amp; Personality (Locked)</option>
+          <option value="unit5" disabled>Unit 5: Mental &amp; Physical Health (Locked)</option>
+        </select>
+      </h1>
+      <div class="mu">AP Psychology Study Suite · 2.3 Memory · 2.4 Encoding · 2.5 Storage · 2.6 Retrieval · 2.7 Forgetting · 2.8 Intelligence</div>
+    </div>
+  </div>
+  <div class="stats" id="cnt"></div>
+  <nav id="modes" aria-label="Study modes"></nav>
+</header>
+
+<div id="rt">
+  <details open class="card" id="flt">
+    <summary><i class="fa-solid fa-sliders"></i> Scope &amp; Filters</summary>
+    <div class="bar" id="scope"></div>
+    <div class="bar" id="cats"></div>
+  </details>
+  <main id="main"></main>
+</div>
+
+<script>
+function switchUnit(v){window.location.href=(v==="index"?"index":v)+".html"}
+const cx=(label,href)=>`<a class="cx" href="${href}"><i class="fa-solid fa-link"></i>${label}</a>`;
+const KEY="nm_unit3_missed";
+const C={
+  Y:"2.3 Types of Memory",
+  S:"2.3 Memory Models & Processing",
+  E:"2.4 Encoding Strategies",
+  T:"2.5 Storage & Impairments",
+  R:"2.6 Retrieval",
+  F:"2.7 Forgetting & Memory Errors",
+  I:"2.8 Theories of Intelligence",
+  P:"2.8 Testing & Psychometrics",
+  A:"2.8 Achievement, Mindset & Equity"
+};
+
+/* [term, category, definition, flag]  flag 1 = beyond the slides, 2 = on the study guide key but not the slides */
+const D=[
+["Memory","Y","The persistence of learning over time: the process of taking in information (encoding), keeping it (storage), and getting it back out when needed (retrieval)."],
+["Explicit memory","Y","Memory of facts and experiences that you can consciously recall and state out loud. Also called declarative memory. Includes episodic and semantic memory."],
+["Episodic memory","Y","An explicit memory of a personally experienced event tied to a time and place, such as your first day of high school."],
+["Semantic memory","Y","An explicit memory of facts and general knowledge, such as the capital of France or that a triangle has three sides."],
+["Implicit memory","Y","Memory retained without conscious recollection that still shapes behavior, such as skills and conditioned responses. Also called nondeclarative memory. Hard to put into words."],
+["Procedural memory","Y","An implicit memory of how to do things: motor skills and habits such as riding a bike, typing, or playing a piano piece."],
+["Prospective memory","Y","Remembering to do something in the future, such as taking medication tonight or turning in an assignment tomorrow."],
+["Autobiographical memory","Y","Memory for the events and facts of your own life. Self-related memories are encoded richly, so they tend to be vivid and they help shape identity."],
+["Retrospective memory","Y","Remembering things from the past (episodic and semantic memories). The opposite direction from prospective memory.",1],
+
+["Encoding","S","The first memory process: getting information into the memory system by turning it into a form the brain can store."],
+["Storage","S","The second memory process: keeping encoded information over time."],
+["Retrieval","S","The third memory process: getting information back out of storage when it is needed."],
+["Multi-store model","S","Atkinson and Shiffrin's classic model: information moves from sensory memory to short-term memory to long-term memory. Also called the three-stage or information-processing model."],
+["Sensory memory","S","The immediate, very brief recording of sensory information. It has a large capacity but fades within seconds unless attention moves it to short-term memory."],
+["Iconic memory","S","Visual sensory memory: a picture-image memory that lasts less than a second."],
+["Echoic memory","S","Auditory sensory memory: a sound memory that lasts a few seconds (about 3 to 4), which is why you can 'replay' what someone just said."],
+["Short-term memory (STM)","S","Briefly activated memory that holds about 7 ± 2 items (5 to 9) for roughly 20 seconds unless it is rehearsed."],
+["Long-term memory (LTM)","S","The relatively permanent and limitless storehouse of the memory system, including knowledge, skills, and experiences."],
+["Working memory","S","Baddeley's updated view of short-term memory as an active workspace where information is held and manipulated, not just stored. Directed by the central executive."],
+["Central executive","S","The 'boss' of working memory. It focuses attention and coordinates the phonological loop and visuospatial sketchpad."],
+["Phonological loop","S","The working-memory component that briefly holds sounds and language, like silently repeating a phone number."],
+["Visuospatial sketchpad","S","The working-memory component that holds visual and spatial information, like mentally rotating a puzzle piece or picturing a route."],
+["Episodic buffer","S","A fourth component Baddeley added later. It links working memory with long-term memory and combines information into single episodes.",1],
+["Levels of processing model","S","Craik and Lockhart's idea that how well we remember depends on how deeply we process information. Deeper (meaning-based) processing produces more durable memories."],
+["Shallow processing","S","Encoding on a basic level, based on the appearance of words or the sound of words. Leads to weak retention."],
+["Structural processing","S","The shallowest level: encoding based on physical features, such as noticing that a word is in capital letters or has three letters."],
+["Phonemic processing","S","A middle level: encoding based on sound, such as noticing what a word rhymes with or how it is pronounced. Also called phonetic processing."],
+["Semantic processing","S","The deepest level: encoding based on meaning, such as thinking about what a word means or relating it to your life. Leads to the best recall."],
+["Deep processing","S","Encoding semantically, based on the meaning of the words. It tends to yield the best retention."],
+["Automatic processing","S","Unconscious encoding of incidental information such as space, time, frequency, and well-learned material. It happens without deliberate effort."],
+["Effortful processing","S","Encoding that requires attention and conscious effort, such as rehearsing, making flashcards, or creating mnemonics."],
+["Long-term potentiation (LTP)","S","An increase in a synapse's firing potential after brief, rapid stimulation. Repeated activation strengthens connections between neurons and is believed to be a neural basis for learning and memory."],
+["Neurogenesis","S","The formation of new neurons. In adults it occurs mainly in the hippocampus and is boosted by exercise and enriched environments."],
+["Hippocampus (memory role)","S","Limbic structure that processes explicit memories (facts and episodes) for storage. It is a temporary holding area; memories later move to the cortex.",1],
+["Cerebellum & basal ganglia (memory role)","S","Brain structures that form and store implicit memories, such as conditioned responses (cerebellum) and procedural skills (basal ganglia).",1],
+
+["Mnemonic devices","E","Memory aids, especially techniques that use vivid imagery, acronyms, rhymes, or organizational devices, such as 'SOH CAH TOA.'"],
+["Method of loci","E","A mnemonic in which you picture items placed along a familiar route or in familiar locations, then mentally 'walk' the route to retrieve them in order."],
+["Chunking","E","Organizing items into familiar, manageable units, such as grouping 1-800-555-0199 into chunks. It increases how much STM can hold."],
+["Categories","E","Grouping information by shared features (fruits, tools, sports) so it is easier to encode and retrieve. A form of chunking."],
+["Hierarchies","E","Organizing information from broad concepts down to specific facts, like an outline or a concept tree. Helps encoding and retrieval."],
+["Spacing effect","E","The tendency for distributed study or practice to produce better long-term retention than massed study or practice."],
+["Massed practice","E","Studying all at once in one long session (cramming). It can produce quick short-term gains but poor long-term retention."],
+["Distributed practice","E","Spreading study sessions out over time. It produces better long-term retention than massed practice."],
+["Serial position effect","E","The tendency to recall the first and last items in a list best and the middle items worst."],
+["Primacy effect","E","Better recall of the first items in a list, because they got more rehearsal and made it into long-term memory."],
+["Recency effect","E","Better recall of the last items in a list, because they are still active in short-term memory. It fades if recall is delayed."],
+["Self-reference effect","E","The tendency to remember information better when you relate it to yourself. A powerful form of deep, semantic processing.",1],
+["Interleaving","E","Mixing different topics or problem types within one study session instead of practicing one type at a time.",2],
+
+["Maintenance rehearsal","T","Repeating information over and over to keep it active in short-term memory, like repeating a phone number until you dial it. It does little for long-term storage."],
+["Elaborative rehearsal","T","Linking new information to what you already know to give it meaning. It promotes deeper processing and long-term retention."],
+["Memory consolidation","T","The neural storage of a long-term memory. Newly encoded memories are stabilized over time, much of it during sleep."],
+["Highly superior autobiographical memory (HSAM)","T","A rare ability to recall specific details of nearly every day of one's life, such as what you ate and what the weather was on a given date years ago.",2],
+["Flashbulb memory","T","A clear, vivid memory of an emotionally significant moment or event, such as where you were when you heard major news. Feels certain, but can still be inaccurate.",2],
+["Alzheimer's disease","T","A progressive neurodegenerative disease that destroys memory and then other thinking. It is associated with a loss of acetylcholine-producing neurons and with plaques and tangles in the brain."],
+["Dementia","T","A broad term for a decline in memory and thinking severe enough to interfere with daily life. Alzheimer's disease is the most common type.",1],
+["Retrograde amnesia","T","An inability to retrieve information from one's past: memories from before an injury or trauma are lost."],
+["Anterograde amnesia","T","An inability to form new long-term memories after an injury, often from hippocampus damage. Old memories stay mostly intact."],
+["Infantile amnesia","T","The inability to recall personal memories from early childhood, roughly before age 3 or 4. Linked to an immature hippocampus and limited language for encoding."],
+["H.M. (Henry Molaison)","T","Famous case study: his hippocampi were removed to treat seizures, leaving severe anterograde amnesia. He could still learn new skills, which showed explicit and implicit memory are separate systems.",1],
+
+["Recall","R","Retrieving information that is not currently in your conscious awareness without cues, as on a fill-in-the-blank or essay test."],
+["Recognition","R","Identifying items previously learned, as on a multiple-choice test or a police lineup. Easier than recall."],
+["Relearning","R","Learning something more quickly when you learn it a second time. Ebbinghaus measured memory this way (the 'savings' method).",1],
+["Retrieval cues","R","Stimuli that help you access a stored memory, like a smell, a place, or a question. The more cues linked to a memory, the easier it is to retrieve."],
+["Context-dependent memory","R","Information is easier to retrieve in the same environment where it was encoded, such as studying in the room where you take the test."],
+["Mood-congruent memory","R","The tendency to recall experiences that match your current mood. When sad, you remember sad events more easily."],
+["State-dependent memory","R","Information is easier to retrieve when you are in the same physiological state (tired, caffeinated, intoxicated) as when you encoded it."],
+["Encoding specificity principle","R","Cues present at encoding are the most effective cues for retrieval. It is the idea behind context- and state-dependent memory.",1],
+["Testing effect","R","Enhanced memory after retrieving information rather than just rereading it. Also called retrieval practice effect. Test, study, retest."],
+["Metacognition","R","Thinking about your own thinking, such as checking whether you truly understand material or just recognize it. Helps you target study time."],
+
+["Forgetting","F","The inability to retrieve information that was previously stored in memory. It can happen at encoding, storage, or retrieval."],
+["Forgetting curve","F","Ebbinghaus's finding that retention drops quickly soon after learning and then levels off over time."],
+["Hermann Ebbinghaus","F","Pioneering memory researcher who memorized nonsense syllables to measure learning, forgetting, and relearning. Produced the forgetting curve.",1],
+["Encoding failure","F","Forgetting because the information never got into long-term memory, usually because we didn't pay attention, as with the details of a penny."],
+["Storage decay","F","The gradual fading of a stored memory over time, especially when it is not used or rehearsed.",2],
+["Proactive interference","F","Old learning disrupts the recall of new information. Your old locker combination keeps coming to mind when you try to recall the new one. Pro = forward."],
+["Retroactive interference","F","New learning disrupts the recall of old information. Learning Spanish makes it harder to recall French you learned earlier. Retro = backward."],
+["Retrieval failure","F","Forgetting because the memory is stored but you can't access it, often because the right retrieval cue is missing.",1],
+["Tip-of-the-tongue phenomenon","F","The feeling of knowing that you know something but being temporarily unable to retrieve it. An example of inadequate retrieval."],
+["Psychodynamic perspective","F","The view (from Freud) that behavior and memory are shaped by unconscious mental processes and conflicts."],
+["Defense mechanism","F","In psychodynamic theory, an unconscious strategy the ego uses to reduce anxiety by distorting reality."],
+["Repression","F","In psychodynamic theory, the basic defense mechanism that banishes anxiety-arousing thoughts, feelings, and memories from consciousness. Modern research finds little support for it."],
+["Id","F","In Freud's theory, the unconscious part of personality that seeks immediate gratification of basic drives. It runs on the pleasure principle."],
+["Ego","F","In Freud's theory, the largely conscious 'self' that balances the id, the superego, and reality. It runs on the reality principle and uses defense mechanisms."],
+["Superego","F","In Freud's theory, the part of personality that holds internalized ideals and standards of right and wrong. Your conscience."],
+["Misinformation effect","F","Incorporating misleading information into one's memory of an event, as when leading questions change an eyewitness's memory (Elizabeth Loftus)."],
+["Source amnesia","F","Remembering information but forgetting or misattributing where you learned it, such as believing a story happened to a friend when you read it online. Also called source misattribution."],
+["Constructive memory","F","Memory is rebuilt, not replayed: we fill in gaps and update memories in light of new experiences, schemas, and information. Also called memory construction."],
+["Imagination inflation","F","Repeatedly imagining an event that never happened increases confidence that it really did happen."],
+["Reconsolidation","F","When a stored memory is retrieved, it becomes briefly unstable and can be altered before it is stored again.",1],
+["False memory","F","A memory of an event that did not happen, or that happened very differently. It can feel just as real as an accurate memory.",1],
+
+["Intelligence","I","The ability to learn from experience, solve problems, and use knowledge to adapt to new situations. A concept (a construct), not a thing that can be measured directly like height."],
+["General intelligence (g)","I","Charles Spearman's idea of one underlying general mental ability that contributes to performance on all mental tasks."],
+["Factor analysis","I","A statistical procedure that identifies clusters of related items (factors) on a test. Spearman used it to find evidence for g."],
+["Fluid intelligence (Gf)","I","The ability to reason quickly and abstractly and solve novel problems. It tends to decline beginning in young adulthood."],
+["Crystallized intelligence (Gc)","I","Accumulated knowledge and verbal skills, such as vocabulary and facts. It tends to increase with age."],
+["Cattell-Horn-Carroll (CHC) theory","I","A hierarchical model of intelligence: g at the top, broad abilities (including fluid and crystallized intelligence) in the middle, and many narrow abilities below."],
+["Multiple intelligences","I","Howard Gardner's theory that we have several relatively independent intelligences (such as linguistic, logical-mathematical, musical, spatial, bodily-kinesthetic, interpersonal, intrapersonal, and naturalist) instead of one general ability."],
+["Savant syndrome","I","A condition in which a person who is otherwise limited in mental ability has an exceptional specific skill, such as in computation, music, or drawing. Used as support for multiple intelligences."],
+["Grit","I","Passion and perseverance in pursuit of long-term goals. It predicts success, sometimes beyond raw talent."],
+["Emotional intelligence","I","The ability to perceive, understand, manage, and use emotions. Important for relationships and for success at work and in life."],
+["Triarchic theory","I","Robert Sternberg's theory of three intelligences: analytical (academic problem-solving), creative (adapting to new situations), and practical (everyday tasks).",1],
+
+["Psychometrics","P","The scientific study of the measurement of human abilities, attitudes, and traits."],
+["Standardization","P","Defining uniform testing procedures and meaningful scores by comparing performance to that of a pretested, representative group."],
+["Norms","P","The average scores and distribution of scores from the standardization group, used to interpret an individual's score."],
+["Normal curve","P","A symmetrical, bell-shaped curve that describes the distribution of many attributes. Most scores fall near the mean, and fewer fall at the extremes. For IQ, mean = 100 and SD = 15."],
+["Reliability","P","The extent to which a test yields consistent results, as assessed by the consistency of scores on two halves of the test, on alternative forms, or on retesting."],
+["Test-retest reliability","P","Reliability measured by giving the same test to the same people at two different times and correlating the scores."],
+["Split-half reliability","P","Reliability measured by dividing a test in half (such as odd vs. even items) and checking whether the two halves produce similar scores."],
+["Validity","P","The extent to which a test measures or predicts what it is supposed to."],
+["Content validity","P","The extent to which a test samples the behavior or content of interest, such as a driving test that actually involves driving."],
+["Construct validity","P","The extent to which a test measures the theoretical construct it claims to measure, often checked by comparing it with established measures of that construct."],
+["Predictive validity","P","The success with which a test predicts the behavior it is designed to predict, such as SAT scores predicting first-year college GPA."],
+["Stanford-Binet","P","The widely used American revision (by Lewis Terman at Stanford) of Alfred Binet's original French intelligence test, which was designed to identify children who needed extra help in school."],
+["Mental age","P","A measure of performance devised by Binet: the chronological age that most typically corresponds to a given level of performance."],
+["Intelligence quotient (IQ)","P","Originally mental age divided by chronological age, times 100 (MA/CA × 100). Modern tests compare your score to the average for your age, which is set at 100."],
+["Wechsler Adult Intelligence Scale (WAIS)","P","The most widely used adult intelligence test. It gives an overall score plus separate scores for verbal comprehension, perceptual reasoning, working memory, and processing speed. WISC is the children's version."],
+["Intellectual disability","P","A condition of limited mental ability, indicated by an IQ score of about 70 or below together with difficulty adapting to the demands of life.",1],
+
+["Flynn effect","A","The rise in average raw intelligence test scores over the past century (about 3 points per decade), likely due to better nutrition, more education, and a more complex world. Shows environment affects intelligence."],
+["Achievement test","A","A test designed to assess what a person has learned, such as the AP Psychology exam or a unit test."],
+["Aptitude test","A","A test designed to predict a person's future performance or capacity to learn, such as the SAT, ACT, or a pilot-aptitude test."],
+["Fixed mindset","A","The belief that intelligence and abilities are fixed traits you're born with. Leads to avoiding challenges and giving up easily (Carol Dweck)."],
+["Growth mindset","A","Carol Dweck's term for the belief that intelligence and abilities can be developed through effort and learning. Leads to embracing challenges and persisting."],
+["Stereotype threat","A","A self-confirming concern that one will be judged by a negative stereotype, which can lower performance (such as a math test after a remark that 'girls aren't good at math').",2],
+["Stereotype lift","A","A boost in performance after being reminded of a positive stereotype about one's group, or a negative one about another group.",2],
+["Eugenics","A","A discredited early-1900s movement to 'improve' the human population through selective breeding. Early IQ tests were misused to support it, including restricting immigration and forced sterilization.",1],
+["Culture-fair test","A","A test designed to reduce cultural bias, often using nonverbal items such as pattern matrices, as one attempt to reduce testing inequities.",1]
+];
+
+/* ---------- NOTES ---------- */
+const NOTES=[
+{id:"n23a",code:"2.3A",t:"Introduction to Memory: Processes & Types",h:`
+<p><b>Memory</b> is learning that persists over time. Think of the brain as a filing system that can recall everything from where you parked to song lyrics. Every memory goes through three processes:</p>
+<div class="tw"><table class="tb"><tr><th>Process</th><th>What it does</th><th>Computer analogy</th></tr>
+<tr><td>Encoding</td><td>Gets information into memory in a usable form</td><td>Typing on the keyboard</td></tr>
+<tr><td>Storage</td><td>Keeps the information over time</td><td>Saving to the hard drive</td></tr>
+<tr><td>Retrieval</td><td>Gets the information back out when needed</td><td>Opening the file</td></tr></table></div>
+<h3>Types of long-term memory</h3>
+<ul><li><b>Explicit (declarative)</b>: memories you <i>consciously</i> recall and can state.
+<ul><li><b>Episodic</b>: personal experiences tied to a time and place (the day you adopted your puppy).</li>
+<li><b>Semantic</b>: facts and general knowledge (a triangle has three sides; the date of the Declaration of Independence).</li></ul></li>
+<li><b>Implicit (nondeclarative)</b>: memories that shape behavior <i>without</i> conscious recall. They're hard to explain in words.
+<ul><li><b>Procedural</b>: skills and habits (riding a bike, typing, your fingers finding piano keys).</li>
+<li>Also includes classically conditioned responses and priming <span class="xtra">★ beyond slides</span>.</li></ul></li>
+<li><b>Prospective memory</b>: remembering to do something <i>in the future</i> (take your medication later, turn in an assignment). Its opposite, remembering the past, is retrospective memory <span class="xtra">★</span>.</li></ul>
+<div class="ex">"Kim knows how to ride a bike (procedural), can recite song lyrics (semantic), can tell you what she ate for breakfast (episodic), and remembers she has to do laundry later (prospective)." All of it is <b>memory</b>, and that's the answer the study guide wants.</div>
+<div class="tip">Explicit memories are ones you can <b>explain</b>. If someone says it's "hard to describe" or they do it "without thinking," it's <b>implicit</b>. A fact about a skill ("a bike has two wheels") is still semantic.</div>
+<h3>The biology of memory</h3>
+<ul><li><b>Long-term potentiation (LTP)</b>: synapses that fire together repeatedly become stronger and more efficient. The sending neuron needs less prompting to fire, and receiving neurons may grow more receptors. Practicing guitar chords until they "stick" is LTP. It's the leading candidate for the neural basis of learning and memory. Glutamate is the key neurotransmitter <span class="xtra">★</span>.</li>
+<li><b>Neurogenesis</b>: the birth of new neurons. It happens in the adult <b>hippocampus</b> and is boosted by exercise and enriched environments.</li>
+<li>Where memories live <span class="xtra">★</span>: the <b>hippocampus</b> processes new explicit memories, which are later stored across the cortex. The <b>cerebellum</b> (conditioned responses) and <b>basal ganglia</b> (procedural skills) handle implicit memories. The <b>amygdala</b> adds emotional strength (flashbulb memories), and the <b>frontal lobes</b> run working memory.</li></ul>
+<div class="ex">The sea snail <i>Aplysia</i> (the NOVA video on your slides) learns to withdraw its gill after repeated shocks because more serotonin is released at specific synapses. Those synapses become more efficient, which is memory at the level of single neurons.</div>
+<div class="cxs">${cx("Unit 1 · Hippocampus","unit1.html")}${cx("Unit 1 · Glutamate","unit1.html")}${cx("Unit 1 · Brain plasticity","unit1.html")}${cx("Unit 1 · Cerebellum","unit1.html")}${cx("Unit 2 · Priming (an implicit memory)","unit2.html")}</div>`},
+
+{id:"n23b",code:"2.3B",t:"Memory Models: Multi-Store, Working Memory & Levels of Processing",h:`
+<h3>Multi-store model (Atkinson &amp; Shiffrin)</h3>
+<p>The classic model has three stages. <b>Attention</b> moves information from sensory memory into short-term memory, and <b>encoding</b> moves it into long-term memory. Open the <b>Memory Models</b> tab to step through it.</p>
+<div class="tw"><table class="tb"><tr><th>Stage</th><th>Capacity</th><th>Duration</th><th>Notes</th></tr>
+<tr><td>Sensory memory</td><td>Large</td><td><b>Iconic</b> (visual): under 1 second<br><b>Echoic</b> (auditory): 3–4 seconds</td><td>Everything your senses take in, briefly. Most is lost unless you pay attention.</td></tr>
+<tr><td>Short-term memory</td><td><b>7 ± 2 items</b> (5 to 9)</td><td>About <b>20 seconds</b> without rehearsal</td><td>Kept alive by maintenance rehearsal. Chunking increases capacity.</td></tr>
+<tr><td>Long-term memory</td><td>Essentially unlimited</td><td>Minutes to a lifetime</td><td>Explicit and implicit memories</td></tr></table></div>
+<div class="ex">Maya's state capitals (from your slides): she glances at the map (<b>iconic</b>) and hears her teacher (<b>echoic</b>). She repeats "Augusta" to herself (<b>STM, maintenance rehearsal</b>). She makes a mnemonic, "August is the best month to visit Maine," and reviews it over several days (<b>effortful processing, LTM</b>). On the quiz, the question "What's the capital of Maine?" is her <b>retrieval</b> cue.</div>
+<div class="tip">Modern research suggests STM really holds about <b>4 ± 1 chunks</b> <span class="xtra">★</span>. For AP, "7 ± 2" (George Miller's "magical number seven") is the safe answer. Also, the slides say iconic memory lasts "less than a second" and echoic "a few seconds." Echoic lasts longer.</div>
+<h3>Working memory model (Baddeley)</h3>
+<p>Working memory is the updated view of STM: an active workbench, not just a waiting room. You hold <i>and manipulate</i> information here.</p>
+<ul><li><b>Central executive</b>: the boss. It directs attention and coordinates the other parts (picturing your route to school <i>while</i> counting the blocks).</li>
+<li><b>Phonological loop</b>: sounds and words (silently repeating a grocery list).</li>
+<li><b>Visuospatial sketchpad</b>: images and space (mentally rotating a puzzle piece).</li>
+<li><b>Episodic buffer</b> <span class="xtra">★</span>: added later, it links working memory with long-term memory.</li></ul>
+<div class="ex">Chris cooking: he tracks the recipe steps, sets the oven timer, and keeps up a conversation with his wife all at once. Juggling several pieces of information right now is <b>working memory</b>.</div>
+<h3>Automatic vs. effortful processing</h3>
+<ul><li><b>Automatic</b>: encoded without trying, such as space (where on the page you read something), time (the order of your day), frequency (how many times you've seen someone today), and well-learned material (reading words in your native language). Knowing the color of your first car without ever studying it is automatic.</li>
+<li><b>Effortful</b>: takes attention and work, such as rehearsal, flashcards, and mnemonics. With enough practice, effortful processing can become automatic (like reading).</li></ul>
+<h3>Levels of processing (Craik &amp; Lockhart)</h3>
+<p>Memory depends on <b>how deeply</b> you process information, from shallowest to deepest:</p>
+<div class="tw"><table class="tb"><tr><th>Level</th><th>Focus</th><th>Example question about "cat"</th><th>Recall</th></tr>
+<tr><td>Structural</td><td>Appearance</td><td>Does it have three letters? Is it in capitals?</td><td>Worst</td></tr>
+<tr><td>Phonemic (phonetic)</td><td>Sound</td><td>Does it rhyme with "hat"?</td><td>Better</td></tr>
+<tr><td>Semantic</td><td>Meaning</td><td>Is it a pet? Do you have one?</td><td>Best</td></tr></table></div>
+<p>Structural and phonemic are <b>shallow processing</b>; semantic is <b>deep processing</b>. Relating a psychology concept to your own life is the deepest of all (the self-reference effect <span class="xtra">★</span>).</p>
+<div class="cxs">${cx("Unit 2 · Sensation (sensory memory starts here)","unit2.html")}${cx("Unit 2 · Selective attention","unit2.html")}${cx("Unit 2 · Executive functions","unit2.html")}${cx("Unit 1 · Frontal lobes","unit1.html")}</div>`},
+
+{id:"n24",code:"2.4",t:"Encoding Memories",h:`
+<p><b>Encoding</b> transforms information into a form that can be stored. How you encode decides how well you'll remember.</p>
+<h3>Mnemonic devices</h3>
+<ul><li><b>Mnemonics</b> use vivid imagery, acronyms, rhymes, and organization: SOH CAH TOA, ROY G. BIV, "Please Excuse My Dear Aunt Sally."</li>
+<li><b>Method of loci</b>: picture each item at a spot along a familiar route (your walk from the living room to the kitchen), then mentally walk the route to recall them in order. Memory champions use this.</li>
+<li>The <b>peg-word system</b> <span class="xtra">★</span> pairs items with a memorized rhyme list ("one is a bun, two is a shoe...").</li></ul>
+<h3>Organizing information</h3>
+<ul><li><b>Chunking</b>: grouping items into familiar units. 1-4-9-2-1-7-7-6 is 8 items, but "1492, 1776" is 2 chunks. Phone numbers and acronyms (FBI, NASA) work the same way.</li>
+<li><b>Categories</b>: group by shared features (all the fruits on a grocery list together).</li>
+<li><b>Hierarchies</b>: organize from broad to specific, like an outline or this page's Notes tab: Memory → Long-term → Explicit → Episodic.</li></ul>
+<h3>When and how much you study</h3>
+<ul><li><b>Massed practice</b> (cramming) feels productive and can work for tomorrow, but it's quickly forgotten.</li>
+<li><b>Distributed practice</b>: short sessions spread over days.</li>
+<li>The <b>spacing effect</b> is the result: distributed practice beats massed practice for long-term retention. Erica crams five hours; Liam studies a little each day for a week. Weeks later, Liam remembers more.</li></ul>
+<div class="tip">Distributed practice is the <b>method</b> (what you do). The spacing effect is the <b>finding</b> (why it works better). If a question asks why Liam remembers more weeks later, the answer is the spacing effect.</div>
+<h3>Serial position effect</h3>
+<ul><li>In a list, we recall the <b>beginning</b> (<b>primacy effect</b>: those items got more rehearsal and reached LTM) and the <b>end</b> (<b>recency effect</b>: those items are still in STM) better than the middle.</li>
+<li>If recall is delayed even 30 seconds, the recency effect disappears, but primacy remains. Try it in the <b>Labs</b> tab.</li></ul>
+<div class="ex">Use it to study: put the hardest material at the start and end of a session, and take breaks to create more "beginnings" and "ends."</div>
+<div class="cxs">${cx("2.3 · Effortful processing","#n23b")}${cx("2.5 · Elaborative rehearsal","#n25")}${cx("Unit 0 · Experiment (massed vs. spaced as IV)","unit0.html")}${cx("Study smarter","#nss")}</div>`},
+
+{id:"n25",code:"2.5",t:"Storing Memories & Memory Impairments",h:`
+<h3>Rehearsal</h3>
+<ul><li><b>Maintenance rehearsal</b>: repeating information to keep it in STM (repeating the bus stop number until the bus arrives). Shallow, so it fades.</li>
+<li><b>Elaborative rehearsal</b>: connecting new information to what you already know (linking a new term to a childhood event). Deep, so it lasts.</li></ul>
+<h3>Consolidation</h3>
+<p><b>Memory consolidation</b> is the neural storage of long-term memories. New memories are fragile at first and stabilize over time, especially <b>during sleep</b> (both deep NREM-3 and REM). While Kevin sleeps, his brain strengthens the skills he learned today. That's why all-nighters backfire.</p>
+<h3>Superior memory</h3>
+<ul><li><b>Autobiographical memories</b> are tied to the self, so they're encoded with extra meaning and emotion. They're vivid and shape your identity.</li>
+<li><b>Highly superior autobiographical memory (HSAM)</b> <span class="sg">study guide</span>: a very rare ability to recall details of almost every day of your life (the 60 Minutes video). These people aren't better at memorizing lists, which shows their gift is specifically autobiographical.</li>
+<li><b>Flashbulb memories</b> <span class="sg">study guide</span>: vivid memories of emotional moments (where you were when you heard big news). The amygdala and stress hormones strengthen them. They feel certain, but studies show they change over time just like ordinary memories.</li></ul>
+<h3>Memory impairments</h3>
+<div class="tw"><table class="tb"><tr><th>Impairment</th><th>What's lost</th><th>Cause / note</th></tr>
+<tr><td>Retrograde amnesia</td><td>Memories from <b>before</b> the injury</td><td>Head trauma (the car accident example). Often the most recent memories go first, since they weren't fully consolidated.</td></tr>
+<tr><td>Anterograde amnesia</td><td>The ability to form <b>new</b> memories</td><td>Hippocampus damage. Patient H.M. <span class="xtra">★</span> couldn't remember new people, yet improved at mirror-drawing day after day without remembering practicing, so implicit memory was intact.</td></tr>
+<tr><td>Infantile amnesia</td><td>Memories from before about age 3</td><td>Normal for everyone. The hippocampus is still developing, and young children lack language to encode events.</td></tr>
+<tr><td>Alzheimer's disease</td><td>Progressive: new memories first, then older memories, language, and reasoning</td><td>Loss of neurons that produce <b>acetylcholine (ACh)</b>, plus plaques and tangles <span class="xtra">★</span>. The hippocampus is hit early.</td></tr></table></div>
+<div class="ex">Memory hook: <b>retro</b>grade goes <b>back</b> (lost the past), <b>antero</b>grade goes <b>forward</b> (can't make the future). Dementia is the umbrella term; Alzheimer's is its most common type.</div>
+<div class="cxs">${cx("Unit 2 · REM & consolidation theory","unit2.html")}${cx("Unit 1 · Acetylcholine","unit1.html")}${cx("Unit 1 · Amygdala","unit1.html")}${cx("Unit 0 · Case study (H.M.)","unit0.html")}</div>`},
+
+{id:"n26",code:"2.6",t:"Retrieving Memories",h:`
+<h3>Measures of retention</h3>
+<ul><li><b>Recall</b>: retrieving without cues (fill-in-the-blank, essay, an FRQ).</li>
+<li><b>Recognition</b>: identifying what you've seen before (multiple choice, picking a suspect out of a lineup). Easier than recall because the answer itself is a cue.</li>
+<li><b>Relearning</b> <span class="xtra">★</span>: learning something faster the second time. Even "forgotten" material leaves traces, which is Ebbinghaus's savings method.</li></ul>
+<h3>Retrieval cues</h3>
+<p>Memories are held in webs of associations. A <b>retrieval cue</b> (a smell, a song, a place) activates one strand and pulls up the rest, like a smell of perfume bringing back a memory of grandma. The more cues, the easier the retrieval. This is the <b>encoding specificity principle</b> <span class="xtra">★</span>: cues present at encoding work best at retrieval.</p>
+<div class="tw"><table class="tb"><tr><th>Cue type</th><th>Match the...</th><th>Example</th></tr>
+<tr><td>Context-dependent</td><td><b>Environment</b></td><td>Taking the test in the room where you studied. Divers who learned words underwater recalled them better underwater.</td></tr>
+<tr><td>State-dependent</td><td><b>Physiological state</b></td><td>Remembering where you hid your keys only when you're tired again, like you were when you hid them.</td></tr>
+<tr><td>Mood-congruent</td><td><b>Emotion</b></td><td>When sad, recalling other sad events. This can keep depressed moods going.</td></tr></table></div>
+<div class="tip">State-dependent vs. mood-congruent: state is about your <b>body</b> (tired, caffeinated, drunk). Mood is about <b>emotion</b>, and it pulls up memories that <i>match</i> the emotion, not memories from when you felt that way.</div>
+<h3>Retrieval practice</h3>
+<ul><li><b>Testing effect</b>: test, study, retest. Self-quizzing beats rereading because retrieving strengthens the memory. Professor Chen's self-quizzers outperformed students who reread.</li>
+<li><b>Metacognition</b>: thinking about your thinking. Is highlighting actually helping? Do I know this, or does it just look familiar? Rereading creates a false feeling of knowing (recognition), but tests require recall.</li>
+<li><b>Tip-of-the-tongue phenomenon</b>: knowing you know something but not being able to retrieve it right now. It's a retrieval failure, not a storage failure. You often know the first letter or the number of syllables.</li></ul>
+<div class="cxs">${cx("Unit 2 · Metacognition","unit2.html")}${cx("Unit 2 · Smell → limbic system","unit2.html")}${cx("Unit 1 · Depressants (state-dependent)","unit1.html")}${cx("Study smarter","#nss")}</div>`},
+
+{id:"n27",code:"2.7",t:"Forgetting & Memory Errors",h:`
+<p><b>Forgetting</b> is the inability to retrieve information. It can break down at each stage of memory.</p>
+<h3>The forgetting curve</h3>
+<p><b>Hermann Ebbinghaus</b> <span class="xtra">★</span> memorized lists of nonsense syllables (like "JIH" and "BAZ") and tested himself. Retention drops <b>steeply soon after learning, then levels off</b>. Most forgetting happens fast, and what survives tends to last. Review early and often. The Labs tab lets you add spaced reviews and watch the curve flatten.</p>
+<h3>Why we forget</h3>
+<div class="tw"><table class="tb"><tr><th>Cause</th><th>Stage</th><th>Example</th></tr>
+<tr><td>Encoding failure</td><td>Never got in</td><td>You can't draw a penny's details because you never paid attention to them. Mark can't recall his neighbor's name because he was preoccupied every time they met.</td></tr>
+<tr><td>Storage decay <span class="sg">study guide</span></td><td>Faded in storage</td><td>High school algebra formulas fade after years of no use.</td></tr>
+<tr><td>Proactive interference</td><td>Retrieval blocked</td><td><b>Old</b> info blocks <b>new</b>: your old phone number keeps popping up.</td></tr>
+<tr><td>Retroactive interference</td><td>Retrieval blocked</td><td><b>New</b> info blocks <b>old</b>: this week's Spanish crowds out last month's French.</td></tr>
+<tr><td>Inadequate retrieval</td><td>Stored but unreachable</td><td>Tip-of-the-tongue; missing the right cue.</td></tr>
+<tr><td>Repression</td><td>Motivated forgetting (psychodynamic)</td><td>No conscious memory of a childhood trauma. A controversial explanation.</td></tr></table></div>
+<div class="ex">Interference hook: <b>PRO</b>active = <b>P</b>revious info causes the <b>P</b>roblem (it acts forward). <b>RETRO</b>active = the new info reaches <b>back</b> and messes up the old. Ask yourself: which one can't you remember? If you can't remember the <i>new</i> thing, it's proactive.</div>
+<h3>The psychodynamic view</h3>
+<ul><li>Freud's <b>psychodynamic perspective</b>: behavior comes from unconscious processes and conflicts between the <b>id</b> (pleasure-seeking urges), the <b>superego</b> (conscience and ideals), and the <b>ego</b> (the realistic "self" that mediates).</li>
+<li>To protect itself from anxiety, the ego uses <b>defense mechanisms</b>. <b>Repression</b>, the most basic one, pushes painful memories out of consciousness.</li>
+<li>Modern research: traumatic events are usually remembered <i>too well</i>, not repressed. "Recovered" memories may be false memories created by suggestion. You'll see Freud again with personality.</li></ul>
+<h3>Memory errors: memory is constructed, not recorded</h3>
+<ul><li><b>Misinformation effect</b>: misleading information after an event changes the memory. In <b>Loftus &amp; Palmer</b>'s classic study, people who heard that cars "smashed" into each other estimated higher speeds than those who heard "hit," and a week later were more likely to falsely remember broken glass.</li>
+<li><b>Source amnesia</b> (source misattribution): you remember the information but not where it came from. Telling a story as your friend's when you read it in a book. Déjà vu may be a form of this.</li>
+<li><b>Constructive memory</b> (memory construction): each time we recall, we rebuild the memory using schemas and new experiences, and fill gaps with plausible details (adding a storm from a different fishing trip). <b>Consolidation</b> leaves new memories vulnerable to this interference, and <b>reconsolidation</b> <span class="xtra">★</span> means even old memories become changeable when retrieved.</li>
+<li><b>Imagination inflation</b>: vividly imagining an event makes people more confident it really happened. It can contribute to false "recovered" memories and even false confessions. Julia Shaw's research (NOVA) got people to falsely remember committing a crime as a teen.</li></ul>
+<div class="tip">Misinformation = <b>someone else</b> feeds you wrong details. Imagination inflation = <b>you</b> imagine it yourself. Source amnesia = the content is right, but the <b>source</b> is wrong.</div>
+<h3>Strategies to remember more (from the slides)</h3>
+<p>Spaced repetition (review at growing intervals), mnemonic devices (acronyms, imagery), and active engagement (teach someone, discuss it, quiz yourself).</p>
+<div class="cxs">${cx("Unit 2 · Schemas","unit2.html")}${cx("Unit 0 · Experiment & ethics (Loftus, Shaw)","unit0.html")}${cx("Unit 0 · Hindsight bias","unit0.html")}${cx("2.6 · Tip-of-the-tongue","#n26")}</div>`},
+
+{id:"n28a",code:"2.8A",t:"Theories of Intelligence",h:`
+<p><b>Intelligence</b> is the ability to learn from experience, solve problems, and use knowledge to adapt to new situations. It's a <b>construct</b>, an idea we define and then measure indirectly, not a thing like height. What counts as "smart" also varies by culture.</p>
+<h3>One intelligence or many?</h3>
+<div class="tw"><table class="tb"><tr><th>Theory</th><th>Who</th><th>Big idea</th></tr>
+<tr><td>General intelligence (g)</td><td>Charles Spearman</td><td>One general ability underlies all mental tasks. Found using <b>factor analysis</b>: people who do well on one kind of question tend to do well on others (Aisha excels in math <i>and</i> reading <i>and</i> science). Like general athletic ability.</td></tr>
+<tr><td>Fluid vs. crystallized</td><td>Raymond Cattell &amp; John Horn</td><td><b>Fluid (Gf)</b>: fast, abstract reasoning on new problems, which declines from the 20s–30s. <b>Crystallized (Gc)</b>: accumulated knowledge and vocabulary, which grows with age (Grandma Rose wins history trivia).</td></tr>
+<tr><td>CHC theory</td><td>Cattell, Horn, Carroll</td><td>A <b>hierarchy</b>: g on top, broad abilities in the middle (Gf, Gc, memory, processing speed, visual and auditory processing), and narrow abilities at the bottom. The basis of most modern IQ tests.</td></tr>
+<tr><td>Multiple intelligences</td><td>Howard Gardner</td><td>Eight relatively <b>independent</b> intelligences. You can be strong in some and weak in others (Marco struggles with academic writing but is a gifted composer).</td></tr>
+<tr><td>Triarchic <span class="xtra">★</span></td><td>Robert Sternberg</td><td>Three intelligences: <b>analytical</b> (academic), <b>creative</b> (novel situations), <b>practical</b> (everyday street smarts).</td></tr>
+<tr><td>Emotional intelligence</td><td>Salovey &amp; Mayer; popularized by Goleman <span class="xtra">★</span></td><td>Perceiving, understanding, managing, and using emotions. Predicts relationship and job success.</td></tr></table></div>
+<h3>Gardner's eight intelligences</h3>
+<p><b>Linguistic</b> (words), <b>logical-mathematical</b> (numbers and logic), <b>spatial</b> (images and space), <b>musical</b>, <b>bodily-kinesthetic</b> (movement), <b>interpersonal</b> (understanding others), <b>intrapersonal</b> (understanding yourself), and <b>naturalist</b> (recognizing patterns in nature). He has also considered a ninth, existential.</p>
+<div class="tip">Critics point out that Gardner's intelligences tend to correlate with each other, which supports <b>g</b>, and that calling every talent an "intelligence" stretches the word. If an AP question asks for evidence <i>for</i> multiple intelligences, use <b>savant syndrome</b>.</div>
+<h3>Exceptional abilities and determination</h3>
+<ul><li><b>Savant syndrome</b>: someone with significant mental limitations (often autism spectrum disorder) has one spectacular skill, such as calendar calculation, music, or drawing. Kim Peek, the inspiration for <i>Rain Man</i>, memorized thousands of books <span class="xtra">★</span>. The twins Flo &amp; Kay on your slides are another example.</li>
+<li><b>Grit</b> (Angela Duckworth <span class="xtra">★</span>): passion and perseverance toward long-term goals. It often predicts success better than raw talent.</li></ul>
+<div class="cxs">${cx("Unit 0 · Correlation (factor analysis)","unit0.html")}${cx("Unit 2 · Convergent & divergent thinking","unit2.html")}${cx("Unit 1 · Nature-nurture & twin studies","unit1.html")}</div>`},
+
+{id:"n28b",code:"2.8B",t:"Measuring Intelligence: Tests & Psychometrics",h:`
+<h3>History of intelligence testing</h3>
+<ul><li><b>Alfred Binet</b> (France, early 1900s) designed the first test to identify schoolchildren who needed extra help. He measured <b>mental age</b> and believed intelligence was complex and could be improved. He warned against using one number to label children.</li>
+<li><b>Lewis Terman</b> at Stanford revised it into the <b>Stanford-Binet</b>. <b>William Stern</b> <span class="xtra">★</span> created the ratio <b>IQ = mental age ÷ chronological age × 100</b>. A 15-year-old performing like a typical 17.25-year-old: 17.25 ÷ 15 × 100 = <b>115</b>.</li>
+<li><b>Early misuse</b>: tests were used to justify discrimination. They were given in English to new immigrants at Ellis Island and used to support <b>eugenics</b> <span class="xtra">★</span>, immigration restrictions, and forced sterilization.</li>
+<li><b>David Wechsler</b> created the <b>WAIS</b> (adults) and <b>WISC</b> (children), now the most widely used tests. They give an overall score plus subscores (verbal comprehension, perceptual reasoning, working memory, processing speed), which helps identify specific strengths and learning disabilities.</li>
+<li><b>Modern uses</b>: identifying learning disabilities and intellectual disability, assessing cognitive strengths, and (controversially) educational placement.</li></ul>
+<div class="tip">The ratio formula doesn't work for adults. A 40-year-old isn't "smarter" than a 20-year-old just by age. Modern tests use a <b>deviation IQ</b>: your score compared with others your age, where the average is set at 100.</div>
+<h3>Psychometric principles: what makes a test good?</h3>
+<p><b>Psychometrics</b> is the science of measuring abilities, attitudes, and traits. A good test must be <b>standardized</b>, <b>reliable</b>, and <b>valid</b>.</p>
+<ul><li><b>Standardization</b>: give the test to a large, <b>representative</b> sample to set <b>norms</b>, and give it and score it the same way for everyone. Scores form a <b>normal curve</b>: mean 100, standard deviation 15. About 68% score 85–115, 95% score 70–130, and 99.7% score 55–145. A score of about 70 or below, together with trouble with daily living, may indicate <b>intellectual disability</b> <span class="xtra">★</span>.</li>
+<li><b>Reliability</b> (consistency):
+<ul><li><b>Test-retest</b>: same people, same test, two times. Correlate the scores.</li>
+<li><b>Split-half</b>: compare scores on two halves (odd vs. even items).</li></ul></li>
+<li><b>Validity</b> (accuracy: does it measure what it should?):
+<ul><li><b>Content validity</b>: samples the actual skill (a road test for driving).</li>
+<li><b>Construct validity</b>: measures the actual concept, like intelligence and not just memory. On your study guide, a new anxiety scale is checked against existing anxiety measures.</li>
+<li><b>Predictive validity</b>: predicts future performance (SAT scores correlated with first-year college GPA).</li></ul></li></ul>
+<div class="ex">Dartboard model: <b>reliable</b> means your darts land in a tight cluster. <b>Valid</b> means they hit the bullseye. A tight cluster in the wrong corner is reliable but <i>not</i> valid. A test can be reliable without being valid, but it <b>can't be valid without being reliable</b>. See the Labs tab.</div>
+<div class="cxs">${cx("Unit 0 · Normal curve & standard deviation","unit0.html")}${cx("Unit 0 · Validity","unit0.html")}${cx("Unit 0 · Correlation coefficient","unit0.html")}${cx("Unit 0 · Random/representative sample","unit0.html")}${cx("Unit 0 · Percentile rank","unit0.html")}</div>`},
+
+{id:"n28c",code:"2.8C",t:"IQ in Society, Achievement & Mindset",h:`
+<h3>Rising scores: the Flynn effect</h3>
+<p>Average raw IQ scores rose about <b>3 points per decade</b> across the 20th century in many countries. That's too fast for genetics, so the cause must be environmental: better nutrition, more and better schooling, smaller families, and a more cognitively complex world. Tests have to be <b>re-normed</b> so the average stays 100. The big lesson: intelligence is <b>not fixed</b>; environment matters.</p>
+<h3>Societal issues with IQ scores</h3>
+<ul><li>IQ and academic scores have been used to <b>restrict access</b> to jobs, schools, and immigration, and to justify discrimination.</li>
+<li>Group differences in average scores largely reflect differences in environment and opportunity (schooling, wealth, nutrition, test familiarity), not innate ability.</li>
+<li>Attempts to reduce testing inequities: removing culturally biased items, <b>culture-fair</b> nonverbal tests such as Raven's matrices <span class="xtra">★</span>, using multiple measures instead of one score, and test-optional admissions.</li>
+<li><b>Stereotype threat</b> <span class="sg">study guide</span>: worrying that you'll confirm a negative stereotype about your group lowers performance. Maria scores lower after hearing "girls aren't good at math" (Claude Steele <span class="xtra">★</span>). <b>Stereotype lift</b> <span class="sg">study guide</span>: a positive stereotype about your group (or a negative one about another group) can boost performance.</li></ul>
+<h3>Achievement vs. aptitude</h3>
+<div class="tw"><table class="tb"><tr><th></th><th>Achievement test</th><th>Aptitude test</th></tr>
+<tr><td>Measures</td><td>What you <b>have learned</b></td><td>What you <b>could learn</b> (predicts future performance)</td></tr>
+<tr><td>Examples</td><td>AP Psych exam, an end-of-course history test, a spelling test</td><td>SAT, ACT, a flight-school or career aptitude test</td></tr>
+<tr><td>Key validity</td><td>Content validity</td><td>Predictive validity</td></tr></table></div>
+<div class="tip">The line is blurry: aptitude tests like the SAT also measure what you've learned and correlate strongly with IQ tests. On AP questions, go by the stated <b>purpose</b>: measuring past learning is achievement; predicting future success is aptitude.</div>
+<h3>Fixed vs. growth mindset (Carol Dweck)</h3>
+<div class="cmp"><div class="cb" style="--c:#ff6b81"><b>Fixed mindset</b>Intelligence is static: you have it or you don't. Leads to avoiding challenges, giving up easily, ignoring feedback, and feeling threatened by others' success.</div><div class="cb" style="--c:#3ecf8e"><b>Growth mindset</b>Abilities develop through effort and learning. Leads to embracing challenges, persisting through setbacks, learning from criticism, and being inspired by others' success.</div></div>
+<div class="ex">Olivia quits calculus because she believes her math ability is "limited and unchangeable": <b>fixed mindset</b>. Javier fails his first attempt, then studies harder and sees the failure as a chance to improve: <b>growth mindset</b>. Praising effort ("you worked hard") rather than ability ("you're so smart") tends to build a growth mindset.</div>
+<div class="cxs">${cx("Unit 1 · Nature-nurture issue","unit1.html")}${cx("Unit 0 · Sampling bias","unit0.html")}${cx("Unit 2 · Framing & confirmation bias","unit2.html")}</div>`},
+
+{id:"nss",code:"STUDY GUIDE",t:"Study Smarter: Use Psych to Learn Psych",h:`
+<p>Your study guide turns this unit into a study plan. Every technique below is a memory concept from 2.3–2.7:</p>
+<div class="tw"><table class="tb"><tr><th>Technique</th><th>What to do</th><th>Why it works</th></tr>
+<tr><td>Metacognition</td><td>Figure out what you do and don't know. Test yourself, then work on the gaps.</td><td>Stops the illusion of knowing that rereading creates (2.6)</td></tr>
+<tr><td>Distributed practice</td><td>A little each day over several days instead of one cram session</td><td>Spacing effect (2.4)</td></tr>
+<tr><td>Elaborative rehearsal</td><td>Give the material meaning: connect it to examples and your own life</td><td>Deep, semantic processing (2.3, 2.5)</td></tr>
+<tr><td>Active recall</td><td>Review → test → review, not review → study → study. Recall, don't just recognize.</td><td>Testing effect (2.6)</td></tr>
+<tr><td>Interleaving <span class="sg">study guide</span></td><td>Switch topics within a session, and revisit ideas in a different order</td><td>Builds more retrieval cues and forces you to choose the right concept</td></tr></table></div>
+<h3>Attitude matters</h3>
+<ul><li><b>Internal locus of control</b>: you are in charge of the outcome.</li>
+<li><b>High self-efficacy</b>: believe you're capable of success.</li>
+<li>Avoid negative <b>self-fulfilling prophecies</b>: if you expect to fail, you won't give your best effort, and you will. (These three terms come back in the personality and social units.)</li></ul>
+<div class="ex">How to use this page: Flashcards first (terms) → Compare (look-alike pairs) → Scenarios (your study guide's question style) → AAQ Practice. Your missed terms are saved, so come back tomorrow and drill only those. That's spacing <i>and</i> testing.</div>`}
+];
+function notes(){
+  $("main").innerHTML=`<div class="card"><div class="mu" style="margin-bottom:8px">Jump to a section. <span class="xtra">★ beyond slides</span> marks things not on your class slides that often show up on AP questions. <span class="sg">study guide</span> marks terms that appear on your study guide key but not the slides. Dashed chips link to Units 0–2.</div><div class="chips row">${NOTES.map(n=>`<button onclick="document.getElementById('${n.id}').scrollIntoView({behavior:'smooth'})">${n.code.split(" ")[0]} ${n.t.split(":")[0]}</button>`).join("")}</div></div>`+
+  NOTES.map(n=>`<section class="card sec" id="${n.id}"><div class="code">${n.code}</div><h2>${n.t}</h2>${n.h}</section>`).join("");
+}
+
+/* ---------- utilities ---------- */
+const $=id=>document.getElementById(id);
+const sh=a=>{a=[...a];for(let i=a.length;i>1;){let j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const X=d=>d[3]==1?'<span class="xtra" title="Not on the class slides, but useful for the AP exam">★ beyond slides</span>':d[3]==2?'<span class="sg" title="On the study guide key but not the slides">study guide</span>':"";
+function loadMiss(){try{return new Set(JSON.parse(localStorage.getItem(KEY)||"[]"))}catch(e){return new Set()}}
+function saveMiss(){try{localStorage.setItem(KEY,JSON.stringify([...miss]))}catch(e){}}
+
+let mode="notes",scope="all",cats=new Set(Object.keys(C)),miss=loadMiss(),missOnly=false;
+const MODES={notes:"Notes",gloss:"Glossary",cmp:"Compare",conn:"Connections",model:"Memory Models",lab:"Labs",flash:"Flashcards",quiz:"Quiz",match:"Matching",type:"Type-In",app:"Scenarios",aaq:"AAQ Practice"};
+const IC={notes:"book",gloss:"book-open",cmp:"code-compare",conn:"diagram-project",model:"layer-group",lab:"flask",flash:"clone",quiz:"list-check",match:"puzzle-piece",type:"keyboard",app:"lightbulb",aaq:"file-pen"};
+const TERM_MODES=["gloss","flash","quiz","match","type"];
+
+function pool(n){let p=sh(D.map((d,k)=>k).filter(k=>cats.has(D[k][1])&&(!missOnly||miss.has(D[k][0]))));return scope=="rand"?p.slice(0,n):p}
+
+function bar(){
+  $("modes").innerHTML=Object.keys(MODES).map(k=>`<button class="tab ${k==mode?"on":""}" onclick="setMode('${k}')"><i class="fa-solid fa-${IC[k]}"></i> ${MODES[k]}</button>`).join("");
+  $("flt").style.display=TERM_MODES.includes(mode)?"":"none";
+  $("scope").innerHTML=[["rand","Random 10"],["all","All Terms"]].map(([k,v])=>`<button class="${k==scope?"on":""}" onclick="scope='${k}';go()">${v}</button>`).join("")+`<button class="${missOnly?"on":""}" onclick="missOnly=!missOnly;go()">Missed (${miss.size})</button>`+(miss.size?`<button onclick="miss.clear();saveMiss();missOnly=false;go()">Clear missed</button>`:"");
+  $("cats").innerHTML=`<button onclick="cats=new Set(Object.keys(C));go()">All Categories</button>`+Object.entries(C).map(([k,v])=>`<button class="${cats.has(k)?"on":""}" onclick="tog('${k}')">${v}</button>`).join("");
+  $("cnt").innerHTML=`<span><i class="fa-solid fa-circle-check" style="color:#3ecf8e"></i> Terms: ${D.filter(d=>cats.has(d[1])).length}</span><span><i class="fa-solid fa-triangle-exclamation" style="color:#ffb454"></i> Missed: ${miss.size}</span>`;
+}
+function setMode(k){mode=k;go();window.scrollTo({top:0})}
+function tog(k){cats.has(k)?cats.delete(k):cats.add(k);if(!cats.size)cats.add(k);go()}
+function addMiss(k){miss.add(D[k][0]);saveMiss()}
+function delMiss(k){miss.delete(D[k][0]);saveMiss()}
+
+let Q=[],i=0,sc=0,flip=false,rv=false;
+function go(){
+  bar();clearTimers();
+  Q=pool(mode=="match"?6:10);i=0;sc=0;flip=false;
+  if(TERM_MODES.includes(mode)&&mode!=="gloss"&&!Q.length){$("main").innerHTML='<div class="card">No terms match your filters. Turn on more categories or switch off "Missed" to continue.</div>';return}
+  ({notes,gloss,cmp,conn,model,lab,flash,quiz,match,type:typ,app,aaq})[mode]();
+}
+function prog(){return `<div class="pg"><i style="width:${Q.length?i/Q.length*100:0}%"></i></div>`}
+function done(){
+  $("main").innerHTML=`<div class="card"><h2>Session complete</h2><p>Score: <b>${sc}</b> / ${Q.length}</p><p class="mu">${miss.size?`${miss.size} term(s) are saved in your Missed list. Tap "Missed" in the filters to drill only those.`:"No missed terms. Nice work."}</p><div class="row"><button class="on" onclick="go()">Restart</button><button onclick="missOnly=true;go()">Drill missed</button></div></div>`;
+  bar();
+}
+
+/* ---------- GLOSSARY ---------- */
+function gloss(){
+  $("main").innerHTML='<input type="text" id="q" placeholder="Search Unit 3 terms or definitions..." oninput="gl()" aria-label="Search terms"><div id="gl"></div>';gl();
+}
+function gl(){
+  const s=($("q").value||"").toLowerCase();
+  $("gl").innerHTML=Object.keys(C).filter(c=>cats.has(c)).map(c=>{
+    const ts=D.filter(d=>d[1]==c&&(d[0]+" "+d[2]).toLowerCase().includes(s));
+    return ts.length?`<div class="gh">${C[c]}</div><div class="gg">${ts.map(d=>`<div class="gt"><b>${d[0]}${X(d)}</b><span>${d[2]}</span></div>`).join("")}</div>`:"";
+  }).join("")||'<div class="card">No matches.</div>';
+}
+
+/* ---------- COMPARE ---------- */
+const CMP=[
+["Explicit vs. implicit memory",[["Explicit (declarative)","Consciously recalled facts and experiences. You can explain them."],["Implicit (nondeclarative)","Skills and conditioned responses retained without conscious recall. Hard to put into words."]],"Can they <i>say</i> it? Explicit. Do they just <i>do</i> it without thinking? Implicit."],
+["Episodic vs. semantic memory",[["Episodic","A personal event with a time and place (your 16th birthday)"],["Semantic","A fact or general knowledge (the year the Declaration was signed)"]],"Look for \"I remember the day when...\" for episodic. A textbook fact is semantic, even if you learned it on a memorable day."],
+["Procedural vs. prospective memory",[["Procedural","How to do something (a skill)"],["Prospective","Remembering to do something later (a plan)"]],"Future task = prospective. Physical skill = procedural."],
+["Iconic vs. echoic memory",[["Iconic","Visual sensory memory, under 1 second"],["Echoic","Auditory sensory memory, 3–4 seconds"]],"Icon = image. Echo = sound. Echoic lasts longer."],
+["Short-term vs. working memory",[["Short-term memory","A brief storage stage (multi-store model): about 7 items for about 20 seconds"],["Working memory","An active workspace (Baddeley) that holds and manipulates information, directed by the central executive"]],"Just holding it (a phone number)? STM. Doing something with it (mental math, juggling tasks)? Working memory."],
+["Working memory components",[["Central executive","The boss: directs attention and coordinates"],["Phonological loop","Sounds and words"],["Visuospatial sketchpad","Images and spatial layout"]],"Silently repeating = loop. Mentally rotating or picturing = sketchpad. Coordinating both = executive."],
+["Levels of processing",[["Structural","How it looks (capital letters, number of letters)"],["Phonemic","How it sounds (rhymes, pronunciation)"],["Semantic","What it means (definition, link to your life)"]],"Meaning is always the deepest level and gives the best recall."],
+["Automatic vs. effortful processing",[["Automatic","No effort: space, time, frequency, well-learned info"],["Effortful","Attention and work: rehearsal, flashcards, mnemonics"]],"Did they try to remember it? Effortful. Did it just stick? Automatic."],
+["Maintenance vs. elaborative rehearsal",[["Maintenance","Repeat it to keep it in STM"],["Elaborative","Connect it to what you know for LTM"]],"Repeating = maintenance. Relating or linking = elaborative."],
+["Massed vs. distributed practice",[["Massed","One long cram session"],["Distributed","Short sessions spread over time"]],"Distributed practice produces the spacing effect. The effect is the result; the practice is the method."],
+["Primacy vs. recency effect",[["Primacy","First items remembered, because they reached LTM"],["Recency","Last items remembered, because they're still in STM"]],"Delay the test and recency disappears; primacy stays."],
+["Chunking vs. method of loci",[["Chunking","Group items into meaningful units (1776, FBI)"],["Method of loci","Place items along an imagined familiar route"]],"Locations or a walk through a place = loci. Grouping = chunking."],
+["Recall vs. recognition",[["Recall","Retrieve without cues (essay, fill-in)"],["Recognition","Identify from options (multiple choice, a lineup)"]],"Choosing from a list = recognition. Generating it from nothing = recall."],
+["Context vs. state vs. mood",[["Context-dependent","Same place"],["State-dependent","Same body state (tired, caffeinated, intoxicated)"],["Mood-congruent","Current emotion pulls up matching memories"]],"Place = context. Physical condition = state. Emotion matches emotion = mood-congruent."],
+["Testing effect vs. metacognition",[["Testing effect","Retrieving info strengthens memory more than rereading"],["Metacognition","Thinking about and judging your own learning"]],"Quizzing yourself = testing effect. Asking \"is this strategy working?\" = metacognition."],
+["Proactive vs. retroactive interference",[["Proactive","OLD info blocks NEW info"],["Retroactive","NEW info blocks OLD info"]],"Find what you <i>can't</i> remember. Can't remember the new thing? Proactive. Can't remember the old thing? Retroactive."],
+["Why we forget",[["Encoding failure","It never got into LTM (didn't pay attention)"],["Storage decay","It faded over time from disuse"],["Retrieval failure","It's stored but you can't reach it (tip-of-the-tongue)"]],"Never noticed it = encoding failure. Used to know it but it faded = decay. Know you know it = retrieval failure."],
+["Retrograde vs. anterograde amnesia",[["Retrograde","Can't remember the past (before the injury)"],["Anterograde","Can't form new memories (after the injury)"]],"Retro = back. Antero = forward."],
+["Infantile amnesia vs. repression",[["Infantile amnesia","Normal: no memories from before about age 3, due to an immature hippocampus and language"],["Repression","Psychodynamic: the ego blocks painful memories (controversial)"]],"Early childhood with no trauma mentioned = infantile amnesia. Trauma + ego + defense = repression."],
+["Memory errors",[["Misinformation effect","Others' misleading info changes your memory"],["Source amnesia","Right info, wrong source"],["Imagination inflation","Imagining it makes you believe it happened"]],"Leading question = misinformation. \"Where did I hear that?\" = source amnesia. \"I pictured it so often...\" = imagination inflation."],
+["Constructive memory vs. misinformation",[["Constructive memory","You rebuild and fill in memories yourself, using schemas and other experiences"],["Misinformation effect","An outside source supplies false details"]],"Mixing in details from your own different experience = construction. Details from someone else's report = misinformation."],
+["Flashbulb vs. HSAM",[["Flashbulb memory","One vivid emotional moment, which still can be wrong"],["HSAM","A rare ability to recall almost every day of one's life"]],"One emotional event = flashbulb. Every day for years = HSAM."],
+["Spearman vs. Gardner",[["General intelligence (g)","One general ability underlies everything"],["Multiple intelligences","Several independent intelligences"]],"Good at many things = g. Great at one area, weak in others = multiple intelligences."],
+["Fluid vs. crystallized intelligence",[["Fluid (Gf)","Reasoning with new problems; declines with age"],["Crystallized (Gc)","Accumulated knowledge; grows with age"]],"Brand-new puzzle = fluid. Facts and vocabulary = crystallized."],
+["Reliability vs. validity",[["Reliability","Consistency: same results each time"],["Validity","Accuracy: measures what it claims to"]],"A test can be reliable but not valid, but it can't be valid without being reliable."],
+["Test-retest vs. split-half reliability",[["Test-retest","Same test, same people, two different times"],["Split-half","One test, compare two halves (odd vs. even items)"]],"Two sittings = test-retest. Two halves of one sitting = split-half."],
+["Types of validity",[["Content","Samples the actual skill or content"],["Construct","Measures the concept itself; compared with other measures of it"],["Predictive","Predicts future performance"]],"Future criterion (GPA, job success) = predictive. Compared to existing measures of the same trait = construct. Covers the actual material = content."],
+["Achievement vs. aptitude test",[["Achievement","What you have learned (past)"],["Aptitude","Your potential to learn (future)"]],"End-of-course test = achievement. Predicting future success = aptitude."],
+["Fixed vs. growth mindset",[["Fixed","Ability is set: avoid challenges, give up"],["Growth","Ability grows with effort: embrace challenges, persist"]],"\"I'm just not a math person\" = fixed. \"I'm not good at this <i>yet</i>\" = growth."],
+["Stereotype threat vs. lift",[["Stereotype threat","A negative stereotype about your group lowers performance"],["Stereotype lift","A positive stereotype about your group (or a negative one about another) raises performance"]],"Performance goes down = threat. Up = lift."],
+["Mental age vs. IQ",[["Mental age","The age level you perform at (Binet)"],["IQ (ratio)","Mental age ÷ chronological age × 100"]],"MA 12, CA 10 → IQ 120. MA = CA → IQ 100."]
+];
+function cmp(){
+  $("main").innerHTML=`<div class="card"><div class="mu">The pairs that most often get swapped on multiple-choice questions. Read the quick tell, then test yourself in Scenarios.</div></div>`+CMP.map(([t,items,tell])=>`<div class="card"><h3 style="margin:0 0 10px">${t}</h3><div class="cmp">${items.map((x,k)=>`<div class="cb" style="--c:${["#4da3ff","#ffd27a","#7cffd8"][k]}"><b>${x[0]}</b>${x[1]}</div>`).join("")}</div><div class="tell">${tell}</div></div>`).join("");
+}
+
+/* ---------- CONNECTIONS ---------- */
+const CON=[
+["Back to Unit 1: Biological Bases",[
+["Explicit memory","Hippocampus","unit1.html","The hippocampus processes new facts and episodes. Damage causes anterograde amnesia (H.M.)."],
+["Alzheimer's disease","Acetylcholine (ACh)","unit1.html","Alzheimer's destroys ACh-producing neurons. Drugs that slow ACh breakdown are a common treatment."],
+["Long-term potentiation","Glutamate & synapses","unit1.html","LTP strengthens synapses, mostly at glutamate synapses. It's the action potential and neurotransmitter story from Unit 1 applied to learning."],
+["Neurogenesis & LTP","Brain plasticity","unit1.html","Memory is the brain physically changing with experience: neuroplasticity in action."],
+["Implicit memory","Cerebellum","unit1.html","The cerebellum stores conditioned responses and helps with procedural skills, which explains why amnesia patients can still learn skills."],
+["Flashbulb memories","Amygdala & stress hormones","unit1.html","Emotional arousal (epinephrine, the amygdala) boosts consolidation, so emotional events feel vivid."],
+["Working memory / central executive","Frontal lobes","unit1.html","The prefrontal cortex runs working memory and executive control."],
+["State-dependent memory","Psychoactive drugs","unit1.html","Material learned while caffeinated or intoxicated is recalled better in that same state. Alcohol also disrupts consolidation (blackouts)."],
+["Intelligence","Twin studies & heritability","unit1.html","Identical twins' IQs correlate more strongly than fraternal twins', but the Flynn effect shows the environment matters too. It's an interaction."],
+["Flynn effect","Nature-nurture issue","unit1.html","Rising scores over a few generations can't be genetic, which makes it strong evidence for nurture."]
+]],
+["Back to Unit 0: Research Methods",[
+["Reliability & validity","Validity (research)","unit0.html","Same ideas as Unit 0 research validity, applied to tests."],
+["Normal curve (IQ)","Normal curve & standard deviation","unit0.html","IQ: mean 100, SD 15. 68% fall between 85 and 115, and 95% between 70 and 130."],
+["Test-retest & predictive validity","Correlation coefficient","unit0.html","Both are measured by correlating two sets of scores. Closer to +1.00 means more reliable or more predictive."],
+["Standardization","Random/representative sample","unit0.html","Norms are only meaningful if the standardization sample represents the population."],
+["Factor analysis","Correlation","unit0.html","Spearman found g by finding which test items correlate with one another."],
+["Spacing effect, testing effect","Experiment (IV/DV)","unit0.html","Classic AAQ material: study schedule or method is the IV, test score is the DV."],
+["H.M.","Case study","unit0.html","One person studied in depth revealed the explicit/implicit split, but a single case is hard to generalize."],
+["Loftus & Shaw false memories","Ethics & debriefing","unit0.html","Implanting false memories requires deception, so debriefing and minimizing harm matter."],
+["Constructive memory","Hindsight bias","unit0.html","We rewrite memories to fit what we now know: \"I knew it all along.\""]
+]],
+["Back to Unit 2: Sensation, Perception & Thinking",[
+["Sensory memory","Sensation (1.6)","unit2.html","Iconic and echoic memory are the brief traces of vision and hearing right after transduction."],
+["Attention → STM","Selective attention (2.1)","unit2.html","Only what you attend to moves from sensory memory into STM. Inattentional blindness is a form of encoding failure."],
+["Memory consolidation","REM & NREM-3 (1.5)","unit2.html","Sleep consolidates memories, which supports consolidation theory. Pulling all-nighters hurts retention."],
+["Constructive memory","Schemas (2.1–2.2)","unit2.html","We fill memory gaps with what our schemas expect, the same top-down process as perceptual set."],
+["Implicit memory","Priming (1.6, 2.2)","unit2.html","Priming is implicit memory: an earlier exposure shapes a later response without awareness."],
+["Metacognition","Metacognition (2.2)","unit2.html","Same term, now applied to studying and retrieval."],
+["Flashbulb memories","Availability heuristic (2.2)","unit2.html","Vivid, emotional memories are easy to retrieve, so we overestimate how common those events are."],
+["Fluid intelligence","Mental set & insight (2.2)","unit2.html","Solving novel problems requires breaking out of mental set."],
+["Gardner & Sternberg","Creativity, divergent thinking (2.2)","unit2.html","Creative intelligence relies on divergent thinking."]
+]],
+["Within this unit",[
+["Levels of processing (2.3)","Elaborative rehearsal (2.5)","#n25","Elaborative rehearsal is semantic, deep processing in action."],
+["Recency effect (2.4)","STM duration (2.3)","#n23b","Recency fades after about 20–30 seconds because that's how long STM lasts."],
+["Primacy effect (2.4)","Rehearsal (2.5)","#n24","Early items get rehearsed more, so they reach LTM."],
+["Encoding failure (2.7)","Automatic vs. effortful (2.3)","#n27","No effortful attention to the penny means it never got encoded."],
+["Retrieval cues (2.6)","Encoding specificity (2.6)","#n26","Context and state cues work because they were encoded alongside the memory."],
+["Testing effect (2.6)","Forgetting curve (2.7)","#n27","Each retrieval practice flattens the forgetting curve."],
+["Working memory (2.3)","Intelligence tests (2.8)","#n28b","The WAIS has a working memory index, so memory capacity is part of measured intelligence."],
+["Crystallized intelligence (2.8)","Semantic memory (2.3)","#n28a","Crystallized intelligence is largely what's stored in semantic memory."],
+["Spacing & testing effects","Growth mindset (2.8)","#nss","Effective study strategies are how a growth mindset becomes actual growth."]
+]],
+["Looking ahead",[
+["Implicit memory","Learning: classical & operant conditioning","#n23a","Conditioned responses are stored as implicit memories."],
+["Infantile amnesia","Development: Piaget & language","#n25","Memory develops with the brain and language. Toddlers' memories don't last into adulthood."],
+["Id, ego, superego, repression","Personality: Freud & defense mechanisms","#n27","The psychodynamic perspective returns with the full list of defense mechanisms."],
+["Locus of control, self-efficacy","Personality: social-cognitive theory","#nss","The study guide's attitude tips are personality concepts."],
+["Stereotype threat","Social: stereotypes & prejudice","#n28c","How beliefs about groups affect behavior and performance."],
+["Intellectual disability","Disorders: neurodevelopmental disorders","#n28b","The DSM classifies intellectual disability as a neurodevelopmental disorder."],
+["Repression & flashbulb memories","Disorders: dissociative amnesia & PTSD","#n27","Trauma memory is central to PTSD (often intrusive, not repressed)."]
+]]
+];
+function conn(){
+  $("main").innerHTML=`<div class="card"><div class="mu">How this unit ties into the rest of your NeuroMaster suite. Tap a link to open that unit's page. AP free-response questions reward these cross-unit links.</div></div>`+CON.map(([g,list])=>`<div class="card"><h3 style="margin:0 0 10px">${g}</h3><div class="cn">${list.map(([a,b,href,t])=>`<div class="cc"><div class="pair">${a} <i class="fa-solid fa-arrow-right-arrow-left"></i> <a href="${href}">${b}</a></div>${t}</div>`).join("")}</div></div>`).join("");
+}
+
+/* ---------- timers (labs) ---------- */
+let TM=[];
+function later(f,ms){TM.push(setTimeout(f,ms))}
+function every(f,ms){const t=setInterval(f,ms);TM.push(t);return t}
+function clearTimers(){TM.forEach(t=>{clearTimeout(t);clearInterval(t)});TM=[]}
+
+/* ---------- MEMORY MODELS ---------- */
+const MS=[
+["Stimulus","#9fbdf0","Everything hitting your senses right now: the map, the teacher's voice, the hum of the lights.",{Where:"Environment",Next:"Sensory receptors transduce it (Unit 2)",Example:"Maya looks at a U.S. map while her teacher reads capitals aloud"}],
+["Sensory memory","#7cc4ff","A split-second, high-capacity snapshot of sensory input.",{Capacity:"Large: nearly everything you sense",Duration:"Iconic (visual) under 1 second; echoic (auditory) 3–4 seconds","How it's lost":"Decays almost instantly if not attended to",Example:"The map registers in Maya's iconic memory and the teacher's words in her echoic memory, automatically"}],
+["Attention","#ffd27a","The gate between sensory memory and STM. Only what you attend to moves on.",{Process:"Selective attention (2.1)","If skipped":"Encoding failure: the info never gets in (the penny)",Example:"Maya focuses on Maine's capital and tunes out the other 49"}],
+["Short-term / working memory","#ff9e7a","A small, temporary workspace for what you're thinking about right now.",{Capacity:"About 7 ± 2 items (chunking raises it)",Duration:"About 20 seconds without rehearsal","Kept alive by":"Maintenance rehearsal (repeating)","How it's lost":"Decay and displacement by new items",Example:"Maya repeats \"Augusta, Augusta\" to herself"}],
+["Encoding","#3ecf8e","Moving information into long-term storage, best done with effortful, deep processing.",{Strategies:"Elaborative rehearsal, mnemonics, chunking, spaced practice, self-reference","Biology":"LTP strengthens synapses; the hippocampus helps consolidate, especially during sleep",Example:"Maya creates the mnemonic \"August is the best month to visit Maine\" and reviews it on several days"}],
+["Long-term memory","#7cffd8","The relatively permanent, limitless storehouse.",{Capacity:"Essentially unlimited",Duration:"Minutes to a lifetime",Types:"Explicit (episodic, semantic) and implicit (procedural, conditioned)","How it's lost":"Decay, interference, retrieval failure, or reconstruction errors",Example:"\"Augusta, Maine\" is now a semantic memory"}],
+["Retrieval","#c8b6ff","Pulling information back into working memory when you need it.",{Measures:"Recall, recognition, relearning",Helped:"Retrieval cues, matching context, state, or mood; the testing effect",Example:"The quiz question \"What's the capital of Maine?\" cues the memory. Strong connections mean quick, accurate retrieval."}]
+];
+let msI=1;
+const WM={
+ce:["Central executive","The boss. It directs attention, switches between tasks, and coordinates the two slave systems. Run by the prefrontal cortex.","Olivia plans her route to school while counting the blocks she'll walk."],
+pl:["Phonological loop","Holds sounds and words for a few seconds. You keep them active by silently repeating them (the 'inner voice').","Kevin silently repeats the grocery list while walking to the store."],
+vs:["Visuospatial sketchpad","Holds images and spatial layout (the 'inner eye').","Zoe mentally rotates jigsaw pieces to see where they fit."],
+eb:["Episodic buffer ★","Added by Baddeley in 2000. It combines information from the other components and long-term memory into single episodes.","Picturing and describing yesterday's soccer game while planning what to tell a friend."],
+lt:["Long-term memory","Not part of working memory, but working memory constantly pulls from it and sends to it.","Using your knowledge of multiplication to do mental math."]
+};
+let wmSel="ce";
+const WMQ=[["Repeating a phone number under your breath until you dial it","pl"],["Picturing where you parked in a crowded lot","vs"],["Doing mental math while also listening to directions","ce"],["Rehearsing a line of a speech in your head","pl"],["Mentally rotating a shape on a test","vs"],["Deciding which of two tasks to focus on right now","ce"],["Remembering the layout of your bedroom in the dark","vs"],["Keeping a new vocabulary word's pronunciation in mind","pl"]];
+let wmq=null;
+const TREE={
+mem:["Long-term memory","#7cffd8","The relatively permanent storehouse, split into two big systems."],
+exp:["Explicit (declarative)","#4da3ff","Consciously recalled. Processed by the hippocampus and frontal lobes, then stored across the cortex."],
+epi:["Episodic","#4da3ff","Personal events with a time and place: the day you got your driver's permit."],
+sem:["Semantic","#4da3ff","Facts and general knowledge: Augusta is the capital of Maine."],
+imp:["Implicit (nondeclarative)","#ffd27a","Retained without conscious recall. Cerebellum and basal ganglia."],
+pro:["Procedural","#ffd27a","Skills and habits: riding a bike, typing, a swim stroke."],
+con:["Conditioning ★","#ffd27a","Classically conditioned associations, such as anxiety at a dentist's drill sound (cerebellum)."],
+pri:["Priming ★","#ffd27a","Earlier exposure shapes a later response without awareness (Unit 2)."],
+pros:["Prospective","#ff9e7a","Remembering to do something in the future. It draws on both systems plus planning in the frontal lobes."]
+};
+let trSel="mem";
+const LOP=[["Is the word in CAPITAL letters?","Structural",1,"You only looked at its shape. Shallow processing: weakest recall."],["Does the word rhyme with \"weight\"?","Phonemic",2,"You processed its sound. Still shallow, but better than structural."],["Would it fit in the sentence \"I met my friend at the ___\"?","Semantic",3,"You processed its meaning. Deep processing: best recall."],["Does it remind you of something in your own life?","Semantic (self-reference)",4,"Relating it to yourself is the deepest processing of all."]];
+let lopI=null;
+function model(){
+  const S=MS[msI];
+  const tn=(k,cls)=>`<button class="tn ${trSel==k?"on":""}" style="--c:${TREE[k][1]}" onclick="trSel='${k}';model()">${TREE[k][0]}</button>`;
+  const box=(k,x,y,w,h,c)=>`<g class="ap ${wmSel==k?"sel":""}" onclick="wmSel='${k}';model()"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="${c}" fill-opacity=".22" stroke="${c}" stroke-width="2"/><text x="${x+w/2}" y="${y+h/2+5}" fill="#fff" font-size="${w<150?11:14}" font-weight="800" text-anchor="middle" pointer-events="none">${WM[k][0].replace(" ★","")}</text></g>`;
+  $("main").innerHTML=`<div class="card"><h3 style="margin:0"><i class="fa-solid fa-diagram-next"></i> Multi-store model (Atkinson &amp; Shiffrin)</h3><div class="mu">Tap each stage. Follow Maya (from your slides) as she learns that the capital of Maine is Augusta.</div>
+  <div class="flow">${MS.map((m,k)=>`<button class="stg ${k==msI?"on":""}" style="--c:${m[1]}" onclick="msI=${k};model()"><b>${k+1}. ${m[0]}</b>${m[2]}</button>`).join("")}</div>
+  <div class="pdet"><div class="loc">STAGE ${msI+1} OF ${MS.length}</div><b style="font-size:18px;color:${S[1]}">${S[0]}</b><div class="kv">${Object.entries(S[3]).map(([a,b])=>`<span>${a}</span><span>${b}</span>`).join("")}</div></div>
+  <div class="row"><button onclick="msI=Math.max(0,msI-1);model()">Back</button><button class="on" onclick="msI=(msI+1)%${MS.length};model()">${msI==MS.length-1?"Restart":"Next stage"}</button></div>
+  <div class="tip">Information doesn't only flow one way. Retrieval brings long-term memories back <i>into</i> working memory, and the arrows loop: maintenance rehearsal cycles inside STM, and LTM knowledge helps you chunk new input.</div></div>
+
+  <div class="card"><h3 style="margin:0"><i class="fa-solid fa-gears"></i> Working memory model (Baddeley)</h3><div class="mu">Tap a component. Then try the sorting quiz.</div>
+  <svg class="sv anat" viewBox="0 0 620 300" role="img" aria-label="Working memory model">
+  <path d="M310 82 L150 140 M310 82 L470 140 M310 82 L310 140 M150 196 L150 236 M470 196 L470 236 M310 196 L310 236" stroke="#9fbdf0" stroke-opacity=".6" stroke-width="2" stroke-dasharray="5 4"/>
+  ${box("ce",205,22,210,60,"#ffd27a")}${box("pl",40,140,220,56,"#4da3ff")}${box("eb",255,140,110,56,"#c8b6ff")}${box("vs",360,140,220,56,"#7cffd8")}${box("lt",40,236,540,44,"#ff9e7a")}
+  </svg>
+  <div class="pdet"><b style="font-size:17px">${WM[wmSel][0]}</b><div style="margin-top:4px">${WM[wmSel][1]}</div><div class="ex" style="margin-bottom:0">${WM[wmSel][2]}</div></div>
+  <div id="wmq" style="margin-top:10px"></div></div>
+
+  <div class="card"><h3 style="margin:0"><i class="fa-solid fa-sitemap"></i> Types of long-term memory</h3><div class="mu">Tap any box.</div>
+  <div class="tree" style="margin-top:12px"><div class="tl">${tn("mem")}</div><div class="tl">${tn("exp")}${tn("imp")}<span style="width:20px"></span>${tn("pros")}</div><div class="tl">${tn("epi")}${tn("sem")}<span style="width:20px"></span>${tn("pro")}${tn("con")}${tn("pri")}</div></div>
+  <div class="pdet" style="margin-top:12px"><b style="font-size:17px;color:${TREE[trSel][1]}">${TREE[trSel][0]}</b><div style="margin-top:4px">${TREE[trSel][2]}</div></div></div>
+
+  <div class="card"><h3 style="margin:0"><i class="fa-solid fa-layer-group"></i> Levels of processing (Craik &amp; Lockhart)</h3><div class="mu">The word is <b style="color:var(--mint);font-size:18px">GATE</b>. Pick the question you'd answer about it, and see how deeply you processed it.</div>
+  <div style="margin-top:8px">${LOP.map((l,k)=>`<button class="opt ${lopI==k?"on":""}" onclick="lopI=${k};model()">${l[0]}</button>`).join("")}</div>
+  ${lopI==null?"":`<div class="pdet"><b style="font-size:17px">${LOP[lopI][1]} processing</b><div class="lvl"><span class="mu">Shallow</span><div class="pg"><i style="width:${LOP[lopI][2]*25}%"></i></div><span class="mu">Deep</span></div><div style="margin-top:6px">${LOP[lopI][3]}</div></div>`}</div>`;
+  wmQuiz();
+}
+function wmQuiz(){
+  const el=$("wmq");if(!el)return;
+  if(!wmq){el.innerHTML=`<button onclick="wmq={o:sh(WMQ).slice(0,6),i:0,sc:0,fb:''};wmQuiz()"><i class="fa-solid fa-shuffle"></i> Sorting quiz: which component?</button>`;return}
+  if(wmq.i>=wmq.o.length){el.innerHTML=`<div class="ans">Done: <b>${wmq.sc} / ${wmq.o.length}</b></div><div class="row"><button class="on" onclick="wmq=null;wmQuiz();$('wmq').querySelector('button').click()">Again</button><button onclick="wmq=null;wmQuiz()">Close</button></div>`;return}
+  const [t,a]=wmq.o[wmq.i];
+  el.innerHTML=`<div class="mu">Task ${wmq.i+1} of ${wmq.o.length} · Score ${wmq.sc}</div><div style="font-size:16px;margin:6px 0">${t}</div><div class="row">${["pl","vs","ce"].map(k=>`<button ${wmq.fb?"disabled":""} class="${wmq.fb&&k==a?"ok":""}" onclick="wmAns('${k}')">${WM[k][0]}</button>`).join("")}</div>${wmq.fb}`;
+}
+function wmAns(k){const a=wmq.o[wmq.i][1];if(k==a)wmq.sc++;wmq.fb=`<div class="ans" ${k==a?"":'style="background:rgba(255,107,129,.12);border-left-color:var(--no)"'}>${k==a?"Correct.":"Not quite."} It's the <b>${WM[a][0]}</b>.</div><div class="row"><button class="on" onclick="wmq.i++;wmq.fb='';wmQuiz()">Next</button></div>`;wmQuiz()}
+
+/* ---------- LABS ---------- */
+const WORDS=["apple","river","candle","tiger","window","pencil","ocean","garden","rocket","violin","ladder","pillow","castle","mirror","basket","forest","hammer","jacket","lemon","planet","bridge","camera","dragon","feather","guitar","island","kettle","marble","onion","parrot"];
+let SP={list:[],mode:"now",st:"idle"};
+const TYP_NOW=[.82,.7,.6,.5,.44,.4,.37,.35,.36,.4,.46,.56,.7,.84,.92],TYP_DEL=[.8,.68,.58,.48,.42,.38,.35,.33,.33,.34,.34,.35,.35,.36,.37];
+function lab(){
+  $("main").innerHTML=`<div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-list-ol"></i> Serial position experiment</h3><div class="mu">You'll see 15 words, one per second. Then type every word you remember, in any order. Choose immediate recall, or a 30-second delay with a distracting task (like the classic studies).</div>
+  <div class="row"><button id="spn" class="${SP.mode=="now"?"on":""}" onclick="SP.mode='now';this.classList.add('on');$('spd').classList.remove('on')">Immediate recall</button><button id="spd" class="${SP.mode=="del"?"on":""}" onclick="SP.mode='del';this.classList.add('on');$('spn').classList.remove('on')">30-second delay</button><button class="on" onclick="spStart()"><i class="fa-solid fa-play"></i> Start</button></div>
+  <div id="sp" style="margin-top:10px"></div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-cubes"></i> Chunking test</h3><div class="mu">Each string shows for 5 seconds. Type it back exactly. Round 1 is random letters; Round 2 uses the same number of letters, but they form familiar chunks.</div>
+  <div class="row"><button class="on" onclick="chStart(0)">Round 1: random</button><button class="on" onclick="chStart(1)">Round 2: chunkable</button></div><div id="ch" style="margin-top:10px"></div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-chart-line"></i> Forgetting curve &amp; the spacing effect</h3><div class="mu">An illustrative model of Ebbinghaus's curve. Each review resets memory to 100%, and <i>spaced</i> reviews make memory fade more slowly afterward than crammed ones do.</div>
+  <div class="row">${[["none","No review"],["cram","Cram (3× on day 0)"],["space","Spaced (days 1, 3, 7, 14)"],["test","Self-test (days 1, 3, 7, 14, 21)"]].map(([k,v])=>`<button class="fcb ${k=="none"?"on":""}" onclick="fcSet('${k}',this)">${v}</button>`).join("")}</div>
+  <svg id="fcs" class="sv" viewBox="0 0 640 260" role="img" aria-label="Forgetting curve"></svg>
+  <label class="mu" for="fct">Test day: <b id="fctv"></b></label><input type="range" id="fct" min="1" max="30" value="30" oninput="fcDraw()"><div id="fcr" class="ans"></div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-chart-area"></i> IQ on the normal curve</h3><div class="mu">Modern IQ scores have a mean of 100 and a standard deviation of 15. Slide to see where a score falls.</div>
+  <svg id="iqs" class="sv" viewBox="0 0 640 230" role="img" aria-label="Normal curve of IQ scores"></svg>
+  <label class="mu" for="iqv">IQ score: <b id="iqb"></b></label><input type="range" id="iqv" min="40" max="160" value="115" oninput="iqDraw()"><div id="iqr" class="ans"></div>
+  <h3 style="margin:16px 0 4px;font-size:16px;color:var(--ac)">Ratio IQ calculator (the original Stanford-Binet formula)</h3>
+  <div class="grid"><label class="mu">Mental age<input type="text" id="ma" value="17.25" oninput="ratio()"></label><label class="mu">Chronological age<input type="text" id="ca" value="15" oninput="ratio()"></label></div><div id="rq" class="big"></div><div id="rqn" class="mu"></div></div>
+
+  <div class="card"><h3 style="margin:0 0 4px"><i class="fa-solid fa-bullseye"></i> Reliability vs. validity</h3><div class="mu">Each dart is one score. The bullseye is the trait the test is supposed to measure.</div>
+  <div class="dart" style="margin-top:10px">${dart([[0,0],[4,-3],[-3,4],[3,3],[-4,-2]],"Reliable and valid","Tight cluster on the bullseye: consistent and accurate.")}${dart([[28,-24],[32,-20],[25,-19],[30,-27],[34,-23]],"Reliable, not valid","Consistent but off target, like a scale that always reads 5 lb heavy.")}${dart([[-30,20],[25,-28],[8,34],[-34,-18],[30,22]],"Neither","Scattered: inconsistent, so it can't be valid either.")}</div>
+  <div class="mu" style="margin-top:12px">Classify each test:</div>
+  ${[["Measuring intelligence by head circumference with a precise tape measure","Reliable, not valid. You'd get the same number every time, but head size doesn't measure intelligence."],["A math test where your score swings 30 points from Monday to Tuesday","Not reliable, so it can't be valid either."],["A road test for a driver's license that's scored the same way for everyone","Content valid (it samples real driving) and standardized."],["An aptitude test whose scores correlate +.60 with later job performance","Good predictive validity."]].map(([q,a])=>`<div class="wv"><div>${q}</div><button onclick="this.nextElementSibling.classList.toggle('hide')">Reveal</button><div class="ans hide">${a}</div></div>`).join("")}</div>`;
+  spRender();fcDraw();iqDraw();ratio();
+}
+function dart(p,t,d){return `<div class="wv" style="margin:0;text-align:center"><svg viewBox="-50 -50 100 100" style="width:120px;height:120px">${[46,34,22,10].map((r,k)=>`<circle r="${r}" fill="${["#0b1f4a","#16408f","#0b1f4a","#ffd27a"][k]}" stroke="#4da3ff" stroke-opacity=".5"/>`).join("")}${p.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.5" fill="#ff6b81" stroke="#fff" stroke-width="1"/>`).join("")}</svg><b style="display:block">${t}</b><span class="mu">${d}</span></div>`}
+
+/* serial position */
+function spStart(){clearTimers();SP.list=sh(WORDS).slice(0,15);SP.st="show";let k=0;const el=$("sp");
+  const step=()=>{if(k<15){el.innerHTML=`<div class="mu">Word ${k+1} of 15</div><div class="wordflash">${SP.list[k]}</div>`;k++;later(step,1000)}else if(SP.mode=="del"){spDelay()}else spAsk()};step()}
+function spDelay(){let s=30,n=300+Math.floor(Math.random()*90);const el=$("sp");
+  el.innerHTML=`<div class="mu">Distractor task: count backward by 3s from <b>${n}</b> out loud until the timer ends. (This blocks rehearsal.)</div><div class="big" id="spc">30</div>`;
+  const t=every(()=>{s--;const c=$("spc");if(c)c.textContent=s;if(s<=0){clearInterval(t);spAsk()}},1000)}
+function spAsk(){SP.st="ask";$("sp").innerHTML=`<textarea id="spa" placeholder="Type every word you remember, separated by spaces or commas..."></textarea><button class="on" onclick="spCheck()">Score my recall</button>`;setTimeout(()=>$("spa")&&$("spa").focus(),30)}
+function spCheck(){const got=new Set(($("spa").value||"").toLowerCase().split(/[^a-z]+/).filter(Boolean));SP.hit=SP.list.map(w=>got.has(w));SP.st="done";spRender()}
+function spRender(){
+  const el=$("sp");if(!el)return;if(SP.st=="idle"){el.innerHTML='<div class="mu">Press Start when you\'re ready.</div>';return}if(SP.st!="done")return;
+  const typ=SP.mode=="del"?TYP_DEL:TYP_NOW,W=600,H=170,x=k=>40+k*(W-80)/14,y=v=>H-20-v*(H-40);
+  const n=SP.hit.filter(Boolean).length,first=SP.hit.slice(0,5).filter(Boolean).length,mid=SP.hit.slice(5,10).filter(Boolean).length,last=SP.hit.slice(10).filter(Boolean).length;
+  el.innerHTML=`<svg class="sv" viewBox="0 0 ${W} ${H+20}"><line x1="20" x2="${W-10}" y1="${H-20}" y2="${H-20}" stroke="#1f4a9c"/>${SP.list.map((w,k)=>`<rect x="${x(k)-13}" y="${SP.hit[k]?y(1):H-24}" width="26" height="${SP.hit[k]?y(0)-y(1):4}" rx="4" fill="${SP.hit[k]?"#3ecf8e":"#ff6b81"}" fill-opacity=".75"/><text x="${x(k)}" y="${H-4}" fill="#9fbdf0" font-size="10" text-anchor="middle">${k+1}</text><text x="${x(k)}" y="${H+12}" fill="#cfe3ff" font-size="9" text-anchor="middle">${w}</text>`).join("")}<polyline points="${typ.map((v,k)=>x(k)+","+y(v)).join(" ")}" fill="none" stroke="#ffd27a" stroke-width="2.5" stroke-dasharray="6 4"/><text x="${W-12}" y="16" fill="#ffd27a" font-size="11" text-anchor="end">dashed = typical ${SP.mode=="del"?"delayed":"immediate"} recall</text></svg>
+  <div class="ans">You recalled <b>${n} / 15</b>: ${first} from the first five, ${mid} from the middle five, ${last} from the last five. ${SP.mode=="del"?"With a delay, the <b>recency effect</b> usually disappears because the last words dropped out of STM, but the <b>primacy effect</b> survives because early words were rehearsed into LTM.":"Most people show a U-shape: <b>primacy</b> (early words got more rehearsal, so they reached LTM) and <b>recency</b> (late words are still in STM). Try the delayed version next."}</div>`;
+}
+
+/* chunking */
+const CHK=["FBI","CIA","NBA","USA","CEO","DNA","NFL","ATM","TV","UK","GPA","SAT","NYC","EPL","PDF","WWW"];
+let CH={r:0,s:"",st:"idle",res:[null,null]};
+function chStart(r){clearTimers();let s;if(r==0){const A="BCDFGHJKLMNPQRSTVWXZ";s=Array.from({length:12},()=>A[Math.random()*A.length|0]).join("")}else{s="";const p=sh(CHK.filter(c=>c.length==3));s=p.slice(0,4).join("")}
+  CH={...CH,r,s,st:"show"};$("ch").innerHTML=`<div class="wordflash">${r==1?s.match(/.{3}/g).join(" "):s}</div><div class="mu" style="text-align:center">Memorize it...</div>`;
+  later(()=>{$("ch").innerHTML=`<input type="text" id="cha" placeholder="Type the 12 letters (spaces ignored)" autocomplete="off" onkeydown="if(event.key==='Enter')chCheck()"><button class="on" onclick="chCheck()">Check</button>`;$("cha").focus()},5000)}
+function chCheck(){const a=($("cha").value||"").toUpperCase().replace(/[^A-Z]/g,"");let c=0;for(let k=0;k<12;k++)if(a[k]==CH.s[k])c++;CH.res[CH.r]=c;
+  const [r0,r1]=CH.res;$("ch").innerHTML=`<div class="ans">Round ${CH.r+1}: <b>${c} / 12</b> letters in the right position. The answer was <b>${CH.s}</b>.${r0!=null&&r1!=null?`<br>Random: ${r0}/12 · Chunkable: ${r1}/12. Twelve random letters overflow STM's ~7-item limit, but four familiar acronyms are only <b>4 chunks</b>. That's chunking, and it relies on knowledge already in LTM.`:" Now try the other round."}</div>`}
+
+/* forgetting curve */
+let FC="none";
+const FCP={none:[],cram:[[0.05,1.15],[0.1,1.15],[0.15,1.15]],space:[[1,2.2],[3,2.2],[7,2.2],[14,2.2]],test:[[1,2.6],[3,2.6],[7,2.6],[14,2.6],[21,2.6]]};
+function fcSet(k,b){FC=k;document.querySelectorAll(".fcb").forEach(x=>x.classList.remove("on"));b.classList.add("on");fcDraw()}
+function fcR(t){let S=1.2,last=0;for(const [d,m] of FCP[FC]){if(d<=t){S*=m;last=d}}return 100*(.18+.82*Math.exp(-(t-last)/S))}
+function fcDraw(){
+  const sv=$("fcs");if(!sv)return;const T=+$("fct").value,W=640,H=260,x=t=>50+t*(W-70)/30,y=r=>H-30-r*(H-50)/100;
+  let p="";for(let t=0;t<=30;t+=0.05)p+=(t?"L":"M")+x(t).toFixed(1)+" "+y(fcR(t)).toFixed(1);
+  let base="";for(let t=0;t<=30;t+=0.1){const sv0=FC;base+=(t?"L":"M")+x(t).toFixed(1)+" "+y(100*(.18+.82*Math.exp(-t/1.2))).toFixed(1)}
+  const ax=[0,5,10,15,20,25,30].map(d=>`<text x="${x(d)}" y="${H-10}" fill="#9fbdf0" font-size="11" text-anchor="middle">day ${d}</text>`).join("")+[0,25,50,75,100].map(r=>`<text x="42" y="${y(r)+4}" fill="#9fbdf0" font-size="11" text-anchor="end">${r}%</text><line x1="50" x2="${W-20}" y1="${y(r)}" y2="${y(r)}" stroke="#1f4a9c" stroke-dasharray="2 4"/>`).join("");
+  const rv=FCP[FC].map(([d])=>`<circle cx="${x(d)}" cy="${y(100)}" r="5" fill="#ffd27a"/>`).join("");
+  sv.innerHTML=`${ax}${FC!="none"?`<path d="${base}" stroke="#ff6b81" stroke-opacity=".5" stroke-width="2" fill="none" stroke-dasharray="5 4"/>`:""}<path d="${p}" stroke="#7cffd8" stroke-width="3" fill="none"/>${rv}<line x1="${x(T)}" x2="${x(T)}" y1="${y(100)}" y2="${y(0)}" stroke="#fff" stroke-opacity=".6"/><circle cx="${x(T)}" cy="${y(fcR(T))}" r="6" fill="#fff"/>`;
+  const R=fcR(T);$("fctv").textContent="day "+T;
+  $("fcr").innerHTML=`Estimated retention on day ${T}: <b>${R.toFixed(0)}%</b>${FC=="none"?". Notice the steep drop in the first day or two, then the leveling off. That's Ebbinghaus's curve.":FC=="cram"?". Cramming boosts memory for the next few hours, but it fades almost as fast as no review at all. Massed practice.":FC=="space"?". Each spaced review flattens the curve more. That's the <b>spacing effect</b> (distributed practice).":". Retrieval practice spaced over time (the <b>testing effect</b> + spacing) gives the flattest curve."} ${FC!="none"?"The dashed red line is no review.":""} <span class="mu">(Illustrative model, not real data.)</span>`;
+}
+
+/* IQ */
+function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x>=0?y:-y}
+function iqDraw(){
+  const sv=$("iqs");if(!sv)return;const v=+$("iqv").value,W=640,H=230,x=q=>30+(q-40)*(W-60)/120,pdf=q=>Math.exp(-((q-100)**2)/(2*225)),y=d=>H-40-d*(H-70);
+  let c="",f="M"+x(40)+" "+y(0);for(let q=40;q<=160;q+=1){c+=(q==40?"M":"L")+x(q).toFixed(1)+" "+y(pdf(q)).toFixed(1);if(q<=v)f+="L"+x(q).toFixed(1)+" "+y(pdf(q)).toFixed(1)}f+="L"+x(v)+" "+y(0)+"Z";
+  const marks=[55,70,85,100,115,130,145].map((q,k)=>`<line x1="${x(q)}" x2="${x(q)}" y1="${y(0)}" y2="${y(pdf(q))}" stroke="#9fbdf0" stroke-opacity=".5" stroke-dasharray="3 3"/><text x="${x(q)}" y="${H-24}" fill="#9fbdf0" font-size="11" text-anchor="middle">${q}</text><text x="${x(q)}" y="${H-10}" fill="#4da3ff" font-size="10" text-anchor="middle">${k-3>0?"+":""}${k-3}σ</text>`).join("");
+  const bands=[[85,115,"68%"],[70,130,"95%"]];
+  sv.innerHTML=`<path d="${f}" fill="#4da3ff" fill-opacity=".3"/><path d="${c}" stroke="#7cffd8" stroke-width="3" fill="none"/>${marks}<text x="${x(100)}" y="${y(1)-6}" fill="#7cffd8" font-size="11" text-anchor="middle">68% between 85 and 115</text><line x1="${x(v)}" x2="${x(v)}" y1="${y(0)}" y2="${y(1)}" stroke="#ffd27a" stroke-width="2"/>`;
+  const pct=50*(1+erf((v-100)/(15*Math.SQRT2)));$("iqb").textContent=v;
+  const z=(v-100)/15;
+  $("iqr").innerHTML=`An IQ of <b>${v}</b> is <b>${z>=0?"+":""}${z.toFixed(2)} SD</b> from the mean, higher than about <b>${pct<1?"<1":pct>99?">99":pct.toFixed(0)}%</b> of people (percentile rank). ${v<=70?"Scores around 70 or below, with difficulty in daily adaptive skills, may indicate <b>intellectual disability</b>.":v>=130?"Scores of 130 and above (top ~2%) are often used as a cutoff for gifted programs.":Math.abs(v-100)<=15?"This is in the average range that holds about 68% of people.":"About 95% of people score between 70 and 130."}`;
+}
+function ratio(){const ma=parseFloat($("ma").value),ca=parseFloat($("ca").value);if(!(ma>0&&ca>0)){$("rq").textContent="–";$("rqn").textContent="Enter two positive ages.";return}const q=ma/ca*100;$("rq").textContent="IQ = "+q.toFixed(0);$("rqn").innerHTML=`${ma} ÷ ${ca} × 100 = ${q.toFixed(1)}. ${q>100?"Performing above age level.":q<100?"Performing below age level.":"Performing exactly at age level."} ${ca>=18?"<b>Note:</b> the ratio formula breaks down for adults, which is why modern tests use deviation IQ.":""}`}
+/* ---------- FLASHCARDS ---------- */
+function flash(){
+  if(i>=Q.length)return done();
+  const k=Q[i],d=D[k];
+  $("main").innerHTML=`<div class="mu">Card ${i+1} of ${Q.length}. Tap the card (or press Space) to flip.</div>${prog()}
+  <div class="card fc" onclick="flip=!flip;flash()" tabindex="0" role="button" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();flip=!flip;flash()}">${flip!=rv?`<div>${d[2]}</div><div class="mu" style="margin-top:10px">${d[0]}</div>`:`<div class="t">${d[0]}</div><div style="margin-top:8px"><span class="tag">${C[d[1]]}</span>${X(d)}</div>`}</div>
+  <div class="row"><button onclick="i=Math.max(0,i-1);flip=false;flash()">Back</button>
+  <button onclick="addMiss(${k});bar();i++;flip=false;flash()"><i class="fa-solid fa-rotate"></i> Still learning</button>
+  <button class="on" onclick="delMiss(${k});bar();sc++;i++;flip=false;flash()"><i class="fa-solid fa-check"></i> Mastered</button>
+  <button onclick="rv=!rv;flip=false;flash()">Front: ${rv?"definition":"term"}</button></div>`;
+}
+
+/* ---------- QUIZ ---------- */
+function quiz(){
+  if(i>=Q.length)return done();
+  const k=Q[i],d=D[k];
+  const same=sh(D.map((x,j)=>j).filter(j=>j!=k&&D[j][1]==d[1])),other=sh(D.map((x,j)=>j).filter(j=>j!=k&&D[j][1]!=d[1]));
+  const o=sh([k,...[...same,...other].slice(0,3)]);
+  $("main").innerHTML=`<div class="mu">Question ${i+1} of ${Q.length} · Score ${sc}</div>${prog()}
+  <div class="card"><span class="tag">${C[d[1]]}</span><div style="margin-top:8px;font-size:17px">${d[2]}</div></div>
+  <div id="o">${o.map(j=>`<button class="opt" data-k="${j}" onclick="pick(this,${j==k})">${D[j][0]}</button>`).join("")}</div><div id="f"></div>`;
+}
+function pick(b,ok){
+  const k=Q[i];document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.k==k)x.classList.add("ok")});
+  if(ok)sc++;else{b.classList.add("bad");addMiss(k);bar()}
+  $("f").innerHTML=`<div class="card"><b>${D[k][0]}:</b> ${D[k][2]}</div><button class="on" onclick="i++;quiz()">Next question</button>`;
+}
+
+/* ---------- MATCHING ---------- */
+let M={t:[],d:[],s:null,left:0,bad:null};
+function match(){const r=Q.slice(i,i+6);if(!r.length)return done();M={t:sh(r),d:sh(r),s:null,left:r.length,bad:null};drawM()}
+function drawM(){
+  $("main").innerHTML=`<div class="mu">Tap a term, then its definition. ${M.left} left · Score ${sc}</div>${prog()}<div class="grid"><div>${M.t.map(k=>`<button class="opt ${M.s&&M.s[0]=="t"&&M.s[1]==k?"on":""} ${M.bad&&M.bad.includes("t"+k)?"bad":""}" onclick="selM('t',${k})">${D[k][0]}</button>`).join("")}</div><div>${M.d.map(k=>`<button class="opt ${M.s&&M.s[0]=="d"&&M.s[1]==k?"on":""} ${M.bad&&M.bad.includes("d"+k)?"bad":""}" style="font-size:14px" onclick="selM('d',${k})">${D[k][2]}</button>`).join("")}</div></div>`;
+}
+function selM(t,k){
+  M.bad=null;
+  if(!M.s||M.s[0]==t){M.s=[t,k];return drawM()}
+  const a=M.s[1];
+  if(a==k){sc++;M.t=M.t.filter(x=>x!=k);M.d=M.d.filter(x=>x!=k);M.left--;M.s=null;if(!M.left){i+=6;return i>=Q.length?done():match()}}
+  else{const tk=t=="t"?k:a;addMiss(tk);bar();M.bad=[M.s[0]+a,t+k];M.s=null;setTimeout(()=>{M.bad=null;drawM()},700)}
+  drawM();
+}
+
+/* ---------- TYPE-IN ---------- */
+const norm=s=>s.toLowerCase().replace(/['’]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+function variants(t){const v=[t,t.replace(/\(.*?\)/g,"")];const m=t.match(/\((.*?)\)/);if(m)v.push(m[1]);return v.map(norm).filter(Boolean)}
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function typ(){
+  if(i>=Q.length)return done();
+  const d=D[Q[i]];
+  $("main").innerHTML=`<div class="mu">Term ${i+1} of ${Q.length} · Score ${sc}</div>${prog()}<div class="card"><span class="tag">${C[d[1]]}</span><div style="margin-top:8px;font-size:17px">${d[2]}</div><div class="mu" style="margin-top:6px">Hint: ${d[0].length} characters, starts with “${d[0][0]}”</div></div>
+  <input type="text" id="ans" placeholder="Type the term, then press Enter" onkeydown="if(event.key==='Enter')chkT()" autocomplete="off"><div class="row"><button class="on" onclick="chkT()">Submit</button><button onclick="$('ans').value='';chkT(true)">Show answer</button></div><div id="f"></div>`;
+  setTimeout(()=>$("ans")&&$("ans").focus(),30);
+}
+function chkT(skip){
+  const k=Q[i],d=D[k],inp=norm($("ans").value);if(!skip&&!inp)return;
+  const vs=variants(d[0]),exact=vs.includes(inp),close=!exact&&inp.length>5&&vs.some(v=>lev(inp,v)<=Math.max(1,Math.floor(v.length/8)));
+  $("ans").disabled=true;document.querySelectorAll("#main .row button").forEach(b=>b.disabled=true);
+  if(exact||close){sc++;$("f").innerHTML=`<div class="card ok">${close?"Close enough (check the spelling): ":"Correct! "}<b>${d[0]}</b></div><button class="on" onclick="i++;typ()">Next</button>`}
+  else{addMiss(k);bar();$("f").innerHTML=`<div class="card bad">The term is <b>${d[0]}</b>.</div><button class="on" onclick="i++;typ()">Next</button>`}
+}
+
+/* ---------- SCENARIOS (most from your 2.3–2.8 study guide key) ---------- */
+const APP=[
+["Jasmine vividly remembers the day she adopted her puppy.","Episodic memory",["Semantic memory","Procedural memory","Prospective memory"],"A personal event tied to a specific time and place.","2.3"],
+["While cooking, Chris keeps track of the recipe steps, sets the oven timer, and keeps up a conversation with his wife all at once.","Working memory",["Long-term memory (LTM)","Sensory memory","Procedural memory"],"Actively holding and juggling several pieces of information right now.","2.3"],
+["Linda's fingers automatically move to the correct keys while she plays the piano.","Procedural memory",["Episodic memory","Semantic memory","Working memory"],"A motor skill performed without conscious recall.","2.3"],
+["Alex knows that a triangle has three sides.","Semantic memory",["Episodic memory","Procedural memory","Iconic memory"],"A general fact, not tied to a personal experience.","2.3"],
+["Ethan remembers a seven-digit phone number just long enough to dial it.","Short-term memory (STM)",["Long-term memory (LTM)","Echoic memory","Prospective memory"],"About 7 items held briefly, then gone.","2.3"],
+["Nicole easily states the date of the Declaration of Independence on her test because it is a memory she can consciously recall.","Explicit memory",["Implicit memory","Procedural memory","Sensory memory"],"Consciously recalled and stated: explicit (specifically semantic).","2.3"],
+["Javier sees a license plate flash by on a passing car and can briefly recall the numbers.","Iconic memory",["Echoic memory","Short-term memory (STM)","Semantic memory"],"A split-second visual sensory memory.","2.3"],
+["Chloe wasn't paying attention to the radio, but when asked, she can repeat the last few words the announcer said.","Echoic memory",["Iconic memory","Working memory","Recency effect"],"Auditory sensory memory lasts a few seconds.","2.3"],
+["Iconic and echoic memory are both types of which memory stage?","Sensory memory",["Short-term memory (STM)","Implicit memory","Working memory"],"Both are brief sensory traces, the first stage of the multi-store model.","2.3"],
+["Grandma Rose recalls the details of her wedding day from decades ago.","Long-term memory (LTM)",["Short-term memory (STM)","Sensory memory","Working memory"],"Decades-old memories are in long-term storage.","2.3"],
+["Tom remembers that he needs to take his medication later today.","Prospective memory",["Procedural memory","Episodic memory","Retrieval cues"],"Remembering to do something in the future.","2.3"],
+["Without consciously thinking, Raj knows how to hold and balance his bicycle, but he would struggle to explain it.","Implicit memory",["Explicit memory","Semantic memory","Episodic memory"],"Hard to put into words, performed without awareness.","2.3"],
+["The more Jordan practices his guitar chords, the stronger the synaptic connections in his brain become.","Long-term potentiation (LTP)",["Neurogenesis","Memory consolidation","Automatic processing"],"Repeated activation strengthens synapses.","2.3"],
+["Maya spends hours reviewing flashcards and creating mnemonic devices to master her vocabulary.","Effortful processing",["Automatic processing","Structural processing","Maintenance rehearsal"],"Deliberate attention and work.","2.3"],
+["To solve a jigsaw puzzle, Zoe mentally rotates the pieces to see where they might fit.","Visuospatial sketchpad",["Phonological loop","Central executive","Iconic memory"],"Holding and manipulating images and spatial information.","2.3"],
+["Olivia coordinates picturing her route to school with counting the blocks she'll need to walk.","Central executive",["Visuospatial sketchpad","Phonological loop","Method of loci"],"Coordinating the other working-memory components is the executive's job.","2.3"],
+["Studying French, Elena focuses on how the words sound when pronounced.","Phonemic processing",["Semantic processing","Structural processing","Phonological loop"],"Processing by sound is the middle level.","2.3"],
+["Liam answers a trivia question by pulling the fact out of storage.","Retrieval",["Encoding","Storage","Recognition"],"Getting stored information back out.","2.3"],
+["Maria hasn't thought about her high school locker combination in ten years, yet it's still there if she needs it.","Storage",["Retrieval","Encoding","Storage decay"],"The information has been retained over time.","2.3"],
+["Michael remembers a psychology concept best after relating it to his own life experiences.","Semantic processing",["Phonemic processing","Structural processing","Maintenance rehearsal"],"Processing meaning, especially personal meaning, is the deepest level.","2.3"],
+["Ben can instantly name the color of his first car, something he never consciously studied.","Automatic processing",["Effortful processing","Elaborative rehearsal","Flashbulb memory"],"Incidental information encoded without effort.","2.3"],
+["Kim knows how to ride a bike, can recite song lyrics, can tell you what she ate for breakfast, and remembers to do laundry later. All of this is thanks to her...","Memory",["Working memory","Procedural memory","Semantic memory"],"The examples span procedural, semantic, episodic, and prospective memory, so the umbrella answer is memory.","2.3"],
+["Sam notes that the word \"cat\" has three letters.","Structural processing",["Phonemic processing","Semantic processing","Chunking"],"Processing physical appearance is the shallowest level.","2.3"],
+["Mark has met his neighbor Alice several times but can't recall her name, because he was preoccupied each time and never paid attention.","Encoding",["Retrieval","Storage","Proactive interference"],"The failure happened at the first step: the name never got in.","2.3"],
+["Kevin silently repeats the grocery list while walking to the store.","Phonological loop",["Visuospatial sketchpad","Central executive","Elaborative rehearsal"],"The inner voice holds words and sounds.","2.3"],
+["To recall her 10-item grocery list in order, Ben mentally places each item at a landmark on his walk from the living room to the kitchen.","Method of loci",["Chunking","Hierarchies","Serial position effect"],"Placing items along a familiar route.","2.4"],
+["Asked to recall 15 words, Chloe remembers the first and last few but struggles with the middle.","Serial position effect",["Primacy effect","Recency effect","Spacing effect"],"Both ends remembered, middle forgotten: the full serial position effect.","2.4"],
+["Professor Chen groups a long string of digits into sets of three so the sequence is easier to remember.","Chunking",["Method of loci","Mnemonic devices","Categories"],"Grouping into manageable units.","2.4"],
+["David easily recalls the first four countries listed in a presentation.","Primacy effect",["Recency effect","Serial position effect","Spacing effect"],"Better recall of the first items.","2.4"],
+["Because the last four names of the new committee members are still active in her short-term memory, Olivia recalls them instantly.","Recency effect",["Primacy effect","Chunking","Echoic memory"],"Better recall of the last items, still held in STM.","2.4"],
+["Sofia creates the acronym \"SOH CAH TOA\" to remember trigonometry.","Mnemonic devices",["Chunking","Method of loci","Hierarchies"],"An acronym is a mnemonic device.","2.4"],
+["Erica spends five straight hours before the exam reviewing all of her notes.","Massed practice",["Distributed practice","Spacing effect","Testing effect"],"One long cram session.","2.4"],
+["Liam studies the same material in small sessions throughout the week.","Distributed practice",["Massed practice","Maintenance rehearsal","Interleaving"],"Short sessions spread over time.","2.4"],
+["Weeks later, Liam remembers more for the final exam than Erica does. This is because of the...","Spacing effect",["Serial position effect","Testing effect","Primacy effect"],"Spaced study produces better long-term retention than cramming.","2.4"],
+["A student organizes her biology notes from 'Living things' down to kingdoms, then phyla, then specific species.","Hierarchies",["Chunking","Method of loci","Categories"],"Broad to specific is a hierarchy.","2.4"],
+["After a serious car accident, Ben can't remember any events that happened before the injury.","Retrograde amnesia",["Anterograde amnesia","Infantile amnesia","Encoding failure"],"Loss of past memories (before the injury).","2.5"],
+["While Kevin sleeps, his brain stabilizes and strengthens the new skills he learned during the day.","Memory consolidation",["Long-term potentiation (LTP)","Neurogenesis","Retrieval"],"New memories are stabilized over time, especially during sleep.","2.5"],
+["Jill can instantly say what she ate, what the weather was, and who she talked to on any specific day 15 years ago.","Highly superior autobiographical memory (HSAM)",["Flashbulb memory","Episodic memory","Savant syndrome"],"A rare ability to recall nearly every day of one's life.","2.5"],
+["Javier links a new psychology term to an event from his own childhood.","Elaborative rehearsal",["Maintenance rehearsal","Chunking","Structural processing"],"Connecting new info to existing knowledge.","2.5"],
+["Because of damage to his hippocampus, a patient can't form new long-term memories of people he meets or events that happen today.","Anterograde amnesia",["Retrograde amnesia","Alzheimer's disease","Infantile amnesia"],"Can't make new memories after the damage.","2.5"],
+["Amara repeats her bus stop number to herself until the bus arrives.","Maintenance rehearsal",["Elaborative rehearsal","Phonemic processing","Chunking"],"Simple repetition to keep it in STM.","2.5"],
+["Sam's memory steadily declines because of a neurodegenerative disorder linked to the loss of acetylcholine-producing neurons.","Alzheimer's disease",["Anterograde amnesia","Retrograde amnesia","Storage decay"],"Progressive memory loss with an ACh deficiency.","2.5"],
+["Carlos vividly remembers the moment he heard about a major world event, including where he was and who he was with.","Flashbulb memory",["Highly superior autobiographical memory (HSAM)","Semantic memory","Mood-congruent memory"],"A vivid memory of an emotionally significant moment.","2.5"],
+["Sofia can't recall any specific personal events from before age three.","Infantile amnesia",["Retrograde amnesia","Repression","Encoding failure"],"A normal inability to recall early childhood.","2.5"],
+["Liam answers an essay question by generating the information from memory without any external help.","Recall",["Recognition","Relearning","Retrieval cues"],"Retrieval without cues.","2.6"],
+["Alex scores better on his final after studying in the same classroom where he takes the test.","Context-dependent memory",["State-dependent memory","Mood-congruent memory","Testing effect"],"Same environment at encoding and retrieval.","2.6"],
+["The smell of a specific perfume brings back a detailed memory of Sam's grandmother.","Retrieval cues",["Context-dependent memory","Flashbulb memory","Recognition"],"A stimulus that triggers access to a stored memory.","2.6"],
+["Carlos can only remember where he put his keys once he's back in the same exhausted state he was in when he hid them.","State-dependent memory",["Context-dependent memory","Mood-congruent memory","Tip-of-the-tongue phenomenon"],"Same physiological state at encoding and retrieval.","2.6"],
+["Olivia pauses her studying to ask herself whether highlighting is really helping her understand the concepts.","Metacognition",["Testing effect","Elaborative rehearsal","Central executive"],"Thinking about her own thinking and learning.","2.6"],
+["Maria correctly identifies the perpetrator from a lineup of five people.","Recognition",["Recall","Relearning","Context-dependent memory"],"Identifying from options.","2.6"],
+["When Diana feels sad, she finds it easier to remember other unhappy events from her past.","Mood-congruent memory",["State-dependent memory","Context-dependent memory","Repression"],"Current emotion pulls up matching memories.","2.6"],
+["Students who took self-quizzes remembered the material better than those who just reread their notes.","Testing effect",["Spacing effect","Metacognition","Recognition"],"Retrieval practice strengthens memory.","2.6"],
+["Without review, students forget a large share of new vocabulary soon after learning it, but then forget less and less over time.","Forgetting curve",["Storage decay","Encoding failure","Retroactive interference"],"Ebbinghaus's curve: steep drop, then leveling off.","2.7"],
+["Over five years, Julia's memory of her high school algebra formulas gradually fades because she never uses them.","Storage decay",["Forgetting curve","Encoding failure","Proactive interference"],"Gradual fading from disuse.","2.7"],
+["After hearing other people incorrectly describe a car accident, Chloe works their false details into her own memory of it.","Misinformation effect",["Source amnesia","Imagination inflation","Constructive memory"],"Misleading information from others changed her memory.","2.7"],
+["After a week of Spanish vocabulary, David finds it hard to recall the French words he learned last month.","Retroactive interference",["Proactive interference","Storage decay","Encoding failure"],"New learning disrupts old memories.","2.7"],
+["Sarah struggles to remember her new phone number because her old, well-rehearsed number keeps popping into her head.","Proactive interference",["Retroactive interference","Tip-of-the-tongue phenomenon","Storage decay"],"Old learning disrupts new memories.","2.7"],
+["Mark can't recall the details on a penny's face because he never paid close enough attention to process them.","Encoding failure",["Storage decay","Retrieval cues","Repression"],"The information never got into memory.","2.7"],
+["Maria has no conscious memory of a traumatic childhood incident. A psychodynamic theorist calls this an ego defense mechanism.","Repression",["Infantile amnesia","Retrograde amnesia","Encoding failure"],"The defense mechanism that pushes painful memories out of consciousness.","2.7"],
+["Javier tells a funny anecdote believing it happened to his friend, when he actually read it in a book.","Source amnesia",["Misinformation effect","Imagination inflation","Constructive memory"],"Right memory, wrong source.","2.7"],
+["Recounting a fishing trip, Carlos adds details about a dramatic storm that actually happened on a different trip.","Constructive memory",["Misinformation effect","Source amnesia","Imagination inflation"],"He rebuilt the memory, filling it in with details from another experience.","2.7"],
+["Ben knows the actor's name and feels certain of it, but he can't retrieve it at the moment.","Tip-of-the-tongue phenomenon",["Encoding failure","Storage decay","Proactive interference"],"Stored but temporarily inaccessible.","2.7"],
+["After repeatedly picturing herself scoring the winning goal, Olivia begins to believe it actually happened.","Imagination inflation",["Misinformation effect","Constructive memory","Source amnesia"],"Imagining an event increases confidence that it happened.","2.7"],
+["Chloe takes the same personality assessment two weeks later and gets nearly the same scores.","Test-retest reliability",["Split-half reliability","Predictive validity","Standardization"],"Same test, same person, two times.","2.8"],
+["Before flight school, David takes a test designed to assess his potential for future success as a pilot.","Aptitude test",["Achievement test","Predictive validity","Content validity"],"Predicting future ability to learn.","2.8"],
+["The developers make sure a new IQ test is given and scored exactly the same way for every student.","Standardization",["Reliability","Construct validity","Norms"],"Uniform procedures (and comparison norms).","2.8"],
+["Researchers compare Liam's scores on the odd-numbered questions to his scores on the even-numbered questions of the same math test.","Split-half reliability",["Test-retest reliability","Content validity","Factor analysis"],"Comparing two halves of one test.","2.8"],
+["A new anxiety scale is evaluated by comparing its results with several existing measures of anxiety.","Construct validity",["Predictive validity","Content validity","Test-retest reliability"],"Checking whether it measures the construct (anxiety), as defined by your study guide.","2.8"],
+["Maria takes an end-of-course history test to measure how much she learned about American history.","Achievement test",["Aptitude test","Intelligence quotient (IQ)","Standardization"],"Measuring what has been learned.","2.8"],
+["A college admissions exam is evaluated by correlating students' scores with their GPA after freshman year.","Predictive validity",["Construct validity","Content validity","Test-retest reliability"],"Does the test predict future performance?","2.8"],
+["Maria scores lower on a math test after a classmate remarks that \"everyone knows girls aren't good at math.\"","Stereotype threat",["Stereotype lift","Fixed mindset","Mood-congruent memory"],"Worry about confirming a negative stereotype lowered her performance.","2.8"],
+["Grandma Rose easily wins history trivia by relying on decades of accumulated knowledge.","Crystallized intelligence (Gc)",["Fluid intelligence (Gf)","General intelligence (g)","Semantic processing"],"Accumulated knowledge grows with age.","2.8"],
+["Over the last few decades, Dr. Chen observes that average raw scores on intelligence tests have risen steadily.","Flynn effect",["Standardization","Fluid intelligence (Gf)","Stereotype lift"],"Rising scores over generations.","2.8"],
+["An examiner divides Liam's mental age of 17.25 by his chronological age of 15 and multiplies by 100 to get 115.","Intelligence quotient (IQ)",["Mental age","Percentile rank","Standardization"],"MA ÷ CA × 100 is the original ratio IQ.","2.8"],
+["Olivia quits trying to learn calculus because she believes her capacity for math is limited and unchangeable.","Fixed mindset",["Fluid intelligence (Gf)","Growth mindset","Stereotype threat"],"Believing ability can't change is a fixed mindset. <span class=\"xtra\">Key check</span> Your class key lists \"Fluid Intelligence\" for this item, which looks like a typo. Fluid intelligence is reasoning with new problems, which has nothing to do with Olivia's belief. Ask your teacher to confirm.","2.8"],
+["Ben does better than expected on his parallel-parking test after being told boys usually outperform girls at spatial tasks.","Stereotype lift",["Stereotype threat","Growth mindset","General intelligence (g)"],"A positive stereotype about his group boosted his performance.","2.8"],
+["Marco struggles with academic writing but is an exceptionally talented composer and musician.","Multiple intelligences",["General intelligence (g)","Savant syndrome","Crystallized intelligence (Gc)"],"Strong in one area and weak in another fits Gardner's theory.","2.8"],
+["Professor Smith notices that Aisha, who does well in math, also tends to score highly in reading and science.","General intelligence (g)",["Multiple intelligences","Crystallized intelligence (Gc)","Flynn effect"],"Doing well across many tasks points to one general ability.","2.8"],
+["After failing his first attempt, Javier studies harder and sees the failure as a chance to improve.","Growth mindset",["Fixed mindset","Grit","Stereotype lift"],"Believing ability grows with effort.","2.8"],
+["Carlos quickly figures out the pattern in a new type of puzzle he has never seen before.","Fluid intelligence (Gf)",["Crystallized intelligence (Gc)","Multiple intelligences","Procedural memory"],"Reasoning through a novel problem.","2.8"],
+["A man with severe intellectual limitations can name the day of the week for any date in history within seconds.","Savant syndrome",["Highly superior autobiographical memory (HSAM)","General intelligence (g)","Fluid intelligence (Gf)"],"An exceptional specific skill alongside significant mental limitations.","2.8"],
+["A nurse is especially skilled at reading patients' emotions and calming them down.","Emotional intelligence",["Multiple intelligences","Crystallized intelligence (Gc)","Grit"],"Perceiving and managing emotions.","2.8"],
+["A test meant to measure intelligence actually just measures how many words you can memorize in a minute.","Construct validity",["Test-retest reliability","Standardization","Predictive validity"],"It isn't measuring the construct it claims to (it lacks construct validity).","2.8"]
+];
+let AQ=[],ai=0,as=0,asec="all";
+const SECS=["all","2.3","2.4","2.5","2.6","2.7","2.8"];
+function app(){AQ=sh(APP.filter(x=>asec=="all"||x[4]==asec)).slice(0,12);ai=0;as=0;appQ()}
+function appQ(){
+  const head=`<div class="card"><div class="mu">Most of these come straight from your 2.3–2.8 study guide, with the term bank turned into multiple choice. Pick a section, or mix them all.</div><div class="chips row">${SECS.map(s=>`<button class="${s==asec?"on":""}" onclick="asec='${s}';app()">${s=="all"?"All sections":s}</button>`).join("")}</div></div>`;
+  if(ai>=AQ.length){$("main").innerHTML=head+`<div class="card"><h2>Scenarios complete</h2><p>Score: <b>${as}</b> / ${AQ.length}</p><button class="on" onclick="app()">New set of ${AQ.length}</button></div>`;return}
+  const [s,a,ds,w,sec]=AQ[ai],o=sh([a,...ds]);
+  $("main").innerHTML=head+`<div class="mu">Scenario ${ai+1} of ${AQ.length} · Score ${as}</div><div class="pg"><i style="width:${ai/AQ.length*100}%"></i></div><div class="card" style="font-size:17px"><span class="tag">${sec}</span><div style="margin-top:8px">${s}</div></div><div>${o.map(x=>`<button class="opt" onclick="appP(this,${x==a})">${x}</button>`).join("")}</div><div id="f"></div>`;
+}
+function appP(b,ok){
+  const [s,a,ds,w]=AQ[ai];document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent==a)x.classList.add("ok")});
+  if(ok)as++;else{b.classList.add("bad");const k=D.findIndex(d=>d[0]==a);if(k>=0){addMiss(k);bar()}}
+  $("f").innerHTML=`<div class="card"><b>${a}.</b> ${w}</div><button class="on" onclick="ai++;appQ()">Next</button>`;
+}
+
+/* ---------- AAQ ---------- */
+const AAQS=[
+{t:"Study 1: Cramming vs. Spacing",s:"A researcher tested whether spreading out study time improves long-term memory. Ninety 10th-grade students from three Spanish classes at one suburban high school took part, with parental consent and student assent. Students were randomly assigned to study 50 new Spanish vocabulary words either in one 90-minute session (massed group) or in three 30-minute sessions spread over one week (distributed group). Three weeks after their final session, all students took the same 50-item fill-in-the-blank vocabulary test. The massed group averaged 22 correct (SD = 8); the distributed group averaged 34 correct (SD = 6). The difference was statistically significant (p < .01).",
+p:[["Identify the research method used in the study.","An <b>experiment</b>. The researcher manipulated the study schedule and used <b>random assignment</b>."],
+["State the operational definition of long-term memory in the study.","The <b>number of the 50 vocabulary words correctly recalled</b> on the fill-in-the-blank test three weeks after the final study session."],
+["Describe the meaning of the difference in standard deviations.","The massed group's scores (SD = 8) were <b>more spread out</b> around their mean than the distributed group's (SD = 6), so cramming produced less consistent results."],
+["Identify at least one ethical guideline applied by the researcher.","<b>Informed consent</b>: parental consent plus student assent for minors."],
+["Explain the extent to which the research findings may or may not be generalizable.","Limited: all participants were 10th graders from <b>one suburban school</b>, so results may not generalize to other ages, schools, or subjects. Random assignment supports a causal conclusion <i>within</i> this sample, but the sample isn't randomly selected."],
+["Explain how at least one of the research findings supports or refutes the hypothesis that distributed practice improves long-term memory.","It <b>supports</b> it: the distributed group recalled significantly more words (34 vs. 22, p &lt; .01), which demonstrates the <b>spacing effect</b> (2.4). The fill-in-the-blank format also means it measured <b>recall</b>, not recognition."]]},
+{t:"Study 2: Leading Questions and False Memories",s:"Inspired by Loftus and Palmer, a psychologist recruited 150 undergraduates from an introductory psychology course. Each watched the same 30-second video of a minor two-car accident with no broken glass. Participants were randomly assigned to one of three groups: one was asked, “How fast were the cars going when they smashed into each other?”, one was asked the same question with the word “hit,” and a control group was not asked about speed. One week later, all participants were asked, “Did you see any broken glass?” Results: 34% of the smashed group, 15% of the hit group, and 12% of the control group said yes. Participants were debriefed about the purpose of the study at the end.",
+p:[["Identify the independent variable.","The <b>wording of the question</b> after the video: \"smashed,\" \"hit,\" or no speed question (control)."],
+["Identify the dependent variable.","Whether participants <b>reported seeing broken glass</b> one week later (the percentage answering yes)."],
+["Identify the memory phenomenon demonstrated and explain how the results show it.","The <b>misinformation effect</b>: the misleading word \"smashed\" changed participants' memory. More than twice as many in the smashed group (34%) falsely remembered glass compared with the hit (15%) and control (12%) groups. It also shows that memory is <b>constructive</b>."],
+["Explain why the researcher included a control group.","It provides a <b>baseline</b>: 12% falsely remembered glass with no leading question at all. That lets the researcher show that the word \"smashed\" increased false memories beyond normal error."],
+["Identify one ethical guideline used and explain why it was necessary.","<b>Debriefing</b>. Because participants were misled about the study's purpose (and their memories were altered), they needed to be told the truth afterward."],
+["Explain one limitation on generalizability.","Undergraduates from one intro course watching a video may not represent <b>real eyewitnesses</b>, who see live events under stress and face real stakes."]]},
+{t:"Study 3: Does a New Aptitude Test Work?",s:"A school district developed a new math aptitude test. To evaluate it, district psychologists gave the test to 400 eighth graders from all five of the district's middle schools. Two weeks later, the same students took the test again; the correlation between the two sets of scores was r = +0.88. At the end of the following year, the psychologists correlated the students' original scores with their 9th-grade math grades and found r = +0.45. All test administrators followed the same written script and time limits, and families could opt out of the study.",
+p:[["Identify the research method used to evaluate whether the test predicts 9th-grade grades.","<b>Correlational research</b>: no variable was manipulated; the psychologists measured the relationship between test scores and later grades."],
+["Identify the type of reliability measured and explain what r = +0.88 shows.","<b>Test-retest reliability</b>. A strong positive correlation means students scored very <b>consistently</b> across the two sittings, so the test is reliable."],
+["Identify the type of validity measured by the second correlation.","<b>Predictive validity</b>: whether test scores predict a future criterion (9th-grade math grades)."],
+["Explain why the researchers cannot conclude that a high test score causes better grades.","Correlation does not show <b>causation</b>. A third variable, such as prior math knowledge, motivation, or study habits, could influence both scores and grades."],
+["Identify the psychometric principle shown by the script and time limits.","<b>Standardization</b>: uniform procedures for every test-taker so scores can be compared fairly against norms."],
+["Explain whether this test is better described as an aptitude test or an achievement test.","An <b>aptitude test</b>: its purpose is to <b>predict</b> future math performance, not to measure what was already learned. Its moderate predictive validity (r = +0.45) means it predicts grades only partly."]]}
+];
+let aq=0;
+function aaq(){
+  const A=AAQS[aq];
+  $("main").innerHTML=`<div class="card"><div class="mu">The AP exam's <b>Article Analysis Question (AAQ)</b> pulls in Unit 0 methods. Write your answer to each part first, then reveal the model answer. Keep answers short and specific: name it, then tie it to the study.</div><div class="row">${AAQS.map((x,k)=>`<button class="${k==aq?"on":""}" onclick="aq=${k};aaq()">${x.t}</button>`).join("")}</div></div>
+  <div class="card"><h3 style="margin:0 0 6px">${A.t}</h3><div>${A.s}</div></div>
+  ${A.p.map(([q,a],k)=>`<div class="card"><b>${String.fromCharCode(65+k)}.</b> ${q}<textarea placeholder="Your answer..." aria-label="Your answer for part ${String.fromCharCode(65+k)}"></textarea><button onclick="this.nextElementSibling.classList.toggle('hide')">Reveal model answer</button><div class="ans hide">${a}</div></div>`).join("")}
+  <div class="card mu">${cx("Review Unit 0 · Research methods & statistics","unit0.html")}</div>`;
+}
+
+/* in-page links (#n..) from any tab jump to that Notes section */
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#n"]');if(!a)return;e.preventDefault();const id=a.getAttribute("href").slice(1);if(mode!="notes")setMode("notes");setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth"})},40)});
+window.onload=go;
+</script>
+</body>
+</html>
